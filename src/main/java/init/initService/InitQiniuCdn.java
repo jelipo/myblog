@@ -42,7 +42,7 @@ public class InitQiniuCdn {
         intoJedis(needToAdd, needToReplace, jedis);
         jedis.close();
 
-        
+
     }
 
     private void intoJedis(Map<String, String> needToAdd, Map<String, String> needToReplace, Jedis jedis) {
