@@ -153,7 +153,7 @@
     <p>Posted by: W3School</p>
     <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
 </footer>
-<script type="text/javascript" src="res/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="res/js/mdui.js"></script>
 <script type="text/javascript" src="res/js/index.js"></script>
 <script>
