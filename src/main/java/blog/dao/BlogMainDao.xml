@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog.dao.BlogMainDao">
+
+    <select id="getWord" resultType="blog.bean.BlogMainPojo">
+      select * from word where permission=1 ORDER BY date DESC LIMIT #{startNum},#{getBlogNum};
+    </select>
+
+    <select id="toWord" resultType="HashMap">
+        select htmlSrc from word where id=#{0};
+    </select>
+
+
+</mapper>
