@@ -25,7 +25,7 @@ public class CompareLocalAndCDN {
 
         this.localFileMap = localFileMap;
         this.cdnFilesInfoMap = cdnFilesInfoMap;
-        this.CDN_Prefix = CDN_Prefix;
+
 
         try {
             compare(localFileMap, cdnFilesInfoMap, "");

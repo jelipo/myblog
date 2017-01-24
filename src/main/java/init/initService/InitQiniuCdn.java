@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import qiniu.CompareLocalAndCDN;
 import qiniu.SimpleTools;
+import qiniu.UploadFile;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import util.FileTools;
@@ -15,6 +16,7 @@ import util.FileTools;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +27,20 @@ import java.util.Map;
 @Service("init/initService/initQiniuCdn")
 public class InitQiniuCdn {
 
-    private Boolean initFlag=false;
+    private Boolean uploadFlag=false;
     private Map<String, String> needToAdd;
     private  Map<String, String> needToReplace;
 
     public void init() {
         String resPath = initConfig.getRootPath() + "res";
         Map localFileMap = FileTools.getAllFileMapFromFloder(resPath);
-        FileInfo[] cdnFilesInfList = simpleTools.getCdnFileList("res-blog-springmarker-com", null);
+        FileInfo[] cdnFilesInfList;
+        try {
+            cdnFilesInfList = simpleTools.getCdnFileList(bucketName, null);
+        }catch (Exception e){
+            cdnFilesInfList = simpleTools.getCdnFileList(bucketName, null);
+        }
+
         Map<String, FileInfo> cdnFilesInfoMap = SimpleTools.FileInfoArray2MapByKey(cdnFilesInfList);
         String CDN_Prefix = "blog/res/";
         CompareLocalAndCDN compareLocalAndCDN = new CompareLocalAndCDN(localFileMap, cdnFilesInfoMap, CDN_Prefix);
@@ -41,6 +49,18 @@ public class InitQiniuCdn {
         Jedis jedis = pool.getResource();
         intoJedis(needToAdd, needToReplace, jedis);
         jedis.close();
+
+        uploadFlag=true;
+    }
+
+    @Scheduled(cron = "*/5 * * * * ?")
+    public void dosomething() throws IOException {
+        Iterator<String> iterator=needToAdd.keySet().iterator();
+        if (uploadFlag){
+            String key=iterator.next();
+            uploadFile.simpleUploadByDefault(needToAdd.get(key),key);
+        }
+        uploadFlag=false;
     }
 
     private void intoJedis(Map<String, String> needToAdd, Map<String, String> needToReplace, Jedis jedis) {
@@ -51,14 +71,6 @@ public class InitQiniuCdn {
         String re1 = jedis.hmset(needToReplaceKey, needToReplace);
         jedis.expire(needToReplaceKey, 86400);
     }
-
-    @Scheduled(cron = "*/5 * * * * ?")
-    public void dosomething() {
-        if (initFlag){
-
-        }
-    }
-
 
 
 
@@ -73,4 +85,7 @@ public class InitQiniuCdn {
 
     @Resource(name = "init/initService/initConfig")
     private InitConfig initConfig;
+
+    @Resource(name="qiniu/UploadFile")
+    private UploadFile uploadFile;
 }
