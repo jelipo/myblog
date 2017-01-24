@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="res/css/mdui.css" rel="stylesheet">
+    <link href="https://res.springmarker.com/other/css/mdui.css" rel="stylesheet">
     <link href="res/css/index.css" rel="stylesheet">
     <style>
         .card-pageOther {
@@ -154,7 +154,7 @@
     <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
 </footer>
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="res/js/mdui.js"></script>
+<script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
 <script type="text/javascript" src="res/js/index.js"></script>
 <script>
     $('#wordIframe').attr("src",$('#htmlSrc').val());
