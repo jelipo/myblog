@@ -1,13 +1,11 @@
 package qiniu;
 
 import com.qiniu.common.QiniuException;
-import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
-import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import init.initService.InitConfig;
-import init.pojo.MainQiniuInitPojo;
+import init.pojo.QiniuZoneParameters;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,21 +22,20 @@ public class UploadFile {
     private InitConfig initConfig;
 
 
-    public void simpleUploadByDefault(String localPath,String CDNFileName) throws IOException {
-        MainQiniuInitPojo mainQiniuInitPojo=initConfig.getMainQiniuInitPojo();
-        UploadManager uploadManager=mainQiniuInitPojo.getUploadManager();
-        Auth auth=mainQiniuInitPojo.getAuth();
-        String bucketName=mainQiniuInitPojo.getMainBucketName();
-        upload(localPath,CDNFileName,uploadManager,auth,bucketName);
+    public void simpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) throws IOException {
+        UploadManager uploadManager = qiniuZoneParameters.getUploadManager();
+        Auth auth = qiniuZoneParameters.getAuth();
+        String bucketName = qiniuZoneParameters.getMainBucketName();
+        upload(localPath, CDNFileName, uploadManager, auth, bucketName);
     }
 
-    public void simpleUploadByCustom(String localPath,String CDNFileName,UploadManager uploadManager,Auth auth,String bucketName){
-        upload(localPath,CDNFileName,uploadManager,auth,bucketName);
+    public void simpleUploadByCustom(String localPath, String CDNFileName, UploadManager uploadManager, Auth auth, String bucketName) {
+        upload(localPath, CDNFileName, uploadManager, auth, bucketName);
     }
 
-    private void upload(String localPath,String CDNFileName,UploadManager uploadManager,Auth auth,String bucketName){
+    private void upload(String localPath, String CDNFileName, UploadManager uploadManager, Auth auth, String bucketName) {
         try {
-            Response res = uploadManager.put(localPath,CDNFileName, auth.uploadToken(bucketName));
+            Response res = uploadManager.put(localPath, CDNFileName, auth.uploadToken(bucketName));
             System.out.println(res.bodyString());
         } catch (QiniuException e) {
             Response r = e.response;
@@ -51,4 +48,5 @@ public class UploadFile {
             }
         }
     }
+
 }

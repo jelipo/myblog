@@ -1,7 +1,10 @@
 package blog.ctrl;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by cao on 2017/1/15.
@@ -9,9 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ResCtrl {
 
-    @RequestMapping("/res/**")
-    public String redirectRes(){
+    @Value("#{config['qiniu.projectName']}")
+    private String projectName;
 
-        return "redirect: https://www.baidu.com";
+    @Value("#{config['qiniu.localResourceFloder']}")
+    private String localResourceFloder;
+
+    @RequestMapping("/res/**")
+    public String redirectRes(HttpServletRequest httpServletRequest) {
+        String servletPath = httpServletRequest.getServletPath();
+        return "redirect: https://res.springmarker.com/"+ projectName+"/"+ servletPath;
+    }
+
+    @RequestMapping("/other/**")
+    public String redirectRes2(HttpServletRequest httpServletRequest) {
+        String servletPath = httpServletRequest.getServletPath();
+        return "redirect: https://res.springmarker.com/"+ projectName+"/"+localResourceFloder+"/"+ servletPath;
     }
 }

@@ -1,42 +1,42 @@
 package init.pojo;
 
-import com.qiniu.common.Zone;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by cao on 2017/1/24.
  */
 
-public class MainQiniuInitPojo {
+public class QiniuZoneParameters {
 
     private UploadManager uploadManager;
     private String mainBucketName;
     private Auth auth;
+    private String CDN_Prefix;
+
+    public QiniuZoneParameters(UploadManager uploadManager, String mainBucketName, Auth auth, String CDN_Prefix){
+        this.uploadManager=uploadManager;
+        this.mainBucketName=mainBucketName;
+        this.auth=auth;
+        this.CDN_Prefix=CDN_Prefix;
+    }
 
     public UploadManager getUploadManager() {
         return uploadManager;
-    }
-
-    public void setUploadManager(UploadManager uploadManager) {
-        this.uploadManager = uploadManager;
     }
 
     public String getMainBucketName() {
         return mainBucketName;
     }
 
-    public void setMainBucketName(String mainBucketName) {
-        this.mainBucketName = mainBucketName;
-    }
-
-
     public Auth getAuth() {
         return auth;
     }
 
-    public void setAuth(Auth auth) {
-        this.auth = auth;
+    public String getCDN_Prefix() {
+        return CDN_Prefix;
     }
+
+
+
 }

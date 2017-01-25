@@ -4,7 +4,7 @@ import com.qiniu.common.Zone;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import init.pojo.MainQiniuInitPojo;
+import init.pojo.QiniuZoneParameters;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class InitConfig {
     private String startId;
     private Auth auth;
     private String rootPath;
-    private MainQiniuInitPojo mainQiniuInitPojo;
+    private QiniuZoneParameters mainQiniuZone;
 
     @Value("#{config['qiniu.ACCESS_KEY']}")
     private String ACCESS_KEY;
@@ -28,6 +28,12 @@ public class InitConfig {
 
     @Value("#{config['qiniu.bucketName']}")
     private String mainBucketName;
+
+    @Value("#{config['qiniu.projectName']}")
+    private String projectName;
+
+    @Value("#{config['qiniu.localResourceFloder']}")
+    private String localResourceFloder;
 
     void init() {
         long startTime = System.currentTimeMillis();
@@ -39,12 +45,10 @@ public class InitConfig {
             rootPath = rootPath.substring(1);
         }
         auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-        mainQiniuInitPojo = new MainQiniuInitPojo();
-        mainQiniuInitPojo.setAuth(auth);
-        mainQiniuInitPojo.setMainBucketName(mainBucketName);
         Configuration c = new Configuration(Zone.zone0());
         UploadManager uploadManager = new UploadManager(c);
-        mainQiniuInitPojo.setUploadManager(uploadManager);
+        String CDN_Prefix=(new StringBuilder(projectName).append("/").append(localResourceFloder).append("/")).toString();
+        mainQiniuZone = new QiniuZoneParameters(uploadManager,mainBucketName,auth,CDN_Prefix);
 
     }
 
@@ -60,7 +64,7 @@ public class InitConfig {
         return startId;
     }
 
-    public MainQiniuInitPojo getMainQiniuInitPojo(){
-        return mainQiniuInitPojo;
+    public QiniuZoneParameters getMainQiniuZone() {
+        return mainQiniuZone;
     }
 }

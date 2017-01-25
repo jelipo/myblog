@@ -12,9 +12,9 @@
     <meta charset="UTF-8">
     <title>主页</title>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="format-detection" content="telephone=no" />
-    <link href="https://res.springmarker.com/other/css/mdui.css" rel="stylesheet">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link href="res/css/mdui.css" rel="stylesheet">
     <link href="res/css/index.css" rel="stylesheet">
     <style>
 
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mdui-card-actions smallNone" >
+                    <div class="mdui-card-actions smallNone">
                         <img src="res/img/head.jpg" class="mdui-img-circle">
                         <div class="top-card-left-text">Springmarker</div>
                     </div>
@@ -127,9 +127,9 @@
 </footer>
 
 <div id="word" class="mdui-row mdui-row-margin" style="display: none">
-    <div class="mdui-col-xs-12" >
-        <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor" >
-            <div class="MY-mdui-card-media" >
+    <div class="mdui-col-xs-12">
+        <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor">
+            <div class="MY-mdui-card-media">
                 <img class="MY-card-img" src="res/img/first.jpg"/>
                 <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                     <div class="mdui-card-primary ">
@@ -137,12 +137,13 @@
                     </div>
                 </div>
             </div>
-            <a  href="toWord.do?id=" class="mdui-card-content mdui-ripple secondColorAndBackgroundColor href" style="display: block;text-decoration:none;">
+            <a href="toWord.do?id=" class="mdui-card-content mdui-ripple secondColorAndBackgroundColor href"
+               style="display: block;text-decoration:none;">
                 card简介
             </a>
             <div class="mdui-divider" style="margin-top:1px"></div>
             <div class="mdui-card-actions">
-                <img  src="res/img/head.jpg">
+                <img src="res/img/head.jpg">
                 <span class="writer-name">Springmarker</span>
                 <i mdui-menu="{target: '#example-attr'}"
                    class="mdui-ripple mdui-icon material-icons MY-card-more">more_vert</i>
@@ -156,28 +157,30 @@
 <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
 <script type="text/javascript" src="res/js/index.js"></script>
 <script>
-    $(function(){
+    $(function () {
         init();
         function init() {
-            $.ajax({url:"getWord.do?pageNum=1&getBlogNum=10",success:function(result){
-                if (result.resultCode==200){
-                    var list=result.data;
-                    for(var i=0;i<list.length;i++){
-                        var copyHtml=$('#word').clone();
-                        copyHtml.attr("id","word"+(i+1));
-                        copyHtml.find(".MY-card-img").attr("src",list[i].backgroundImage);
-                        copyHtml.find('.MY-card-tilte').html(list[i].title);
-                        copyHtml.find('.mdui-card-content').html(list[i].summary);
-                        copyHtml.find('.writer-name').html(list[i].writer);
-                        var href=copyHtml.find('.href').attr('href')+list[i].id;
-                        copyHtml.find('.href').attr('href',href);
-                        $(".mainPage").append(copyHtml);
-                        copyHtml.show();
+            $.ajax({
+                url: "getWord.do?pageNum=1&getBlogNum=10", success: function (result) {
+                    if (result.resultCode == 200) {
+                        var list = result.data;
+                        for (var i = 0; i < list.length; i++) {
+                            var copyHtml = $('#word').clone();
+                            copyHtml.attr("id", "word" + (i + 1));
+                            copyHtml.find(".MY-card-img").attr("src", list[i].backgroundImage);
+                            copyHtml.find('.MY-card-tilte').html(list[i].title);
+                            copyHtml.find('.mdui-card-content').html(list[i].summary);
+                            copyHtml.find('.writer-name').html(list[i].writer);
+                            var href = copyHtml.find('.href').attr('href') + list[i].id;
+                            copyHtml.find('.href').attr('href', href);
+                            $(".mainPage").append(copyHtml);
+                            copyHtml.show();
+                        }
+                    } else {
+                        console.log("服务器出现错误，错误代码", result.resultCode + ',错误内容' + result.worng);
                     }
-                }else{
-                    console.log("服务器出现错误，错误代码",result.resultCode+',错误内容'+result.worng);
                 }
-            }});
+            });
         }
     });
 

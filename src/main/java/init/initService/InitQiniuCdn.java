@@ -1,8 +1,6 @@
 package init.initService;
 
 import com.qiniu.storage.model.FileInfo;
-import com.qiniu.util.Etag;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -14,11 +12,8 @@ import redis.clients.jedis.JedisPool;
 import util.FileTools;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,13 +37,13 @@ public class InitQiniuCdn {
         }
 
         Map<String, FileInfo> cdnFilesInfoMap = SimpleTools.FileInfoArray2MapByKey(cdnFilesInfList);
-        String CDN_Prefix = "blog/res/";
-        CompareLocalAndCDN compareLocalAndCDN = new CompareLocalAndCDN(localFileMap, cdnFilesInfoMap, CDN_Prefix);
-        needToAdd = compareLocalAndCDN.getNeedToAdd();
-        needToReplace = compareLocalAndCDN.getNeedToReplace();
+        String CDN_Prefix = initConfig.getMainQiniuZone().getCDN_Prefix();
+        CompareLocalAndCDN.CompareLocalAndCDNResult compareLocalAndCDNResult = compareLocalAndCDN.getCompareResult(localFileMap, cdnFilesInfoMap, CDN_Prefix);
+        needToAdd = compareLocalAndCDNResult.getNeedToAdd();
+        needToReplace = compareLocalAndCDNResult.getNeedToReplace();
+
         Jedis jedis = pool.getResource();
         intoJedis(needToAdd, needToReplace, jedis);
-        jedis.close();
 
         uploadFlag=true;
     }
@@ -56,23 +51,31 @@ public class InitQiniuCdn {
     @Scheduled(cron = "*/5 * * * * ?")
     public void dosomething() throws IOException {
         Iterator<String> iterator=needToAdd.keySet().iterator();
-        if (uploadFlag){
-            String key=iterator.next();
-            uploadFile.simpleUploadByDefault(needToAdd.get(key),key);
+        while (iterator.hasNext()){
+            if (uploadFlag){
+                String key=iterator.next();
+                uploadFile.simpleUpload(needToAdd.get(key),key,initConfig.getMainQiniuZone());
+            }
         }
+
+
+
         uploadFlag=false;
     }
 
     private void intoJedis(Map<String, String> needToAdd, Map<String, String> needToReplace, Jedis jedis) {
-        String needToAddKey = initConfig.getStartId() + "_needToAddHash";
-        String re = jedis.hmset(needToAddKey, needToAdd);
-        jedis.expire(needToAddKey, 86400);
-        String needToReplaceKey = initConfig.getStartId() + "_needToReplaceHash";
-        String re1 = jedis.hmset(needToReplaceKey, needToReplace);
-        jedis.expire(needToReplaceKey, 86400);
+        if (needToAdd.size()!=0){
+            String needToAddKey = initConfig.getStartId() + "_needToAddHash";
+            String re = jedis.hmset(needToAddKey, needToAdd);
+            jedis.expire(needToAddKey, 86400);
+        }
+        if (needToReplace.size()!=0){
+            String needToReplaceKey = initConfig.getStartId() + "_needToReplaceHash";
+            String re1 = jedis.hmset(needToReplaceKey, needToReplace);
+            jedis.expire(needToReplaceKey, 86400);
+        }
+
     }
-
-
 
     @Resource(name = "jedisPool")
     private JedisPool pool;
@@ -88,4 +91,7 @@ public class InitQiniuCdn {
 
     @Resource(name="qiniu/UploadFile")
     private UploadFile uploadFile;
+
+    @Resource(name="qiniu/CompareLocalAndCDN")
+    private CompareLocalAndCDN compareLocalAndCDN;
 }

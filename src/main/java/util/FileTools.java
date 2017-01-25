@@ -43,11 +43,11 @@ public class FileTools {
     }
 
     public static Map getAllFileMapFromFloder(String floderPath){
-        Map<String,Object> map=new HashMap();
         File floder=new File(floderPath);
         Map map1=check(floder);
         return map1;
     }
+
     private static Map check(File file){
         Map childMap=new HashMap();
         File[] files=file.listFiles();
