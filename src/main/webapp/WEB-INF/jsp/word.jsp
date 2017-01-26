@@ -44,10 +44,26 @@
             }
         }
     </style>
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
+    <script type="text/javascript" src="res/js/index.js"></script>
 </head>
 
 <body class="mdui-drawer-body-left ">
+<script>
+    function changeFrameHeight(){
+        var iframeHeight = $("#wordIframe").contents().find("body").height();
+        $("#wordIframe").height(iframeHeight + 50);
+        setTimeout("changeFrameHeight()", 2000);
+    }
+    $(function () {
+        $('#wordIframe').attr("src",$('#htmlSrc').val());
+
+    });
+</script>
 <input id="htmlSrc" value="${htmlSrc}" type="hidden">
+
+<i onclick="toggle()" class="mdui-icon material-icons" style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
 <div id="drawer" class="mdui-drawer leftbar secondColorAndBackgroundColor">
     <div class="leftbar-head" style="background-image: url('res/img/first.jpg')">
         <img src="res/img/head.jpg" class="mdui-img-circle">
@@ -108,13 +124,13 @@
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px">
-        <button onclick="toggle()" id="toggle" class="mdui-btn mdui-color-pink-accent mdui-m-a-1">toggle</button>
+
     </div>
     <div class="mainPage">
 
         <div class="mdui-row mdui-row-margin">
             <div class="mdui-col-xs-12">
-                <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor">
+                <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor " >
                     <div class="MY-mdui-card-media">
                         <img class="MY-card-img" src="res/img/first.jpg"/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
@@ -134,7 +150,7 @@
                     <div class="mdui-divider"></div>
                     <div class="card-page">
                         <iframe id="wordIframe" src="" scrolling="no"
-                                onload="changeFrameHeight()" frameborder="0" height="100%" width="100%">
+                                onload="changeFrameHeight()" frameborder="0" height="100%" width="100%" style="transition: 2s">
                         </iframe>
                     </div>
                     <div class="mdui-divider"></div>
@@ -153,11 +169,6 @@
     <p>Posted by: W3School</p>
     <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
 </footer>
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
-<script type="text/javascript" src="res/js/index.js"></script>
-<script>
-    $('#wordIframe').attr("src",$('#htmlSrc').val());
-</script>
+
 </body>
 </html>

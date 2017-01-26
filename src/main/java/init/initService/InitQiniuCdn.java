@@ -39,8 +39,8 @@ public class InitQiniuCdn {
         Map<String, FileInfo> cdnFilesInfoMap = SimpleTools.FileInfoArray2MapByKey(cdnFilesInfList);
         String CDN_Prefix = initConfig.getMainQiniuZone().getCDN_Prefix();
         CompareLocalAndCDN.CompareLocalAndCDNResult compareLocalAndCDNResult = compareLocalAndCDN.getCompareResult(localFileMap, cdnFilesInfoMap, CDN_Prefix);
-        needToAdd = compareLocalAndCDNResult.getNeedToAdd();
-        needToReplace = compareLocalAndCDNResult.getNeedToReplace();
+        this.needToAdd = compareLocalAndCDNResult.getNeedToAdd();
+        this.needToReplace = compareLocalAndCDNResult.getNeedToReplace();
 
         Jedis jedis = pool.getResource();
         intoJedis(needToAdd, needToReplace, jedis);
@@ -50,15 +50,21 @@ public class InitQiniuCdn {
 
     @Scheduled(cron = "*/5 * * * * ?")
     public void dosomething() throws IOException {
-        Iterator<String> iterator=needToAdd.keySet().iterator();
-        while (iterator.hasNext()){
-            if (uploadFlag){
-                String key=iterator.next();
-                uploadFile.simpleUpload(needToAdd.get(key),key,initConfig.getMainQiniuZone());
+        Iterator<String> add=needToAdd.keySet().iterator();
+        while (add.hasNext()){
+            if (this.uploadFlag){
+                String key=add.next();
+                uploadFile.simpleUpload(this.needToAdd.get(key),key,initConfig.getMainQiniuZone());
             }
         }
 
-
+        Iterator<String> replace=this.needToAdd.keySet().iterator();
+        while (replace.hasNext()){
+            if (uploadFlag){
+                String key=replace.next();
+                uploadFile.coverSimpleUpload(needToAdd.get(key),key,initConfig.getMainQiniuZone());
+            }
+        }
 
         uploadFlag=false;
     }

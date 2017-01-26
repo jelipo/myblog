@@ -26,16 +26,23 @@ public class UploadFile {
         UploadManager uploadManager = qiniuZoneParameters.getUploadManager();
         Auth auth = qiniuZoneParameters.getAuth();
         String bucketName = qiniuZoneParameters.getMainBucketName();
-        upload(localPath, CDNFileName, uploadManager, auth, bucketName);
+        upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName));
     }
 
     public void simpleUploadByCustom(String localPath, String CDNFileName, UploadManager uploadManager, Auth auth, String bucketName) {
-        upload(localPath, CDNFileName, uploadManager, auth, bucketName);
+        upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName));
     }
 
-    private void upload(String localPath, String CDNFileName, UploadManager uploadManager, Auth auth, String bucketName) {
+    public void coverSimpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) {
+        UploadManager uploadManager = qiniuZoneParameters.getUploadManager();
+        Auth auth = qiniuZoneParameters.getAuth();
+        String bucketName = qiniuZoneParameters.getMainBucketName();
+        upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName,CDNFileName));
+    }
+
+    private void upload(String localPath, String CDNFileName, UploadManager uploadManager, String uploadToken) {
         try {
-            Response res = uploadManager.put(localPath, CDNFileName, auth.uploadToken(bucketName));
+            Response res = uploadManager.put(localPath, CDNFileName, uploadToken);
             System.out.println(res.bodyString());
         } catch (QiniuException e) {
             Response r = e.response;
