@@ -18,11 +18,11 @@ public class ResCtrl {
     @Value("#{config['qiniu.localResourceFloder']}")
     private String localResourceFloder;
 
-    @RequestMapping("/res/**")
-    public String redirectRes(HttpServletRequest httpServletRequest) {
-        String servletPath = httpServletRequest.getServletPath();
-        return "redirect: https://res.springmarker.com/"+ projectName+"/"+ servletPath;
-    }
+//    @RequestMapping("/res/**")
+//    public String redirectRes(HttpServletRequest httpServletRequest) {
+//        String servletPath = httpServletRequest.getServletPath();
+//        return "redirect: https://res.springmarker.com/"+ projectName+"/"+ servletPath;
+//    }
 
     @RequestMapping("/other/**")
     public String redirectRes2(HttpServletRequest httpServletRequest) {

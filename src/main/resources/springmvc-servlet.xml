@@ -29,8 +29,8 @@
     </mvc:annotation-driven>
 
     <!-- 拦截到静态资源时找到相应的目录 -->
-    <!--<mvc:resources mapping="/res/**" location="/res/"/>-->
-    <mvc:resources mapping="/local/**" location="/res/"/>
+    <mvc:resources mapping="/res/**" location="/res/"/>
+    <mvc:resources mapping="/local/**" location="/local/"/>
 
     <!-- 配置视图名称解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"

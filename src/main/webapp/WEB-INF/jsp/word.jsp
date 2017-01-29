@@ -35,13 +35,106 @@
             float: right;
             font-size: 15px;
         }
-        .word-msg-height{
+
+        .word-msg-height {
             height: 55px;
         }
+
+        .card-comment {
+            padding: 20px;
+        }
+
+        .comment-mian {
+            padding: 7px 0px 13px 0px;
+            width: 100%;
+            min-height: 70px;
+            border-bottom: 1px solid #d0d0d0
+        }
+
+        .comment-mian-msg {
+            padding: 3px 0px 3px 0px;
+            width: 100%;
+            height: 32px;
+        }
+
+        .comment-mian-msg > img {
+            height: 100%;
+            float: left;
+            margin-right: 8px;
+        }
+
+        .comment-mian-msg > div {
+            float: left;
+        }
+
+        .comment-mian-msg > span {
+            float: right;
+            margin-right: 40px;
+        }
+
+        .comment-mian-msg-lz {
+            font-size: 14px;
+            color: black;
+            padding: 1px 0px 3px 0px;
+        }
+
+        .comment-mian-msg-time {
+            font-size: 10px;
+        }
+
+        .comment-mian-content {
+            padding: 8px 0px 8px 40px;
+            font-size: 14px;
+        }
+
+        .comment-mian-scomment {
+            padding: 0px 38px 0px 38px;
+            box-sizing: border-box;
+        }
+
+        .comment-mian-scomment-main {
+            width: 100%;
+            display: flex;
+            font-size: 13px;
+            padding: 8px 0px 5px 5px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .comment-mian-scomment-msg {
+            float: left;
+        }
+
+        .comment-mian-scomment-msg > a {
+            float: left;
+            padding-left: 4px;
+            color: #4986ea;
+        }
+
+        .comment-mian-scomment-msg > div {
+            float: left;
+            padding-left: 4px;
+        }
+
+        .comment-mian-scomment-conntent {
+            flex: 1;
+            float: left;
+            padding-left: 5px;
+            line-height: 18px;
+        }
+
         @media only screen and (max-width: 800px) {
+            .card-comment {
+                padding: 20px 10px 20px 10px;
+            }
+
             .word-msg-height {
                 height: 38px;
             }
+
+            .comment-mian-scomment-main {
+                display: block;
+            }
+
         }
     </style>
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
@@ -51,19 +144,35 @@
 
 <body class="mdui-drawer-body-left ">
 <script>
-    function changeFrameHeight(){
+    function changeFrameHeight() {
         var iframeHeight = $("#wordIframe").contents().find("body").height();
         $("#wordIframe").height(iframeHeight + 50);
         setTimeout("changeFrameHeight()", 2000);
     }
+    var dialog;
     $(function () {
-        $('#wordIframe').attr("src",$('#htmlSrc').val());
+        $('#wordIframe').attr("src", $('#htmlSrc').val());
+        dialog = new mdui.Dialog('#dialog');
 
+        var dialogTextareaHeight=$("#dialog_textarea").height();
+        $("#dialog_textarea").resize(function () {
+            var addHeight=$("#dialog_textarea").height()-dialogTextareaHeight
+            var dialogJq=$("#dialog");
+            dialogJq.css("height",dialogJq.height()+addHeight);
+            dialogTextareaHeight=$("#dialog_textarea").height();
+        }
+        );
     });
+    function showDialog(dialogg) {
+        dialog.open();
+    }
+
 </script>
+
 <input id="htmlSrc" value="${htmlSrc}" type="hidden">
 
-<i onclick="toggle()" class="mdui-icon material-icons" style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
+<i onclick="toggle()" class="mdui-icon material-icons"
+   style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
 <div id="drawer" class="mdui-drawer leftbar secondColorAndBackgroundColor">
     <div class="leftbar-head" style="background-image: url('res/img/first.jpg')">
         <img src="res/img/head.jpg" class="mdui-img-circle">
@@ -130,7 +239,7 @@
 
         <div class="mdui-row mdui-row-margin">
             <div class="mdui-col-xs-12">
-                <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor " >
+                <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor ">
                     <div class="MY-mdui-card-media">
                         <img class="MY-card-img" src="res/img/first.jpg"/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
@@ -150,7 +259,7 @@
                     <div class="mdui-divider"></div>
                     <div class="card-page">
                         <iframe id="wordIframe" src="" scrolling="no"
-                                onload="changeFrameHeight()" frameborder="0" height="100%" width="100%" style="transition: 2s">
+                                onload="changeFrameHeight()" frameborder="0" height="100%" width="100%">
                         </iframe>
                     </div>
                     <div class="mdui-divider"></div>
@@ -158,7 +267,48 @@
                         <div class="card-turnPage-up">上一篇:<span>多线程</span></div>
                         <div class="card-turnPage-down"><span>多线程的理解和使用</span>:下一篇</div>
                     </div>
+
+                    <div class="mdui-divider"></div>
+                    <div class="card-comment">
+                        <div style="width: 100%;height: 30px;">
+                            评论：
+                        </div>
+
+                        <div class="comment-mian">
+                            <div class="comment-mian-msg">
+                                <img src="res/img/head.jpg" class="mdui-img-circle">
+                                <div>
+                                    <div class="comment-mian-msg-lz">Springmarker</div>
+                                    <div class="comment-mian-msg-time">1楼 11月12,2017 18:32:54</div>
+                                </div>
+                                <span>
+                                    <button onclick="showDialog(this)" class="mdui-btn mdui-btn-icon"
+                                            mdui-tooltip="{content: '回复',position: 'top'}">
+                                        <i style="font-size: 18px;" class="mdui-icon material-icons">textsms</i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="comment-mian-content">
+                                做的还不错。
+                            </div>
+                            <div class="comment-mian-scomment">
+                                <div class="comment-mian-scomment-main mdui-ripple">
+                                    <div class="comment-mian-scomment-msg">
+                                        <a>张三</a>
+                                        <div>回复:</div>
+                                        <a>李四(层主)</a>
+                                        <div>：</div>
+                                    </div>
+                                    <span class="comment-mian-scomment-conntent">
+                                            这不对啊。
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
         </div>
 
@@ -169,6 +319,24 @@
     <p>Posted by: W3School</p>
     <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
 </footer>
+<div id="toReplace">
+    <div style="height: auto;" class="mdui-dialog" id="dialog">
+
+        <div style="width: 100%;padding: 10px;box-sizing:border-box;">
+            <div class="mdui-textfield">
+                <textarea id="dialog_textarea" style="height: 80px" class="mdui-textfield-input"
+                          placeholder="请输入您的回复消息!"></textarea>
+            </div>
+            <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>
+                <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>发送</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 </body>
+
+
 </html>
