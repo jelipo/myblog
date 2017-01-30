@@ -15,15 +15,15 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!-- 阿里巴巴druid监控的serverlet -->
-    <servlet>
-        <servlet-name>DruidStatView</servlet-name>
-        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DruidStatView</servlet-name>
-        <url-pattern>/druid/*</url-pattern>
-    </servlet-mapping>
+    <!--&lt;!&ndash; 阿里巴巴druid监控的serverlet &ndash;&gt;-->
+    <!--<servlet>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<url-pattern>/druid/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <servlet>
         <servlet-name>springMVC</servlet-name>

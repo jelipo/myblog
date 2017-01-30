@@ -1,14 +1,11 @@
 package init.initService;
 
-import com.qiniu.util.Auth;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-import qiniu.SimpleTools;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.File;
 
 /**
  * Created by cao on 2017/1/15.
@@ -23,7 +20,7 @@ public class MainInit {
     @Resource(name = "init/initService/initQiniuCdn")
     private InitQiniuCdn initQiniuCdn;
 
-    private static Logger logger = Logger.getLogger(MainInit.class);
+    private static final Logger logger = LogManager.getLogger(MainInit.class);
 
     @PostConstruct
     public void initStart() {
