@@ -154,15 +154,38 @@
         $('#wordIframe').attr("src", $('#htmlSrc').val());
         dialog = new mdui.Dialog('#dialog');
 
-        var dialogTextareaHeight=$("#dialog_textarea").height();
+        var dialogTextareaHeight = $("#dialog_textarea").height();
         $("#dialog_textarea").resize(function () {
-            var addHeight=$("#dialog_textarea").height()-dialogTextareaHeight
-            var dialogJq=$("#dialog");
-            dialogJq.css("height",dialogJq.height()+addHeight);
-            dialogTextareaHeight=$("#dialog_textarea").height();
-        }
+                var addHeight = $("#dialog_textarea").height() - dialogTextareaHeight
+                var dialogJq = $("#dialog");
+                dialogJq.css("height", dialogJq.height() + addHeight);
+                dialogTextareaHeight = $("#dialog_textarea").height();
+            }
         );
+        cemments();
     });
+    function cemments() {
+        var id=getUrlParam("id");
+        $.ajax({
+            url: "getComments.do?id="+id, success: function (result) {
+                var comments = result.data;
+                var i=1;
+                for (var key in comments) {
+                    var comment=comments[key];
+                    var copyHtml = $('#comment').clone();
+                    copyHtml.attr("id", "comment" + i);
+                    copyHtml.find(".comment-mian-msg-lz").html(comment.observername);
+                    copyHtml.find(".comment-mian-msg-time").html(comment.date);
+                    copyHtml.find(".comment-mian-content").html(comment.value);
+
+
+                    $(".card-comment").append(copyHtml);
+
+                    i++;
+                }
+            }
+        });
+    }
     function showDialog(dialogg) {
         dialog.open();
     }
@@ -274,37 +297,6 @@
                             评论：
                         </div>
 
-                        <div class="comment-mian">
-                            <div class="comment-mian-msg">
-                                <img src="res/img/head.jpg" class="mdui-img-circle">
-                                <div>
-                                    <div class="comment-mian-msg-lz">Springmarker</div>
-                                    <div class="comment-mian-msg-time">1楼 11月12,2017 18:32:54</div>
-                                </div>
-                                <span>
-                                    <button onclick="showDialog(this)" class="mdui-btn mdui-btn-icon"
-                                            mdui-tooltip="{content: '回复',position: 'top'}">
-                                        <i style="font-size: 18px;" class="mdui-icon material-icons">textsms</i>
-                                    </button>
-                                </span>
-                            </div>
-                            <div class="comment-mian-content">
-                                做的还不错。
-                            </div>
-                            <div class="comment-mian-scomment">
-                                <div class="comment-mian-scomment-main mdui-ripple">
-                                    <div class="comment-mian-scomment-msg">
-                                        <a>张三</a>
-                                        <div>回复:</div>
-                                        <a>李四(层主)</a>
-                                        <div>：</div>
-                                    </div>
-                                    <span class="comment-mian-scomment-conntent">
-                                            这不对啊。
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -319,9 +311,43 @@
     <p>Posted by: W3School</p>
     <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
 </footer>
-<div id="toReplace">
-    <div style="height: auto;" class="mdui-dialog" id="dialog">
+<div id="toReplace" style="display:none">
 
+    <!--评论-->
+    <div id="comment">
+    <div class="comment-mian">
+        <div class="comment-mian-msg">
+            <img src="res/img/head.jpg" class="mdui-img-circle">
+            <div>
+                <div class="comment-mian-msg-lz">Springmarker</div>
+                <div class="comment-mian-msg-time">1楼 11月12,2017 18:32:54</div>
+            </div>
+            <span>
+                <button onclick="showDialog(this)" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '回复',position: 'top'}">
+                    <i style="font-size: 18px;" class="mdui-icon material-icons">textsms</i>
+                </button>
+            </span>
+        </div>
+        <div class="comment-mian-content">
+            做的还不错。
+        </div>
+        <div class="comment-mian-scomment">
+            <div class="comment-mian-scomment-main mdui-ripple">
+                <div class="comment-mian-scomment-msg">
+                    <a>张三</a>
+                    <div>回复:</div>
+                    <a>李四(层主)</a>
+                    <div>：</div>
+                </div>
+                <span class="comment-mian-scomment-conntent">这不对啊。</span>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--评论-->
+
+    <!--回复对话框-->
+    <div style="height: auto;" class="mdui-dialog" id="dialog">
         <div style="width: 100%;padding: 10px;box-sizing:border-box;">
             <div class="mdui-textfield">
                 <textarea id="dialog_textarea" style="height: 80px" class="mdui-textfield-input"
@@ -332,8 +358,8 @@
                 <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>发送</button>
             </div>
         </div>
-
     </div>
+    <!--回复对话框-->
 </div>
 
 </body>

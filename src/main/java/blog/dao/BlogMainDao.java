@@ -1,6 +1,7 @@
 package blog.dao;
 
 import blog.bean.BlogMainPojo;
+import blog.bean.CommentPojo;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -14,7 +15,9 @@ import java.util.Map;
 @Repository("blog/dao/BlogMainDao")
 
 public interface BlogMainDao {
-    public List<BlogMainPojo> getWord(Map map);
+    List<BlogMainPojo> getWord(Map map);
 
-    public HashMap toWord(int id);
+    HashMap toWord(int id);
+
+    List<CommentPojo> getComments(int id);
 }

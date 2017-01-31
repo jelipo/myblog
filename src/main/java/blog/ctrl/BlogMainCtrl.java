@@ -1,6 +1,7 @@
 package blog.ctrl;
 
 import blog.service.BlogMainService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +26,7 @@ public class BlogMainCtrl {
 //        System.out.println(jedis.get("name"));
     }
 
+
     @ResponseBody
     @RequestMapping("/getWord.do")
     public Map getWord(HttpServletRequest request,@RequestParam int pageNum, @RequestParam int getBlogNum){
@@ -36,6 +39,13 @@ public class BlogMainCtrl {
         Map map=blogMainService.toWord(request,id);
         request.setAttribute("htmlSrc",map.get("htmlSrc"));
         return "word";
+    }
+
+    @ResponseBody
+    @RequestMapping("/getComments.do")
+    public JSONObject getComments(HttpServletRequest request, @RequestParam int id){
+
+        return blogMainService.getComments(id);
     }
 
 

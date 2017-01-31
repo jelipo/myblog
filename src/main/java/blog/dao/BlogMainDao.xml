@@ -10,5 +10,9 @@
         select htmlSrc from word where id=#{0};
     </select>
 
+    <select id="getComments" resultType="blog.bean.CommentPojo">
+        select * from comment where wordId=#{0} ORDER BY isMainComment ,date;
+    </select>
+
 
 </mapper>
