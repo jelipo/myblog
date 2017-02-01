@@ -122,6 +122,39 @@
             line-height: 18px;
         }
 
+        .dialog-main {
+            width: 100%;
+            padding: 15px 20px 10px 20px;
+            box-sizing: border-box;
+        }
+
+        .dialog-tilte {
+            height: 30px;
+            width: 100%;
+            color: #5a5a5a;
+        }
+
+        .dialog-tilte > span {
+            font-size: 13px;
+        }
+
+        .dialog-msgInput {
+            width: 50%;
+            float: left;
+            -width: 280px;
+        }
+
+        .dialog-msgInput > input {
+            width: 98%;
+            font-size: 13px
+        }
+
+        .dialog-msgInput > div {
+            font-size: 12px;
+            margin-top: 5px;
+            color: #ff9713
+        }
+
         @media only screen and (max-width: 800px) {
             .card-comment {
                 padding: 20px 10px 20px 10px;
@@ -156,32 +189,33 @@
 
         var dialogTextareaHeight = $("#dialog_textarea").height();
         $("#dialog_textarea").resize(function () {
-                var addHeight = $("#dialog_textarea").height() - dialogTextareaHeight
+                var addHeight = $("#dialog_textarea").height() - dialogTextareaHeight;
                 var dialogJq = $("#dialog");
                 dialogJq.css("height", dialogJq.height() + addHeight);
                 dialogTextareaHeight = $("#dialog_textarea").height();
             }
         );
+
         getCemments();
     });
     function getCemments() {
-        var id=getUrlParam("id");
+        var id = getUrlParam("id");
         $.ajax({
-            url: "getComments.do?id="+id, success: function (result) {
+            url: "getComments.do?id=" + id, success: function (result) {
                 var comments = result.data;
-                var i=1;
+                var i = 1;
                 for (var key in comments) {
-                    var comment=comments[key];
+                    var comment = comments[key];
                     var copyHtml = $('#comment').clone();
                     copyHtml.attr("id", "comment" + i);
                     copyHtml.find(".comment-mian-msg-lz").html(comment.observername);
                     copyHtml.find(".comment-mian-msg-time").html(comment.date);
                     copyHtml.find(".comment-mian-content").html(comment.value);
-                    if(comment.viceComment!=null){
-                        var viceComments=comment.viceComment;
-                        for (var a=0;a<viceComments.length;a++){
-                            var viceComment=$("#viceComment").clone();
-                            viceComment.attr("id","");
+                    if (comment.viceComment != null) {
+                        var viceComments = comment.viceComment;
+                        for (var a = 0; a < viceComments.length; a++) {
+                            var viceComment = $("#viceComment").clone();
+                            viceComment.attr("id", "");
                             viceComment.find(".form").html(viceComments[a].observername);
                             viceComment.find(".to").html(viceComments[a].toobservername);
                             viceComment.find(".comment-mian-scomment-conntent").html(viceComments[a].value);
@@ -196,6 +230,9 @@
     }
     function showDialog(dialogg) {
         dialog.open();
+    }
+    function closeDialog() {
+        dialog.close();
     }
 
 </script>
@@ -330,7 +367,8 @@
                 <div class="comment-mian-msg-time">1楼 11月12,2017 18:32:54</div>
             </div>
             <span>
-                <button onclick="showDialog(this)" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '回复',position: 'top'}">
+                <button onclick="showDialog(this)" class="mdui-btn mdui-btn-icon"
+                        mdui-tooltip="{content: '回复',position: 'top'}">
                     <i style="font-size: 18px;" class="mdui-icon material-icons">textsms</i>
                 </button>
             </span>
@@ -341,7 +379,6 @@
 
     </div>
     <!--评论-->
-
 
     <!--副评论-->
     <div class="comment-mian-scomment" id="viceComment">
@@ -359,17 +396,32 @@
 </div>
 
 <!--回复对话框-->
-<div style="height: auto;" class="mdui-dialog" id="dialog">
-    <div style="width: 100%;padding: 10px;box-sizing:border-box;">
-        <div class="mdui-textfield">
+<div class="mdui-dialog" id="dialog">
+    <form>
+        <div class="dialog-main">
+            <div class="dialog-tilte">您要向XXX回复消息
+                <span>（由于是游客制度，所以会有所限制发言频率）</span>
+            </div>
+            <div>
+                <div class="mdui-textfield dialog-msgInput">
+                    <input style="" class="mdui-textfield-input" type="text" placeholder="请输入昵称（可选）"/>
+                    <div>不填写时随机分配</div>
+                </div>
+                <div class="mdui-textfield dialog-msgInput">
+                    <input type="email" class="mdui-textfield-input" type="text" placeholder="请输入邮箱(可选)"/>
+                    <div>收到回复时，会向邮箱发送邮件</div>
+                </div>
+            </div>
+            <div class="mdui-textfield" style="width: 100%">
                 <textarea id="dialog_textarea" style="height: 80px" class="mdui-textfield-input"
                           placeholder="请输入您的回复消息!"></textarea>
+            </div>
+            <div class="mdui-dialog-actions">
+                <input type="button" value="取消" onclick="closeDialog()" class="mdui-btn mdui-ripple" >
+                <button  class="mdui-btn mdui-ripple" >确认</button>
+            </div>
         </div>
-        <div class="mdui-dialog-actions">
-            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>
-            <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>发送</button>
-        </div>
-    </div>
+    </form>
 </div>
 <!--回复对话框-->
 
