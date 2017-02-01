@@ -43,7 +43,7 @@ public class BlogMainCtrl {
 
     @ResponseBody
     @RequestMapping("/getComments.do")
-    public JSONObject getComments(HttpServletRequest request, @RequestParam int id){
+    public Map getComments(HttpServletRequest request, @RequestParam int id){
 
         return blogMainService.getComments(id);
     }

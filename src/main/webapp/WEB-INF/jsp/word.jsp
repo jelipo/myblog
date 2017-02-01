@@ -162,9 +162,9 @@
                 dialogTextareaHeight = $("#dialog_textarea").height();
             }
         );
-        cemments();
+        getCemments();
     });
-    function cemments() {
+    function getCemments() {
         var id=getUrlParam("id");
         $.ajax({
             url: "getComments.do?id="+id, success: function (result) {
@@ -177,10 +177,18 @@
                     copyHtml.find(".comment-mian-msg-lz").html(comment.observername);
                     copyHtml.find(".comment-mian-msg-time").html(comment.date);
                     copyHtml.find(".comment-mian-content").html(comment.value);
-
-
+                    if(comment.viceComment!=null){
+                        var viceComments=comment.viceComment;
+                        for (var a=0;a<viceComments.length;a++){
+                            var viceComment=$("#viceComment").clone();
+                            viceComment.attr("id","");
+                            viceComment.find(".form").html(viceComments[a].observername);
+                            viceComment.find(".to").html(viceComments[a].toobservername);
+                            viceComment.find(".comment-mian-scomment-conntent").html(viceComments[a].value);
+                            copyHtml.append(viceComment);
+                        }
+                    }
                     $(".card-comment").append(copyHtml);
-
                     i++;
                 }
             }
@@ -314,8 +322,8 @@
 <div id="toReplace" style="display:none">
 
     <!--评论-->
-    <div id="comment">
-    <div class="comment-mian">
+
+    <div class="comment-mian" id="comment">
         <div class="comment-mian-msg">
             <img src="res/img/head.jpg" class="mdui-img-circle">
             <div>
@@ -331,36 +339,39 @@
         <div class="comment-mian-content">
             做的还不错。
         </div>
-        <div class="comment-mian-scomment">
-            <div class="comment-mian-scomment-main mdui-ripple">
-                <div class="comment-mian-scomment-msg">
-                    <a>张三</a>
-                    <div>回复:</div>
-                    <a>李四(层主)</a>
-                    <div>：</div>
-                </div>
-                <span class="comment-mian-scomment-conntent">这不对啊。</span>
-            </div>
-        </div>
-    </div>
+
     </div>
     <!--评论-->
 
-    <!--回复对话框-->
-    <div style="height: auto;" class="mdui-dialog" id="dialog">
-        <div style="width: 100%;padding: 10px;box-sizing:border-box;">
-            <div class="mdui-textfield">
-                <textarea id="dialog_textarea" style="height: 80px" class="mdui-textfield-input"
-                          placeholder="请输入您的回复消息!"></textarea>
+    <!--副评论-->
+    <div class="comment-mian-scomment" id="viceComment">
+        <div class="comment-mian-scomment-main mdui-ripple">
+            <div class="comment-mian-scomment-msg">
+                <a class="form">张三</a>
+                <div>回复:</div>
+                <a class="to">李四(层主)</a>
+                <div>：</div>
             </div>
-            <div class="mdui-dialog-actions">
-                <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>
-                <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>发送</button>
-            </div>
+            <span class="comment-mian-scomment-conntent">这不对啊。</span>
         </div>
     </div>
-    <!--回复对话框-->
+    <!--评论-->
 </div>
+
+<!--回复对话框-->
+<div style="height: auto;" class="mdui-dialog" id="dialog">
+    <div style="width: 100%;padding: 10px;box-sizing:border-box;">
+        <div class="mdui-textfield">
+                <textarea id="dialog_textarea" style="height: 80px" class="mdui-textfield-input"
+                          placeholder="请输入您的回复消息!"></textarea>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>
+            <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>发送</button>
+        </div>
+    </div>
+</div>
+<!--回复对话框-->
 
 </body>
 

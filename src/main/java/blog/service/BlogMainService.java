@@ -52,7 +52,7 @@ public class BlogMainService {
         return blogMainDao.toWord(id);
     }
 
-    public JSONObject getComments(int id){
+    public Map getComments(int id){
         List<CommentPojo> list= blogMainDao.getComments(id);
         JSONObject json=new JSONObject();
         for(int i=0;i<list.size();i++){
@@ -66,7 +66,7 @@ public class BlogMainService {
                 viceComment.viceComment.add(comment);
             }
         }
-        return json;
+        return packingResult.toSuccessMap(json);
     }
 
 

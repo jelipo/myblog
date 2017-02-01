@@ -52,9 +52,8 @@ public class InitQiniuCdn {
     public void dosomething() throws IOException {
         Iterator<String> add=needToAdd.keySet().iterator();
         while (add.hasNext()){
-            System.out.println("2");
+            String key=add.next();
             if (this.uploadFlag){
-                String key=add.next();
                 uploadFile.simpleUpload(this.needToAdd.get(key),key,initConfig.getMainQiniuZone());
             }
         }
@@ -62,8 +61,8 @@ public class InitQiniuCdn {
         Iterator<String> replace=this.needToReplace.keySet().iterator();
         while (replace.hasNext()){
             System.out.println(needToReplace.size());
+            String key=replace.next();
             if (uploadFlag){
-                String key=replace.next();
                 uploadFile.coverSimpleUpload(needToReplace.get(key),key,initConfig.getMainQiniuZone());
             }
         }

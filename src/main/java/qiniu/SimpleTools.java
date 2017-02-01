@@ -52,7 +52,7 @@ public class SimpleTools {
         } catch (QiniuException e) {
             //捕获异常信息
             Response r = e.response;
-            System.out.println(r.toString());
+            System.out.println("异常"+r.toString());
         }
         return null;
     }

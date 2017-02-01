@@ -1,5 +1,6 @@
 package server;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,12 @@ public class PackingResult {
         Map map1=new HashMap();
         map.put("resultCode",200);
         map.put("data",map);
+        return map1;
+    }
+    public Map toSuccessMap(JSONObject json){
+        Map map1=new HashMap();
+        map1.put("resultCode",200);
+        map1.put("data",json);
         return map1;
     }
 
