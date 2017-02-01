@@ -322,7 +322,6 @@
 <div id="toReplace" style="display:none">
 
     <!--评论-->
-
     <div class="comment-mian" id="comment">
         <div class="comment-mian-msg">
             <img src="res/img/head.jpg" class="mdui-img-circle">
