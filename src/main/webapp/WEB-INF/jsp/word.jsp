@@ -15,228 +15,19 @@
     <meta name="format-detection" content="telephone=no"/>
     <link href="res/css/mdui.css" rel="stylesheet">
     <link href="res/css/index.css" rel="stylesheet">
-    <style>
-        .card-pageOther {
-            height: 100px;
-            padding: 20px;
+    <link href="res/css/word.css" rel="stylesheet">
 
-        }
-
-        .card-turnPage-up {
-            color: #366fb4;
-            width: 200px;
-            float: left;
-            font-size: 15px;
-        }
-
-        .card-turnPage-down {
-            color: #366fb4;
-            width: 200px;
-            float: right;
-            font-size: 15px;
-        }
-
-        .word-msg-height {
-            height: 55px;
-        }
-
-        .card-comment {
-            padding: 20px;
-        }
-
-        .comment-mian {
-            padding: 7px 0px 13px 0px;
-            width: 100%;
-            min-height: 70px;
-            border-bottom: 1px solid #d0d0d0
-        }
-
-        .comment-mian-msg {
-            padding: 3px 0px 3px 0px;
-            width: 100%;
-            height: 32px;
-        }
-
-        .comment-mian-msg > img {
-            height: 100%;
-            float: left;
-            margin-right: 8px;
-        }
-
-        .comment-mian-msg > div {
-            float: left;
-        }
-
-        .comment-mian-msg > span {
-            float: right;
-            margin-right: 40px;
-        }
-
-        .comment-mian-msg-lz {
-            font-size: 14px;
-            color: black;
-            padding: 1px 0px 3px 0px;
-        }
-
-        .comment-mian-msg-time {
-            font-size: 10px;
-        }
-
-        .comment-mian-content {
-            padding: 8px 0px 8px 40px;
-            font-size: 14px;
-        }
-
-        .comment-mian-scomment {
-            padding: 0px 38px 0px 38px;
-            box-sizing: border-box;
-        }
-
-        .comment-mian-scomment-main {
-            width: 100%;
-            display: flex;
-            font-size: 13px;
-            padding: 8px 0px 5px 5px;
-            border-bottom: 1px solid #e1e1e1;
-        }
-
-        .comment-mian-scomment-msg {
-            float: left;
-        }
-
-        .comment-mian-scomment-msg > a {
-            float: left;
-            padding-left: 4px;
-            color: #4986ea;
-        }
-
-        .comment-mian-scomment-msg > div {
-            float: left;
-            padding-left: 4px;
-        }
-
-        .comment-mian-scomment-conntent {
-            flex: 1;
-            float: left;
-            padding-left: 5px;
-            line-height: 18px;
-        }
-
-        .dialog-main {
-            width: 100%;
-            padding: 15px 20px 10px 20px;
-            box-sizing: border-box;
-        }
-
-        .dialog-tilte {
-            height: 30px;
-            width: 100%;
-            color: #5a5a5a;
-        }
-
-        .dialog-tilte > span {
-            font-size: 13px;
-        }
-
-        .dialog-msgInput {
-            width: 50%;
-            float: left;
-            -width: 280px;
-        }
-
-        .dialog-msgInput > input {
-            width: 98%;
-            font-size: 13px
-        }
-
-        .dialog-msgInput > div {
-            font-size: 12px;
-            margin-top: 5px;
-            color: #ff9713
-        }
-
-        @media only screen and (max-width: 800px) {
-            .card-comment {
-                padding: 20px 10px 20px 10px;
-            }
-
-            .word-msg-height {
-                height: 38px;
-            }
-
-            .comment-mian-scomment-main {
-                display: block;
-            }
-
-        }
-    </style>
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
     <script type="text/javascript" src="res/js/index.js"></script>
+    <script type="text/javascript" src="res/js/word.js"></script>
 </head>
 
 <body class="mdui-drawer-body-left ">
 <script>
-    function changeFrameHeight() {
-        var iframeHeight = $("#wordIframe").contents().find("body").height();
-        $("#wordIframe").height(iframeHeight + 50);
-        setTimeout("changeFrameHeight()", 2000);
-    }
-    var dialog;
-    $(function () {
-        $('#wordIframe').attr("src", $('#htmlSrc').val());
-        dialog = new mdui.Dialog('#dialog');
-
-        var dialogTextareaHeight = $("#dialog_textarea").height();
-        $("#dialog_textarea").resize(function () {
-                var addHeight = $("#dialog_textarea").height() - dialogTextareaHeight;
-                var dialogJq = $("#dialog");
-                dialogJq.css("height", dialogJq.height() + addHeight);
-                dialogTextareaHeight = $("#dialog_textarea").height();
-            }
-        );
-
-        getCemments();
-    });
-    function getCemments() {
-        var id = getUrlParam("id");
-        $.ajax({
-            url: "getComments.do?id=" + id, success: function (result) {
-                var comments = result.data;
-                var i = 1;
-                for (var key in comments) {
-                    var comment = comments[key];
-                    var copyHtml = $('#comment').clone();
-                    copyHtml.attr("id", "comment" + i);
-                    copyHtml.find(".comment-mian-msg-lz").html(comment.observername);
-                    copyHtml.find(".comment-mian-msg-time").html(comment.date);
-                    copyHtml.find(".comment-mian-content").html(comment.value);
-                    if (comment.viceComment != null) {
-                        var viceComments = comment.viceComment;
-                        for (var a = 0; a < viceComments.length; a++) {
-                            var viceComment = $("#viceComment").clone();
-                            viceComment.attr("id", "");
-                            viceComment.find(".form").html(viceComments[a].observername);
-                            viceComment.find(".to").html(viceComments[a].toobservername);
-                            viceComment.find(".comment-mian-scomment-conntent").html(viceComments[a].value);
-                            copyHtml.append(viceComment);
-                        }
-                    }
-                    $(".card-comment").append(copyHtml);
-                    i++;
-                }
-            }
-        });
-    }
-    function showDialog(dialogg) {
-        dialog.open();
-    }
-    function closeDialog() {
-        dialog.close();
-    }
 
 </script>
-
+<input id="wordId" value="${wordId}" type="hidden">
 <input id="htmlSrc" value="${htmlSrc}" type="hidden">
 
 <i onclick="toggle()" class="mdui-icon material-icons"
@@ -338,8 +129,12 @@
 
                     <div class="mdui-divider"></div>
                     <div class="card-comment">
-                        <div style="width: 100%;height: 30px;">
-                            评论：
+                        <div style="width: 100%;height: 100px;">
+                            <div style="font-size: 25px;font-weight: 900;color:#616161">评论：</div>
+                            <div class="mdui-textfield mdui-textfield-floating-label " onclick="newMainCommentShowDialog()">
+                                <label class="mdui-textfield-label">留下你的见解吧！</label>
+                                <input class="mdui-textfield-input newComment"  disabled/>
+                            </div>
                         </div>
 
 
@@ -367,7 +162,7 @@
                 <div class="comment-mian-msg-time">1楼 11月12,2017 18:32:54</div>
             </div>
             <span>
-                <button onclick="showDialog(this)" class="mdui-btn mdui-btn-icon"
+                <button onclick="mainCommentShowDialog(this)" class="mdui-btn mdui-btn-icon replyButton"
                         mdui-tooltip="{content: '回复',position: 'top'}">
                     <i style="font-size: 18px;" class="mdui-icon material-icons">textsms</i>
                 </button>
@@ -382,9 +177,9 @@
 
     <!--副评论-->
     <div class="comment-mian-scomment" id="viceComment">
-        <div class="comment-mian-scomment-main mdui-ripple">
+        <div class="comment-mian-scomment-main mdui-ripple" onclick="viceCommentShowDialog(this)">
             <div class="comment-mian-scomment-msg">
-                <a class="form">张三</a>
+                <a class="from">张三</a>
                 <div>回复:</div>
                 <a class="to">李四(层主)</a>
                 <div>：</div>
@@ -397,28 +192,32 @@
 
 <!--回复对话框-->
 <div class="mdui-dialog" id="dialog">
-    <form>
+    <form  onsubmit="return chaeckDialogForm(this)">
+        <input id="observername" type="hidden" name="observername" value="" >
+        <input id="mainCommentId" type="hidden" name="mainCommentId" value="" >
+        <input id="viceCommentId" type="hidden" name="viceCommentId" value="" >
+        <input id="isNewMainComment" type="hidden" name="isNewMainComment" value="" >
         <div class="dialog-main">
-            <div class="dialog-tilte">您要向XXX回复消息
-                <span>（由于是游客制度，所以会有所限制发言频率）</span>
+            <div class="dialog-tilte">您要向<span class="observername"></span>回复消息
+                <span>（由于是游客制，所以会有所限制发言频率）</span>
             </div>
             <div>
                 <div class="mdui-textfield dialog-msgInput">
-                    <input style="" class="mdui-textfield-input" type="text" placeholder="请输入昵称（可选）"/>
+                    <input id="nickname"  class="mdui-textfield-input" type="text" name="nickname" placeholder="请输入昵称（可选）"/>
                     <div>不填写时随机分配</div>
                 </div>
                 <div class="mdui-textfield dialog-msgInput">
-                    <input type="email" class="mdui-textfield-input" type="text" placeholder="请输入邮箱(可选)"/>
+                    <input id="email" type="email" class="mdui-textfield-input"  placeholder="请输入邮箱(可选)"/>
                     <div>收到回复时，会向邮箱发送邮件</div>
                 </div>
             </div>
-            <div class="mdui-textfield" style="width: 100%">
-                <textarea id="dialog_textarea" style="height: 80px" class="mdui-textfield-input"
+            <div class="mdui-textfield" style="width: 100%;padding-top: 10px;">
+                <textarea id="value" name="value" id="dialog_textarea" style="max-height: 80px" class="mdui-textfield-input"
                           placeholder="请输入您的回复消息!"></textarea>
             </div>
             <div class="mdui-dialog-actions">
                 <input type="button" value="取消" onclick="closeDialog()" class="mdui-btn mdui-ripple" >
-                <button  class="mdui-btn mdui-ripple" >确认</button>
+                <input type="submit" value="确认"  class="mdui-btn mdui-ripple" >
             </div>
         </div>
     </form>

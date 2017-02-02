@@ -11,12 +11,12 @@ public class CommentPojo {
     private int ismaincomment;
     private String observername;
     private String toobservername;
-    private java.sql.Timestamp date;
+    private String date;
     private int vicecomment_maincomment_id;
     private String value;
     public List<CommentPojo> viceComment;
 
-    @JSONField(serialize = false)
+
     public int getId() {
         return id;
     }
@@ -51,11 +51,11 @@ public class CommentPojo {
         this.toobservername = toobservername;
     }
 
-    public java.sql.Timestamp getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Timestamp date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

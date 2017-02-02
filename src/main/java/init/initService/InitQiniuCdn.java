@@ -60,14 +60,14 @@ public class InitQiniuCdn {
 
         Iterator<String> replace=this.needToReplace.keySet().iterator();
         while (replace.hasNext()){
-            System.out.println(needToReplace.size());
+            System.out.println(this.needToReplace.size()+"你得");
             String key=replace.next();
-            if (uploadFlag){
+            if (this.uploadFlag){
                 uploadFile.coverSimpleUpload(needToReplace.get(key),key,initConfig.getMainQiniuZone());
             }
         }
 
-        uploadFlag=false;
+        this.uploadFlag=false;
     }
 
     private void intoJedis(Map<String, String> needToAdd, Map<String, String> needToReplace, Jedis jedis) {
