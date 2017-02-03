@@ -21,6 +21,7 @@
     <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
     <script type="text/javascript" src="res/js/index.js"></script>
     <script type="text/javascript" src="res/js/word.js"></script>
+
 </head>
 
 <body class="mdui-drawer-body-left ">
@@ -135,6 +136,7 @@
                                 <label class="mdui-textfield-label">留下你的见解吧！</label>
                                 <input class="mdui-textfield-input newComment"  disabled/>
                             </div>
+
                         </div>
 
 
@@ -168,9 +170,9 @@
                 </button>
             </span>
         </div>
-        <div class="comment-mian-content">
+        <span class="comment-mian-content">
             做的还不错。
-        </div>
+        </span>
 
     </div>
     <!--评论-->
@@ -215,7 +217,9 @@
                 <textarea id="value" name="value" id="dialog_textarea" style="max-height: 80px" class="mdui-textfield-input"
                           placeholder="请输入您的回复消息!"></textarea>
             </div>
+            <div class="g-recaptcha" data-sitekey="6LdoOBQUAAAAAP5Q-qMbFDphzLteAvdMGmHZXzxQ"></div>
             <div class="mdui-dialog-actions">
+
                 <input type="button" value="取消" onclick="closeDialog()" class="mdui-btn mdui-ripple" >
                 <input type="submit" value="确认"  class="mdui-btn mdui-ripple" >
             </div>
@@ -225,6 +229,5 @@
 <!--回复对话框-->
 
 </body>
-
 
 </html>

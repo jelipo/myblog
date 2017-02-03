@@ -49,9 +49,9 @@ public class BlogMainCtrl {
 
     @ResponseBody
     @PostMapping("/postComment.do")
-    public String postComment( HttpServletRequest httpServletRequest,@ModelAttribute("replyPojo")ReplyPojo replyPojo){
-        blogMainService.putReply(httpServletRequest,replyPojo);
-        return "{\"s\":\"ds\"}";
+    public Map postComment( HttpServletRequest httpServletRequest,@ModelAttribute("replyPojo")ReplyPojo replyPojo){
+        Map resultMap=blogMainService.putReply(httpServletRequest,replyPojo);
+        return resultMap;
     }
 
 

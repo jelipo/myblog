@@ -97,7 +97,12 @@ function chaeckDialogForm(form) {
         value:value,  // 评论主要内容
         isNewMainComment:isNewMainComment //是否是新主评论
     },function(result){
-        alert(result);
+        dialog.close();
+        if ( result.resultCode!=200){
+            alert(result.wrong);
+            return ;
+        }
+        var data = result.data;
     });
     return false;
 }

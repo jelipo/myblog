@@ -8,7 +8,9 @@ import blog.dao.BlogMainDao;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.stereotype.Service;
+import redisServer.service.CommentLimit;
 import redisServer.service.IpLimit;
 import server.PackingResult;
 
@@ -35,6 +37,9 @@ public class BlogMainService {
 
     @Resource(name = "redisServer/service/IpLimit")
     private IpLimit ipLimit;
+
+    @Resource(name="redisServer/service/CommentLimit")
+    private CommentLimit commentLimit;
 
     public Map getBlogByPageNum(HttpServletRequest request,int pageNum, int getBlogNum) {
         if (ipLimit.isBlackIp(request,"10")){
@@ -73,10 +78,21 @@ public class BlogMainService {
     }
 
     public Map putReply(HttpServletRequest request,ReplyPojo replyPojo){
-
-
+        if (commentLimit.isBanIp(request)){
+            return packingResult.toWorngMap("您暂时还不能操作！");
+        }
+        if (replyPojo.getWordId().equals("")||replyPojo.getValue().equals("")||replyPojo.getIsNewMainComment().equals("")){
+            return packingResult.toWorngMap("服务器出现错误！");
+        }
+        long timeNow=System.currentTimeMillis();
+        if (replyPojo.getNickname().equals("")){
+            replyPojo.setNickname("游客"+timeNow%10000000);
+        }
         Map map=new HashMap();
         if (!(replyPojo.getIsNewMainComment().equals("1"))){
+            if (replyPojo.getMainCommentId().equals("")){
+                return packingResult.toWorngMap("服务器出现错误！");
+            }
             map.put("toObserverName",replyPojo.getToObservername().equals("")?null:replyPojo.getToObservername());
             map.put("viceComment_mainComment_id",replyPojo.getMainCommentId());
         }
@@ -84,11 +100,12 @@ public class BlogMainService {
         map.put("isMainComment",replyPojo.getIsNewMainComment().equals("1")?1:2);
         map.put("observerName",replyPojo.getNickname());
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy　HH:mm:ss");
-        map.put("date",simpleDateFormat.format(Long.valueOf(System.currentTimeMillis())));
-        map.put("value",replyPojo.getValue());
+        map.put("date",simpleDateFormat.format(Long.valueOf(timeNow)));
+        map.put("value", StringEscapeUtils.escapeHtml4(replyPojo.getValue()) );
         map.put("email",replyPojo.getEmail());
         int result=blogMainDao.putReply(map);
         if (result>0){
+            commentLimit.insertIp(request);
             return packingResult.toSuccessMap(new JSONObject());
         }else{
             return packingResult.toWorngMap("服务器出现错误！");
