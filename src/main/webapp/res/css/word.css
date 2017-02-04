@@ -1,21 +1,21 @@
 .card-pageOther {
-    height: 100px;
+    height: 40px;
     padding: 20px;
 
 }
 
 .card-turnPage-up {
-    color: #366fb4;
-    width: 200px;
     float: left;
     font-size: 15px;
+    height: 100%;
+    display: block;
 }
 
 .card-turnPage-down {
-    color: #366fb4;
-    width: 200px;
     float: right;
     font-size: 15px;
+    height: 100%;
+    display: block;
 }
 
 .word-msg-height {
@@ -145,7 +145,11 @@
 .observername{
     color: #F44336;
 }
-
+.card-pagedownmsg{
+    font-size: 15px;
+    height: 100%;
+    width: 100px;
+}
 @media only screen and (max-width: 800px) {
     .card-comment {
         padding: 20px 10px 20px 10px;

@@ -215,7 +215,7 @@ body {
     transition: 1000ms;
     color: #696969;
     background-color:#ffffff;
-
+    box-shadow: 0 0 8px;
 }
 .MY-card-img{
     width: 100%;
@@ -244,6 +244,47 @@ body {
     min-height: 100px;
     padding: 10px 30px 10px 30px;
 }
+.MY-footer{
+    height: 220px;
+    margin-top: 70px;
+    background-color: #2e2e2e;
+    color: #e3e3e3;
+}
+.MY-footer a{
+    color:#e3e3e3;
+    text-decoration: none;
+}
+.footer-main{
+    height:190px;
+    width:100%;
+    max-width: 1330px;
+    padding: 40px 20px 20px 40px;
+    box-sizing:border-box;
+}
+.footer-other>div{
+    font-weight: bold;
+    width: 100%;
+    font-size: 15px;
+    height:28px;
+}
+.footer-other>a{
+
+    width: 100%;
+    display:block;
+    font-size:13px;
+    height: 22px;
+    text-decoration: none;
+}
+.footer-bottom{
+    font-size: 10px;
+    width: 100%;
+    max-width: 1330px;
+    line-height: 15px;
+}
+.footer-href{
+
+}
+
 @media only screen and (max-width: 800px) {
     .MY-card-tilte {
         font-size: 20px;

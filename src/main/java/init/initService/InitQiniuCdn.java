@@ -50,24 +50,26 @@ public class InitQiniuCdn {
 
     @Scheduled(cron = "*/5 * * * * ?")
     public void dosomething() throws IOException {
-        Iterator<String> add=needToAdd.keySet().iterator();
-        while (add.hasNext()){
-            String key=add.next();
-            if (this.uploadFlag){
-                uploadFile.simpleUpload(this.needToAdd.get(key),key,initConfig.getMainQiniuZone());
-            }
-        }
 
-        Iterator<String> replace=this.needToReplace.keySet().iterator();
-        while (replace.hasNext()){
-            System.out.println(this.needToReplace.size()+"你得");
-            String key=replace.next();
-            if (this.uploadFlag){
-                uploadFile.coverSimpleUpload(needToReplace.get(key),key,initConfig.getMainQiniuZone());
-            }
-        }
 
-        this.uploadFlag=false;
+//        Iterator<String> add=needToAdd.keySet().iterator();
+//        while (add.hasNext()){
+//            String key=add.next();
+//            if (this.uploadFlag){
+//                uploadFile.simpleUpload(this.needToAdd.get(key),key,initConfig.getMainQiniuZone());
+//            }
+//        }
+//
+//        Iterator<String> replace=this.needToReplace.keySet().iterator();
+//        while (replace.hasNext()){
+//            System.out.println(this.needToReplace.size()+"你得");
+//            String key=replace.next();
+//            if (this.uploadFlag){
+//                uploadFile.coverSimpleUpload(needToReplace.get(key),key,initConfig.getMainQiniuZone());
+//            }
+//        }
+//
+//        this.uploadFlag=false;
     }
 
     private void intoJedis(Map<String, String> needToAdd, Map<String, String> needToReplace, Jedis jedis) {

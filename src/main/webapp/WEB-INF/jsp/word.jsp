@@ -98,8 +98,8 @@
     <div class="mainPage">
 
         <div class="mdui-row mdui-row-margin">
-            <div class="mdui-col-xs-12">
-                <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor ">
+            <div class="mdui-col-xs-12 ">
+                <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
                     <div class="MY-mdui-card-media">
                         <img class="MY-card-img" src="res/img/first.jpg"/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
@@ -124,8 +124,8 @@
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-pageOther">
-                        <div class="card-turnPage-up">上一篇:<span>多线程</span></div>
-                        <div class="card-turnPage-down"><span>多线程的理解和使用</span>:下一篇</div>
+                        <button  class="mdui-btn  card-turnPage-up"><i class="mdui-icon material-icons">chevron_left</i><span>多线程</span></button>
+                        <button class="mdui-btn card-turnPage-down"><span>多线程</span><i class="mdui-icon material-icons">chevron_right</i></button>
                     </div>
 
                     <div class="mdui-divider"></div>
@@ -148,11 +148,35 @@
 
     </div>
 </div>
+
 <!-- 页脚-->
-<footer style="height: 250px;margin-top: 70px" class="mdui-color-light-green">
-    <p>Posted by: W3School</p>
-    <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
+<footer class="MY-footer" >
+    <div class="mdui-center  mdui-container footer-main">
+        <div class="mdui-col-xs-4 footer-other">
+            <div>导 航 ：</div>
+            <a href="/">网站主页</a>
+            <a  href="https://github.com/springmarker/MyBlog" target="_blank">此站GitHub</a>
+
+        </div>
+        <div class="mdui-col-xs-4 footer-other">
+            <div>联 系 ：</div>
+            <a href="mailto:springmarker@163.com">邮箱联系</a>
+
+        </div>
+        <div class="mdui-col-xs-4 footer-other">
+            <a href="https://github.com/springmarker" target="_blank">
+                <img width="80px"  src="res/img/github.png">
+            </a>
+
+        </div>
+    </div>
+    <div  class="mdui-center mdui-text-center footer-bottom">
+        <a>©2016 Cao. All rights reserved.</a>
+        <a href="http://www.miitbeian.gov.cn" target="_blank">备案号：鲁ICP备16035555号-2</a>
+    </div>
 </footer>
+<!-- 页脚-->
+
 <div id="toReplace" style="display:none">
 
     <!--评论-->
@@ -170,9 +194,9 @@
                 </button>
             </span>
         </div>
-        <span class="comment-mian-content">
+        <div class="comment-mian-content">
             做的还不错。
-        </span>
+        </div>
 
     </div>
     <!--评论-->

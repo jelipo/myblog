@@ -22,7 +22,7 @@ function getCemments() {
                 var copyHtml = $('#comment').clone();
                 copyHtml.attr("id", "comment" + i);
                 copyHtml.find(".comment-mian-msg-lz").html(comment.observername);
-                copyHtml.find(".comment-mian-msg-time").html(i+"楼 "+comment.date);
+                copyHtml.find(".comment-mian-msg-time").html(i+"楼　"+comment.date);
                 copyHtml.find(".comment-mian-content").html(comment.value);
                 copyHtml.find(".replyButton").attr("commentid",comment.id);
                 if (comment.viceComment != null) {

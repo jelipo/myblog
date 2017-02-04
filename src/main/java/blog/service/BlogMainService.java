@@ -101,7 +101,7 @@ public class BlogMainService {
         map.put("observerName",replyPojo.getNickname());
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy　HH:mm:ss");
         map.put("date",simpleDateFormat.format(Long.valueOf(timeNow)));
-        map.put("value", StringEscapeUtils.escapeHtml4(replyPojo.getValue()) );
+        map.put("value", StringEscapeUtils.escapeHtml4(replyPojo.getValue()).replace("\n","<br>") );
         map.put("email",replyPojo.getEmail());
         int result=blogMainDao.putReply(map);
         if (result>0){
