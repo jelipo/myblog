@@ -36,7 +36,7 @@
 .comment-mian-msg {
     padding: 3px 0px 3px 0px;
     width: 100%;
-    height: 32px;
+    height: 36px;
 }
 
 .comment-mian-msg > img {
@@ -55,9 +55,10 @@
 }
 
 .comment-mian-msg-lz {
-    font-size: 14px;
-    color: #4b4b4b;
-    padding: 1px 0px 3px 0px;
+    font-size: 13px;
+    color: #616161;
+    padding: 1px 0px 8px 0px;
+    font-weight: 900;
 }
 
 .comment-mian-msg-time {
@@ -66,7 +67,9 @@
 
 .comment-mian-content {
     padding: 8px 0px 8px 40px;
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 22px;
+    color: #616161;
 }
 
 .comment-mian-scomment {

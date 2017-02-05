@@ -160,7 +160,8 @@
         </div>
         <div class="mdui-col-xs-4 footer-other">
             <div>联 系 ：</div>
-            <a href="mailto:springmarker@163.com">邮箱联系</a>
+            <a href="mailto:springmarker@163.com">发送邮件</a>
+            <a >向我留言</a>
 
         </div>
         <div class="mdui-col-xs-4 footer-other">

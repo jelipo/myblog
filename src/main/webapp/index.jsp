@@ -117,10 +117,30 @@
     </div>
 </div>
 <!-- 页脚-->
-<footer style="height: 250px;margin-top: 70px" class="mdui-color-light-green">
-    <p>Posted by: W3School</p>
-    <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
+<footer class="MY-footer" >
+    <div class="mdui-center  mdui-container footer-main">
+        <div class="mdui-col-xs-4 footer-other">
+            <div>导 航 ：</div>
+            <a href="/">网站主页</a>
+            <a  href="https://github.com/springmarker/MyBlog" target="_blank">此站GitHub</a>
+        </div>
+        <div class="mdui-col-xs-4 footer-other">
+            <div>联 系 ：</div>
+            <a href="mailto:springmarker@163.com">发送邮件</a>
+            <a >向我留言</a>
+        </div>
+        <div class="mdui-col-xs-4 footer-other">
+            <a href="https://github.com/springmarker" target="_blank">
+                <img width="80px"  src="res/img/github.png">
+            </a>
+        </div>
+    </div>
+    <div  class="mdui-center mdui-text-center footer-bottom">
+        <a>©2016 Cao. All rights reserved.</a>
+        <a href="http://www.miitbeian.gov.cn" target="_blank">备案号：鲁ICP备16035555号-2</a>
+    </div>
 </footer>
+<!-- 页脚-->
 
 <div id="word" class="mdui-row mdui-row-margin" style="display: none">
     <div class="mdui-col-xs-12">
@@ -164,6 +184,7 @@
                             copyHtml.find('.MY-card-tilte').html(list[i].title);
                             copyHtml.find('.mdui-card-content').html(list[i].summary);
                             copyHtml.find('.writer-name').html(list[i].writer);
+                            copyHtml.find('.MY-card-data').html(list[i].date);
                             var href = copyHtml.find('.href').attr('href') + list[i].id;
                             copyHtml.find('.href').attr('href', href);
                             $(".mainPage").append(copyHtml);

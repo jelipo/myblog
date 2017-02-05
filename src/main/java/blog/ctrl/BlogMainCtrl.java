@@ -54,7 +54,6 @@ public class BlogMainCtrl {
         return resultMap;
     }
 
-
     @Resource(name = "blog/service/BlogMain")
     private BlogMainService blogMainService;
 
