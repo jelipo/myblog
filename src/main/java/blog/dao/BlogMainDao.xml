@@ -6,8 +6,12 @@
       select * from word where permission=1 ORDER BY date DESC LIMIT #{startNum},#{getBlogNum};
     </select>
 
-    <select id="toWord" resultType="HashMap">
-        select htmlSrc from word where id=#{0};
+    <select id="toWord" resultType="blog.bean.WordPojo">
+        (SELECT * FROM word WHERE id &lt; #{0} LIMIT 1)
+        union
+        (SELECT * FROM word WHERE id = #{0} )
+        union
+        (SELECT * FROM word WHERE id &gt; #{0} LIMIT 1 )
     </select>
 
     <select id="getComments" resultType="blog.bean.CommentPojo">

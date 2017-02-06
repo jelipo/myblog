@@ -4,6 +4,7 @@ package blog.bean;
 import com.alibaba.fastjson.annotation.JSONField;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class CommentPojo {
@@ -11,7 +12,8 @@ public class CommentPojo {
     private int ismaincomment;
     private String observername;
     private String toobservername;
-    private String date;
+    private Date date;
+    private String formatDate;
     private int vicecomment_maincomment_id;
     private String value;
     public List<CommentPojo> viceComment;
@@ -51,12 +53,26 @@ public class CommentPojo {
         this.toobservername = toobservername;
     }
 
-    public String getDate() {
+    @JSONField(serialize = false)
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    @JSONField(name = "date")
+    public String getFormatDate() {
+        return formatDate;
+    }
+
+    public void setFormatDate(String formatDate) {
+        this.formatDate = formatDate;
+    }
+
+    public void setViceComment(List<CommentPojo> viceComment) {
+        this.viceComment = viceComment;
     }
 
     @JSONField(serialize = false)

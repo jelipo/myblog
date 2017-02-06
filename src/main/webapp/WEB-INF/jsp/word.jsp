@@ -25,11 +25,17 @@
 </head>
 
 <body class="mdui-drawer-body-left ">
-<script>
 
-</script>
-<input id="wordId" value="${wordId}" type="hidden">
+<!--参数-->
 <input id="htmlSrc" value="${htmlSrc}" type="hidden">
+<input id="wordId" value="${wordId}" type="hidden">
+<input id="title" value="${title}" type="hidden">
+<input id="date" value="${date}" type="hidden">
+<input id="lastwordId" value="${lastWordId}" type="hidden">
+<input id="lastwordTitle" value="${lastWordTitle}" type="hidden">
+<input id="nextwordId" value="${nextWordId}" type="hidden">
+<input id="nextwordTitle" value="${nextWordTitle}" type="hidden">
+<!--参数-->
 
 <i onclick="toggle()" class="mdui-icon material-icons"
    style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
@@ -104,7 +110,7 @@
                         <img class="MY-card-img" src="res/img/first.jpg"/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                             <div class="mdui-card-primary ">
-                                <div class="MY-card-tilte">宁静致远</div>
+                                <div id="wordTitle" class="MY-card-tilte">标题</div>
                             </div>
                         </div>
                     </div>
@@ -114,7 +120,7 @@
                         <span>Springmarker</span>
                         <i mdui-menu="{target: '#example-attr'}"
                            class="mdui-ripple mdui-icon material-icons MY-card-more">more_vert</i>
-                        <div class="MY-card-data">11月25,2016</div>
+                        <div id="wordDate" class="MY-card-data">11月25,2016</div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page">
@@ -124,8 +130,8 @@
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-pageOther">
-                        <button  class="mdui-btn  card-turnPage-up"><i class="mdui-icon material-icons">chevron_left</i><span>多线程</span></button>
-                        <button class="mdui-btn card-turnPage-down"><span>多线程</span><i class="mdui-icon material-icons">chevron_right</i></button>
+                        <a href="" class="mdui-btn  card-turnPage-up"><i class="mdui-icon material-icons">chevron_left</i><span>上一篇文章</span></a>
+                        <a href="" class="mdui-btn card-turnPage-down"><span>下一篇文章</span><i class="mdui-icon material-icons">chevron_right</i></a>
                     </div>
 
                     <div class="mdui-divider"></div>

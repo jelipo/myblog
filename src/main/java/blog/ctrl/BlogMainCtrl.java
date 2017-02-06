@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -34,9 +35,7 @@ public class BlogMainCtrl {
 
     @RequestMapping("/toWord.do")
     public String toWord(HttpServletRequest request,@RequestParam int id){
-        Map map=blogMainService.toWord(request,id);
-        request.setAttribute("htmlSrc",map.get("htmlSrc"));
-        request.setAttribute("wordId",id);
+        blogMainService.toWord(request,id);
         return "word";
     }
 

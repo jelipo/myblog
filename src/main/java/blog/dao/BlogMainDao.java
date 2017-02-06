@@ -3,6 +3,7 @@ package blog.dao;
 import blog.bean.BlogMainPojo;
 import blog.bean.CommentPojo;
 import blog.bean.ReplyPojo;
+import blog.bean.WordPojo;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.Map;
 public interface BlogMainDao {
     List<BlogMainPojo> getWord(Map map);
 
-    HashMap toWord(int id);
+    List<WordPojo> toWord(int id);
 
     List<CommentPojo> getComments(int id);
 

@@ -4,6 +4,7 @@ package blog.service;
 import blog.bean.BlogMainPojo;
 import blog.bean.CommentPojo;
 import blog.bean.ReplyPojo;
+import blog.bean.WordPojo;
 import blog.dao.BlogMainDao;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -17,10 +18,7 @@ import server.PackingResult;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by cao on 2017/1/10.
@@ -52,19 +50,55 @@ public class BlogMainService {
         map.put("getBlogNum",getBlogNum);
         map.put("startNum", (pageNum - 1) * getBlogNum);
         List<BlogMainPojo> list = blogMainDao.getWord(map);
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy");
+        for (int i=0;i<list.size();i++){
+            BlogMainPojo blogMainPojo=list.get(i);
+            blogMainPojo.setFormatDate(simpleDateFormat.format(blogMainPojo.getDate()));
+        }
         return packingResult.toSuccessMap(list);
     }
 
-    public Map toWord(HttpServletRequest request,int id) {
-        return blogMainDao.toWord(id);
+    public void toWord(HttpServletRequest request,int id) {
+        List<WordPojo> list=blogMainDao.toWord(id);
+        int listSize=list.size();
+        WordPojo mainWordPojo;
+        if (listSize==2){
+            if (list.get(0).getId()==id){
+                mainWordPojo=list.get(0);
+                request.setAttribute("lastWordId",id);
+                request.setAttribute("lastWordTitle","没有上一篇了");
+                request.setAttribute("nextWordId",list.get(1).getId());
+                request.setAttribute("nextWordTitle",list.get(1).getTitle());
+            }else {
+                mainWordPojo=list.get(1);
+                request.setAttribute("lastWordId",list.get(0).getId());
+                request.setAttribute("lastWordTitle",list.get(0).getTitle());
+                request.setAttribute("nextWordId",id);
+                request.setAttribute("nextWordTitle","没有下一篇了");
+            }
+        }else {
+            mainWordPojo=list.get(1);
+            request.setAttribute("lastWordId",list.get(0).getId());
+            request.setAttribute("lastWordTitle",list.get(0).getTitle());
+            request.setAttribute("nextWordId",list.get(2).getId());
+            request.setAttribute("nextWordTitle",list.get(2).getTitle());
+        }
+
+        request.setAttribute("htmlSrc",mainWordPojo.getHtmlsrc());
+        request.setAttribute("wordId",id);
+        request.setAttribute("title",mainWordPojo.getTitle());
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy");
+        request.setAttribute("date",simpleDateFormat.format(mainWordPojo.getDate()));
+
     }
 
     public Map getComments(int id){
         List<CommentPojo> list= blogMainDao.getComments(id);
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy HH:mm:ss");
         JSONObject json=new JSONObject();
-
         for(int i=0;i<list.size();i++){
             CommentPojo comment=list.get(i);
+            comment.setFormatDate(simpleDateFormat.format(comment.getDate()));
             if (comment.getIsmaincomment()==1){
                 comment.viceComment=new ArrayList<>();
                 json.put(String.valueOf(comment.getId()),comment);
@@ -99,8 +133,7 @@ public class BlogMainService {
         map.put("wordId",replyPojo.getWordId());
         map.put("isMainComment",replyPojo.getIsNewMainComment().equals("1")?1:2);
         map.put("observerName",replyPojo.getNickname());
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy　HH:mm:ss");
-        map.put("date",simpleDateFormat.format(Long.valueOf(timeNow)));
+        map.put("date",new Date(System.currentTimeMillis()));
         map.put("value", StringEscapeUtils.escapeHtml4(replyPojo.getValue()).replace("\n","<br>") );
         map.put("email",replyPojo.getEmail());
         int result=blogMainDao.putReply(map);

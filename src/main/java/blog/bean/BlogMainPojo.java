@@ -1,15 +1,20 @@
 package blog.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+import java.util.Date;
+
 /**
  * Created by cao on 2017/1/11.
  */
 public class BlogMainPojo {
     public String id;
     public String title;
-    public String date;
+    public Date date;
     public String summary;
     public String writer;
     public String backgroundImage;
+    private String formatDate;
 
     public String getId() {
         return id;
@@ -51,11 +56,21 @@ public class BlogMainPojo {
         this.title = title;
     }
 
-    public String getDate() {
+    @JSONField(serialize = false)
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    @JSONField(name = "date")
+    public String getFormatDate() {
+        return formatDate;
+    }
+
+    public void setFormatDate(String formatDate) {
+        this.formatDate = formatDate;
     }
 }
