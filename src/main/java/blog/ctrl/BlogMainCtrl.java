@@ -18,6 +18,9 @@ import java.util.Map;
 @Controller
 public class BlogMainCtrl {
 
+    @Resource(name = "blog/service/BlogMain")
+    private BlogMainService blogMainService;
+
     @ModelAttribute
     public void init(HttpServletRequest request){
 
@@ -35,8 +38,12 @@ public class BlogMainCtrl {
 
     @RequestMapping("/toWord.do")
     public String toWord(HttpServletRequest request,@RequestParam int id){
-        blogMainService.toWord(request,id);
-        return "word";
+        Boolean isSuccess=blogMainService.toWord(request,id);
+        if (isSuccess){
+            return "word";
+        } else{
+            return "404";
+        }
     }
 
     @ResponseBody
@@ -53,8 +60,18 @@ public class BlogMainCtrl {
         return resultMap;
     }
 
-    @Resource(name = "blog/service/BlogMain")
-    private BlogMainService blogMainService;
+    @RequestMapping("/moreWords.do")
+    public String moreWords(HttpServletRequest request,@RequestParam int pageNum){
+        request.setAttribute("pageNum",pageNum);
+        return "wordList";
+    }
+
+    @RequestMapping("/toNone.do")
+    public String toNone(HttpServletRequest request){
+        return "none";
+    }
+
+
 
 
 

@@ -58,7 +58,7 @@ public class BlogMainService {
         return packingResult.toSuccessMap(list);
     }
 
-    public void toWord(HttpServletRequest request,int id) {
+    public Boolean toWord(HttpServletRequest request,int id) {
         List<WordPojo> list=blogMainDao.toWord(id);
         int listSize=list.size();
         WordPojo mainWordPojo;
@@ -76,6 +76,8 @@ public class BlogMainService {
                 request.setAttribute("nextWordId",id);
                 request.setAttribute("nextWordTitle","没有下一篇了");
             }
+        }else if(listSize==1){
+            return false;
         }else {
             mainWordPojo=list.get(1);
             request.setAttribute("lastWordId",list.get(0).getId());
@@ -89,7 +91,7 @@ public class BlogMainService {
         request.setAttribute("title",mainWordPojo.getTitle());
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy");
         request.setAttribute("date",simpleDateFormat.format(mainWordPojo.getDate()));
-
+        return true;
     }
 
     public Map getComments(int id){

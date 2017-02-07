@@ -62,4 +62,18 @@ var leftbar;
 function toggle() {
     leftbar.toggle();
 }
-
+//ajax
+function getAjaxData(url) {
+    var data;
+    $.ajax({
+        url: url,async: false, success: function (result) {
+            if (result.resultCode == 200) {
+                data=result.data;
+            } else {
+                alert("服务器出现错误，错误代码"+result.resultCode + ',错误内容' + result.wrong);
+                return null;
+            }
+        }
+    });
+    return data;
+}

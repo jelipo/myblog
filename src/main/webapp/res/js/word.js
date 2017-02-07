@@ -6,14 +6,20 @@ function changeFrameHeight() {
 var dialog;
 $(function () {
     $('#wordIframe').attr("src", $('#htmlSrc').val());
+    $("#wordIframe").on("load",function(){
+        $("#wordIframe").fadeIn(1000);
+    });
     $("#wordTitle").html($("#title").val());
     $("#wordDate").html($("#date").val());
-    $(".card-turnPage-up").attr("href","toWorld.do?id="+$("#lastwordId").val());
-    $(".card-turnPage-up").find("span").html($("#lastwordTitle").val());
-    $(".card-turnPage-down").attr("href","toWorld.do?id="+$("#nextwordId").val());
-    $(".card-turnPage-down").find("span").html($("#nextwordTitle").val());
+    $("#lastPage").attr("href","toWord.do?id="+$("#lastwordId").val());
+    $("#lastPage").find("div").html($("#lastwordTitle").val());
+    $("#nextPage").attr("href","toWord.do?id="+$("#nextwordId").val());
+    $("#nextPage").find("div").html($("#nextwordTitle").val());
     dialog = new mdui.Dialog('#dialog');
     getCemments();
+
+
+
 });
 function getCemments() {
     var id = getUrlParam("id");

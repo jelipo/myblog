@@ -4,18 +4,26 @@
 
 }
 
-.card-turnPage-up {
+.card-turnPage {
     float: left;
-    font-size: 15px;
     height: 100%;
     display: block;
+    text-decoration:none;
+    out-line: none;
+    color: #424242;
+    font-weight: 900;
 }
 
-.card-turnPage-down {
-    float: right;
-    font-size: 15px;
-    height: 100%;
-    display: block;
+
+.card-turnPage>div{
+    float: left;
+    line-height: 23px;
+    font-size: 16px;
+}
+.card-turnPage>i{
+    float: left;
+    font-size: 23px;
+
 }
 
 .word-msg-height {
@@ -164,6 +172,10 @@
 
     .comment-mian-scomment-main {
         display: block;
+    }
+    .card-turnPage {
+       font-size: 12px;
+        font-weight: 300;
     }
 
 }

@@ -16,6 +16,10 @@
 
 <body class="mdui-drawer-body-left ">
 
+<!--参数-->
+<input id="pageNum" value="${pageNum}" type="hidden">
+<!--参数-->
+
 <i onclick="toggle()" class="mdui-icon material-icons"
    style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
 
@@ -84,36 +88,6 @@
     </div>
     <div class="mainPage">
 
-        <div class="mdui-row mdui-row-margin">
-            <div id="top_card_left" class="mdui-col-xs-7">
-                <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor">
-                    <div class="mdui-card-media top-card-left-img">
-                        <img src="res/img/first.jpg"/>
-                        <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
-                            <div class="mdui-card-primary ">
-                                <div class="MY-card-tilte">宁静致远</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mdui-card-actions smallNone">
-                        <img src="res/img/head.jpg" class="mdui-img-circle">
-                        <div class="top-card-left-text">Springmarker</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="top_card_right" class="mdui-col-xs-5">
-                <div class="mdui-card-top-right mdui-hoverable secondColorAndBackgroundColor">
-                    <div class="top-card-right">
-                        <button onclick="changeColor()" class="mdui-fab mdui-ripple mdui-color-teal rippleButton">
-                            <i class="mdui-icon material-icons ">&#xe145;</i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
 
     </div>
 </div>
@@ -142,6 +116,8 @@
     </div>
 </footer>
 <!-- 页脚-->
+
+<!--控件库-->
 <div style="display: none">
     <!-- 单个item-->
     <div id="word" class="mdui-row mdui-row-margin" style="display: none">
@@ -172,41 +148,39 @@
     </div>
     <!-- 单个item-->
 
-    <!--底部信息“查看更多”-->
-    <a href="moreWords.do?pageNum=1" id="lookMore" class="mdui-row mdui-row-margin mdui-text-center"
-       style="display: block;color: #919191;font-size: 16px;">
-        查看更多
-    </a>
+    <!--底部信息“没有更多了”-->
+    <div id="noMore" class="mdui-row mdui-row-margin mdui-text-center" style="color: #919191;font-size: 16px;">
+        没有更多了
+    </div>
     <!--底部信息“查看更多”-->
 
 </div>
+<!--控件库-->
 
 <script>
     $(function () {
-        indexAppendWord(getAjaxData("getWord.do?pageNum=1&getBlogNum=10"));
-        var nextPageNum = 2;
+        var pageNumNow = parseInt($("#pageNum").val());
+        appendWord(getAjaxData("getWord.do?pageNum=" + pageNumNow + "&getBlogNum=10"));
+
 
         //监听滚动条到底部
-//        var appendFlag = true;
-//        $(window).scroll(function () {
-//            if (appendFlag && ($(window).scrollTop() + 20 > $(document).height() - $(window).height())) {
-//                appendFlag = false;
-//                var getWordNum = appendWord(getAjaxData("getWord.do?pageNum=" + nextPageNum + "&getBlogNum=10"));
-//                if (getWordNum == 0) {
-//                    appendNoMore();
-//                    return;
-//                }
-//                nextPageNum = nextPageNum + getWordNum;
-//                appendFlag = true;
-//            }
-//        });
+        var appendFlag = true;
+        $(window).scroll(function () {
+            if (appendFlag && ($(window).scrollTop() + 20 > $(document).height() - $(window).height())) {
+                appendFlag = false;
+                var getWordNum = appendWord(getAjaxData("getWord.do?pageNum=" + (pageNumNow + 1) + "&getBlogNum=10"));
+                if (getWordNum == 0) {
+                    appendNoMore();
+                    return;
+                }
+                pageNumNow = pageNumNow + 1;
+                appendFlag = true;
+            }
+        });
 
 
     });
-
-
-    function indexAppendWord(list) {
-
+    function appendWord(list) {
         for (var i = 0; i < list.length; i++) {
             var copyHtml = $('#word').clone();
             copyHtml.attr("id", "word" + (i + 1));
@@ -221,11 +195,12 @@
             $(".mainPage").append(copyHtml);
             copyHtml.show();
         }
-        $(".mainPage").append($('#lookMore').clone());
         return list.length;
     }
-
-
+    function appendNoMore() {
+        var copyHtml = $('#noMore').clone();
+        $(".mainPage").append(copyHtml);
+    }
 </script>
 </body>
 </html>

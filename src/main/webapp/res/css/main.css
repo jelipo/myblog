@@ -228,6 +228,7 @@ body {
     padding-bottom: 30%;
     position: relative;
     overflow: hidden;
+    display: block;
 }
 .top-card-left-img{
     position:relative;
@@ -283,7 +284,9 @@ body {
 .footer-href{
 
 }
-
+.noHrefCss{
+    text-decoration:none;
+}
 @media only screen and (max-width: 800px) {
     .MY-card-tilte {
         font-size: 20px;

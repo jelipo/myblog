@@ -7,7 +7,7 @@
     </select>
 
     <select id="toWord" resultType="blog.bean.WordPojo">
-        (SELECT * FROM word WHERE id &lt; #{0} LIMIT 1)
+        (SELECT * FROM word WHERE id &lt; #{0} ORDER BY id DESC LIMIT 1)
         union
         (SELECT * FROM word WHERE id = #{0} )
         union

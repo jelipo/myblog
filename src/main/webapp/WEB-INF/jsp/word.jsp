@@ -14,12 +14,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
     <link href="res/css/mdui.css" rel="stylesheet">
-    <link href="res/css/index.css" rel="stylesheet">
+    <link href="res/css/main.css" rel="stylesheet">
     <link href="res/css/word.css" rel="stylesheet">
 
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
-    <script type="text/javascript" src="res/js/index.js"></script>
+    <script type="text/javascript" src="res/js/main.js"></script>
     <script type="text/javascript" src="res/js/word.js"></script>
 
 </head>
@@ -106,14 +106,14 @@
         <div class="mdui-row mdui-row-margin">
             <div class="mdui-col-xs-12 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
-                    <div class="MY-mdui-card-media">
+                    <a class="MY-mdui-card-media">
                         <img class="MY-card-img" src="res/img/first.jpg"/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                             <div class="mdui-card-primary ">
                                 <div id="wordTitle" class="MY-card-tilte">标题</div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
                     <div class="mdui-card-actions word-msg-height">
                         <img src="res/img/head.jpg">
@@ -123,15 +123,21 @@
                         <div id="wordDate" class="MY-card-data">11月25,2016</div>
                     </div>
                     <div class="mdui-divider"></div>
-                    <div class="card-page">
-                        <iframe id="wordIframe" src="" scrolling="no"
+                    <div class="card-page" style="min-height: 600px;">
+                        <iframe style="display: none;" id="wordIframe" src="" scrolling="no"
                                 onload="changeFrameHeight()" frameborder="0" height="100%" width="100%">
                         </iframe>
                     </div>
                     <div class="mdui-divider"></div>
-                    <div class="card-pageOther">
-                        <a href="" class="mdui-btn  card-turnPage-up"><i class="mdui-icon material-icons">chevron_left</i><span>上一篇文章</span></a>
-                        <a href="" class="mdui-btn card-turnPage-down"><span>下一篇文章</span><i class="mdui-icon material-icons">chevron_right</i></a>
+                    <div class="card-pageOther" >
+                        <a id="lastPage" class="mdui-valign card-turnPage" style="float:left">
+                            <i class="mdui-icon material-icons">arrow_back</i>
+                            <div>上一篇</div>
+                        </a>
+                        <a id="nextPage" class="mdui-valign card-turnPage" style="float:right">
+                            <div >下一篇</div>
+                            <i class="mdui-icon material-icons">arrow_forward</i>
+                        </a>
                     </div>
 
                     <div class="mdui-divider"></div>
@@ -144,8 +150,6 @@
                             </div>
 
                         </div>
-
-
                     </div>
                 </div>
 
