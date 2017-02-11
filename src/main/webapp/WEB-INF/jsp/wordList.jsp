@@ -19,14 +19,7 @@
 <!--参数-->
 <input id="pageNum" value="${pageNum}" type="hidden">
 <!--参数-->
-
-<i onclick="toggle()" class="mdui-icon material-icons"
-   style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
-
-
 <%@include file="webParts/drawer.html" %>
-
-
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px">

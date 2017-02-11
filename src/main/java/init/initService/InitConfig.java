@@ -35,6 +35,9 @@ public class InitConfig {
     @Value("#{config['qiniu.localResourceFloder']}")
     private String localResourceFloder;
 
+    @Value("#{config['qiniu.cdnDomainName']}")
+    private String cdnDomainName;
+
     void init() {
         long startTime = System.currentTimeMillis();
         startId = "startID_" + startTime;
@@ -48,7 +51,7 @@ public class InitConfig {
         Configuration c = new Configuration(Zone.zone0());
         UploadManager uploadManager = new UploadManager(c);
         String CDN_Prefix=(new StringBuilder(projectName).append("/").append(localResourceFloder).append("/")).toString();
-        mainQiniuZone = new QiniuZoneParameters(uploadManager,mainBucketName,auth,CDN_Prefix);
+        mainQiniuZone = new QiniuZoneParameters(uploadManager,mainBucketName,auth,CDN_Prefix,cdnDomainName);
 
     }
 

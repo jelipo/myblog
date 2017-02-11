@@ -20,11 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- * Created by cao on 2017/1/10.
- */
-
-@Service("blog/service/BlogMain")
+@Service("blog/service/BlogMainService")
 public class BlogMainService {
 
     @Resource(name = "blog/dao/BlogMainDao")

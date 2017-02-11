@@ -15,13 +15,7 @@
 </head>
 
 <body class="mdui-drawer-body-left ">
-
-<i onclick="toggle()" class="mdui-icon material-icons"
-   style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
-
-
 <%@include file="webParts/drawer.html" %>
-
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px"></div>
@@ -37,17 +31,16 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-<%@include file="webParts/footer.html" %>
 
-<!--控件库-->
+<!--部件-->
 <div style="display: none">
 
 
 </div>
-<!--控件库-->
+<!--部件-->
 
+<%@include file="webParts/footer.html" %>
 </body>
 </html>

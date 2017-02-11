@@ -12,13 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by cao on 2017/1/10.
- */
+
 @Controller
 public class BlogMainCtrl {
 
-    @Resource(name = "blog/service/BlogMain")
+    @Resource(name = "blog/service/BlogMainService")
     private BlogMainService blogMainService;
 
     @ModelAttribute

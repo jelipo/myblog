@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by cao on 2017/1/15.
- */
+
 @Controller
 public class ResCtrl {
 

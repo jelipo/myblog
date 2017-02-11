@@ -64,6 +64,11 @@
         <constructor-arg index="4" value="${redis.password}"/>
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+                p:defaultEncoding="UTF-8"
+                p:maxUploadSize="10000000"
+                p:uploadTempDir="local/upload">
+    </bean>
 
 </beans>
 

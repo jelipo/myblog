@@ -18,15 +18,12 @@ import java.io.IOException;
 @Service("qiniu/UploadFile")
 public class UploadFile {
 
-    @Resource(name = "init/initService/initConfig")
-    private InitConfig initConfig;
-
-
-    public void simpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) throws IOException {
+    public String simpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) throws IOException {
         UploadManager uploadManager = qiniuZoneParameters.getUploadManager();
         Auth auth = qiniuZoneParameters.getAuth();
         String bucketName = qiniuZoneParameters.getMainBucketName();
         upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName));
+        return qiniuZoneParameters.getCdnDomainName()+CDNFileName;
     }
 
     public void simpleUploadByCustom(String localPath, String CDNFileName, UploadManager uploadManager, Auth auth, String bucketName) {

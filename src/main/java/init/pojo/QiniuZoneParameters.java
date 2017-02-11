@@ -13,12 +13,14 @@ public class QiniuZoneParameters {
     private String mainBucketName;
     private Auth auth;
     private String CDN_Prefix;
+    private String cdnDomainName;
 
-    public QiniuZoneParameters(UploadManager uploadManager, String mainBucketName, Auth auth, String CDN_Prefix){
+    public QiniuZoneParameters(UploadManager uploadManager, String mainBucketName, Auth auth, String CDN_Prefix,String cdnDomainName){
         this.uploadManager=uploadManager;
         this.mainBucketName=mainBucketName;
         this.auth=auth;
         this.CDN_Prefix=CDN_Prefix;
+        this.cdnDomainName=cdnDomainName;
     }
 
     public UploadManager getUploadManager() {
@@ -37,6 +39,7 @@ public class QiniuZoneParameters {
         return CDN_Prefix;
     }
 
-
-
+    public String getCdnDomainName() {
+        return cdnDomainName;
+    }
 }
