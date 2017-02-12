@@ -28,6 +28,7 @@
 <input id="lastwordTitle" value="${lastWordTitle}" type="hidden">
 <input id="nextwordId" value="${nextWordId}" type="hidden">
 <input id="nextwordTitle" value="${nextWordTitle}" type="hidden">
+<input id="backgroundImage" value="${backgroundImage}" type="hidden">
 <!--参数-->
 
 
@@ -43,7 +44,7 @@
             <div class="mdui-col-xs-12 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
                     <a class="MY-mdui-card-media">
-                        <img class="MY-card-img" src="res/img/first.jpg"/>
+                        <img id="wordBackgroundImage" class="MY-card-img" src="res/img/first.jpg"/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                             <div class="mdui-card-primary ">
                                 <div id="wordTitle" class="MY-card-tilte">标题</div>

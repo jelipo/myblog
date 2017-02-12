@@ -11,6 +11,7 @@ $(function () {
     });
     $("#wordTitle").html($("#title").val());
     $("#wordDate").html($("#date").val());
+    $("#wordBackgroundImage").attr("src",$("#backgroundImage").val());
     $("#lastPage").attr("href","toWord.do?id="+$("#lastwordId").val());
     $("#lastPage").find("div").html($("#lastwordTitle").val());
     $("#nextPage").attr("href","toWord.do?id="+$("#nextwordId").val());

@@ -77,3 +77,32 @@ function getAjaxData(url) {
     });
     return data;
 }
+
+function ajaxUploadFile(Url,formData) {
+    var data;
+    $.ajax({
+        url : Url,
+        async: false,
+        type : 'POST',
+        data : formData,
+        // 告诉jQuery不要去处理发送的数据
+        processData : false,
+        // 告诉jQuery不要去设置Content-Type请求头
+        contentType : false,
+        beforeSend:function(){
+            console.log("正在进行，请稍候");
+        },
+        success : function(result) {
+            if (result.resultCode == 200) {
+                data=result.data;
+            }else{
+                alert("服务器出现错误，错误代码"+result.resultCode + ',错误内容' + result.wrong);
+                return null;
+            }
+        },
+        error : function(responseStr) {
+            alert("error");
+        }
+    });
+    return data;
+}

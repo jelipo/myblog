@@ -6,14 +6,12 @@ import blog.bean.CommentPojo;
 import blog.bean.ReplyPojo;
 import blog.bean.WordPojo;
 import blog.dao.BlogMainDao;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.stereotype.Service;
 import redisServer.service.CommentLimit;
 import redisServer.service.IpLimit;
-import server.PackingResult;
+import util.PackingResult;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +24,6 @@ public class BlogMainService {
     @Resource(name = "blog/dao/BlogMainDao")
     private BlogMainDao blogMainDao;
 
-    @Resource(name = "server/PackingResult")
-    private PackingResult packingResult;
 
     @Resource(name = "redisServer/service/IpLimit")
     private IpLimit ipLimit;
@@ -37,10 +33,10 @@ public class BlogMainService {
 
     public Map getBlogByPageNum(HttpServletRequest request,int pageNum, int getBlogNum) {
         if (ipLimit.isBlackIp(request,"10")){
-            return packingResult.toWorngMap("Please stop!");
+            return PackingResult.toWorngMap("Please stop!");
         }
         if (pageNum == 0 || getBlogNum == 0) {
-            return packingResult.toWorngMap("参数错误");
+            return PackingResult.toWorngMap("参数错误");
         }
         Map map=new HashMap();
         map.put("getBlogNum",getBlogNum);
@@ -51,7 +47,7 @@ public class BlogMainService {
             BlogMainPojo blogMainPojo=list.get(i);
             blogMainPojo.setFormatDate(simpleDateFormat.format(blogMainPojo.getDate()));
         }
-        return packingResult.toSuccessMap(list);
+        return PackingResult.toSuccessMap(list);
     }
 
     public Boolean toWord(HttpServletRequest request,int id) {
@@ -65,6 +61,7 @@ public class BlogMainService {
                 request.setAttribute("lastWordTitle","没有上一篇了");
                 request.setAttribute("nextWordId",list.get(1).getId());
                 request.setAttribute("nextWordTitle",list.get(1).getTitle());
+
             }else {
                 mainWordPojo=list.get(1);
                 request.setAttribute("lastWordId",list.get(0).getId());
@@ -87,6 +84,7 @@ public class BlogMainService {
         request.setAttribute("title",mainWordPojo.getTitle());
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy");
         request.setAttribute("date",simpleDateFormat.format(mainWordPojo.getDate()));
+        request.setAttribute("backgroundImage",mainWordPojo.getBackgroundimage());
         return true;
     }
 
@@ -106,15 +104,15 @@ public class BlogMainService {
                 viceComment.viceComment.add(comment);
             }
         }
-        return packingResult.toSuccessMap(json);
+        return PackingResult.toSuccessMap(json);
     }
 
     public Map putReply(HttpServletRequest request,ReplyPojo replyPojo){
         if (commentLimit.isBanIp(request)){
-            return packingResult.toWorngMap("您暂时还不能操作！");
+            return PackingResult.toWorngMap("您暂时还不能操作！");
         }
         if (replyPojo.getWordId().equals("")||replyPojo.getValue().equals("")||replyPojo.getIsNewMainComment().equals("")){
-            return packingResult.toWorngMap("服务器出现错误！");
+            return PackingResult.toWorngMap("服务器出现错误！");
         }
         long timeNow=System.currentTimeMillis();
         if (replyPojo.getNickname().equals("")){
@@ -123,7 +121,7 @@ public class BlogMainService {
         Map map=new HashMap();
         if (!(replyPojo.getIsNewMainComment().equals("1"))){
             if (replyPojo.getMainCommentId().equals("")){
-                return packingResult.toWorngMap("服务器出现错误！");
+                return PackingResult.toWorngMap("服务器出现错误！");
             }
             map.put("toObserverName",replyPojo.getToObservername().equals("")?null:replyPojo.getToObservername());
             map.put("viceComment_mainComment_id",replyPojo.getMainCommentId());
@@ -137,9 +135,9 @@ public class BlogMainService {
         int result=blogMainDao.putReply(map);
         if (result>0){
             commentLimit.insertIp(request);
-            return packingResult.toSuccessMap(new JSONObject());
+            return PackingResult.toSuccessMap(new JSONObject());
         }else{
-            return packingResult.toWorngMap("服务器出现错误！");
+            return PackingResult.toWorngMap("服务器出现错误！");
         }
     }
 

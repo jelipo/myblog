@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import qiniu.UploadFile;
 import redisServer.service.IpLimit;
+import util.PackingResult;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Service("blog/service/ManagerService")
@@ -27,6 +30,15 @@ public class ManagerService {
 
     @Value("#{config['blog.passWord']}")
     private String passWord;
+
+    @Value("#{config['qiniu.CDNBlogHtmlPath']}")
+    private String CDNBlogHtmlPath;
+
+    @Value("#{config['qiniu.CDNBLogBackgroundImagePath']}")
+    private String CDNBLogBackgroundImagePath;
+
+    @Value("#{config['qiniu.otherPath']}")
+    private String CDNOtherPath;
 
     @Resource(name = "redisServer/service/IpLimit")
     private IpLimit ipLimit;
@@ -51,34 +63,70 @@ public class ManagerService {
         return isSuccess;
     }
 
-    public Boolean uploadBlog(MultipartFile blogFiles, MultipartFile backgroundImage, String title, String writer,String summary, Boolean allowComment) {
-        Boolean isNull=blogFiles.isEmpty()||backgroundImage.isEmpty()||title.equals("")||writer.equals("")||summary.equals("");
-        if (isNull){return false;}
-        long nowTime=System.currentTimeMillis();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+    /**
+     * 文章上传，临时存放到本地，然后把html文件和背景图片上传到七牛CDN中
+     *
+     * @param blogFiles       html文件
+     * @param backgroundImage 背景图片
+     * @param title           标题
+     * @param writer          作者
+     * @param summary         简介
+     * @param allowComment    允许评论
+     * @return
+     */
+    public Boolean uploadBlog(MultipartFile blogFiles, MultipartFile backgroundImage, String title, String writer, String summary, Boolean allowComment) {
+        Boolean isNull = blogFiles.isEmpty() || backgroundImage.isEmpty() || title.equals("") || writer.equals("") || summary.equals("");
+        if (isNull) {
+            return false;
+        }
+        long nowTime = System.currentTimeMillis();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         int result;
         try {
-            File htmlFile=new File(initConfig.getRootPath()+"/local/upload/"+nowTime+".html");
+            File htmlFile = new File(initConfig.getRootPath() + "/local/upload/" + nowTime + ".html");
             blogFiles.transferTo(htmlFile);
-            String[] name= backgroundImage.getOriginalFilename().split("\\.");
-            String suffix="."+name[name.length-1];
-            File imageFile=new File(initConfig.getRootPath()+"/local/upload/"+nowTime+suffix);
+            String[] name = backgroundImage.getOriginalFilename().split("\\.");
+            String suffix = "." + name[name.length - 1];
+            File imageFile = new File(initConfig.getRootPath() + "/local/upload/" + nowTime + suffix);
             backgroundImage.transferTo(imageFile);
-            QiniuZoneParameters qiniuZoneParameters=initConfig.getMainQiniuZone();
-            String htmlCDNFileName="blog/static/html/"+simpleDateFormat.format(nowTime)+".html";
-            String imageCDNFileName="blog/static/image/"+simpleDateFormat.format(nowTime)+suffix;
-            String htmlLink=uploadFile.simpleUpload(htmlFile.getAbsolutePath(),htmlCDNFileName,qiniuZoneParameters);
-            String imageLink=uploadFile.simpleUpload(imageFile.getAbsolutePath(),imageCDNFileName,qiniuZoneParameters);
-            Date date=new Date(nowTime);
-            result=managerDao.insertBlog(title,1,summary,writer,imageLink,htmlLink,date,1,1);
+            QiniuZoneParameters qiniuZoneParameters = initConfig.getMainQiniuZone();
+            String htmlCDNFileName = CDNBlogHtmlPath + simpleDateFormat.format(nowTime) + ".html";
+            String imageCDNFileName = CDNBLogBackgroundImagePath + simpleDateFormat.format(nowTime) + suffix;
+            String htmlLink = uploadFile.simpleUpload(htmlFile.getAbsolutePath(), htmlCDNFileName, qiniuZoneParameters);
+            String imageLink = uploadFile.simpleUpload(imageFile.getAbsolutePath(), imageCDNFileName, qiniuZoneParameters);
+            Date date = new Date(nowTime);
+            result = managerDao.insertBlog(title, 1, summary, writer, imageLink, htmlLink, date, 1, (allowComment == null) || (allowComment == false) ? 0 : 1);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
-        if (result==1){
+        if (result == 1) {
             return true;
         }
         return false;
+    }
+
+    public Map fileUpload(MultipartFile file, String fileName) {
+        if (file.isEmpty()) {
+            return PackingResult.toWorngMap("未上传文件！");
+        }
+        long nowTime = System.currentTimeMillis();
+        String fileRealName = file.getOriginalFilename();
+        String suffix = fileRealName.substring(fileRealName.lastIndexOf("."));
+        File loaclFile = new File(initConfig.getRootPath() + "/local/upload/" + nowTime + suffix);
+        String link;
+        try {
+            file.transferTo(loaclFile);
+            QiniuZoneParameters qiniuZoneParameters = initConfig.getMainQiniuZone();
+            fileName = (fileName == null) || (fileName.equals("")) ? String.valueOf(nowTime)+suffix : fileName+suffix;
+            link = uploadFile.simpleUpload(loaclFile.getAbsolutePath(), fileName, qiniuZoneParameters);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return PackingResult.toWorngMap("io错误");
+        }
+        Map map = new HashMap();
+        map.put("link", link);
+        return PackingResult.toSuccessMap(map);
     }
 
 }
