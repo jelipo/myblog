@@ -6,85 +6,67 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import qiniu.CompareLocalAndCDN;
 import qiniu.SimpleTools;
-import qiniu.UploadFile;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import util.FileTools;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by cao on 2017/1/16.
- */
 @Service("init/initService/initQiniuCdn")
 public class InitQiniuCdn {
 
-    private Boolean uploadFlag=false;
-    private Map<String, String> needToAdd;
-    private  Map<String, String> needToReplace;
 
+    /**
+     * 需要初始化之一，对比本地和CDN，并将比对结果放入Redis中，然后由定时任务实际上传到CDN
+     * 此项目中只检测res文件夹的文件
+     */
     public void init() {
-        String resPath = initConfig.getRootPath() + "res";
+        String resPath = initConfig.getRootPath() + "res/";
         Map localFileMap = FileTools.getAllFileMapFromFloder(resPath);
         FileInfo[] cdnFilesInfList;
         try {
             cdnFilesInfList = simpleTools.getCdnFileList(bucketName, null);
-        }catch (Exception e){
+        } catch (Exception e) {
             cdnFilesInfList = simpleTools.getCdnFileList(bucketName, null);
         }
-
         Map<String, FileInfo> cdnFilesInfoMap = SimpleTools.FileInfoArray2MapByKey(cdnFilesInfList);
         String CDN_Prefix = initConfig.getMainQiniuZone().getCDN_Prefix();
         CompareLocalAndCDN.CompareLocalAndCDNResult compareLocalAndCDNResult = compareLocalAndCDN.getCompareResult(localFileMap, cdnFilesInfoMap, CDN_Prefix);
-        this.needToAdd = compareLocalAndCDNResult.getNeedToAdd();
-        this.needToReplace = compareLocalAndCDNResult.getNeedToReplace();
-
-        Jedis jedis = pool.getResource();
-        intoJedis(needToAdd, needToReplace, jedis);
-
-        uploadFlag=true;
+        intoRedis(compareLocalAndCDNResult.getNeedToAdd(),compareLocalAndCDNResult.getNeedToReplace());
     }
 
-    @Scheduled(cron = "*/5 * * * * ?")
-    public void dosomething() throws IOException {
 
-
-//        Iterator<String> add=needToAdd.keySet().iterator();
-//        while (add.hasNext()){
-//            String key=add.next();
-//            if (this.uploadFlag){
-//                uploadFile.simpleUpload(this.needToAdd.get(key),key,initConfig.getMainQiniuZone());
-//            }
-//        }
-//
-//        Iterator<String> replace=this.needToReplace.keySet().iterator();
-//        while (replace.hasNext()){
-//            System.out.println(this.needToReplace.size()+"你得");
-//            String key=replace.next();
-//            if (this.uploadFlag){
-//                uploadFile.coverSimpleUpload(needToReplace.get(key),key,initConfig.getMainQiniuZone());
-//            }
-//        }
-//
-//        this.uploadFlag=false;
-    }
-
-    private void intoJedis(Map<String, String> needToAdd, Map<String, String> needToReplace, Jedis jedis) {
-        if (needToAdd.size()!=0){
-            String needToAddKey = initConfig.getStartId() + "_needToAddHash";
-            String re = jedis.hmset(needToAddKey, needToAdd);
-            jedis.expire(needToAddKey, 86400);
+    /**
+     * 此方法把需要添加和需要替换的条目放到Redis中
+     * hash的名称 startID_(startId)_needToAddHash/needToReplaceHash
+     * 例如startID_1486897618157_needToAddHash
+     * hash的有效时间为24小时
+     * 添加到redis中，key值为将要添加到CDN的文件名，value值为本地文件的实际路径
+     *
+     * @param needToAdd 需要添加到cdn的文件map
+     * @param needToReplace 需要替换的文件map
+     */
+    public void intoRedis(Map<String, String> needToAdd, Map<String, String> needToReplace) {
+        Jedis jedis=pool.getResource();
+        if (needToAdd!=null){
+            if (needToAdd.size()!=0){
+                String needToAddKey = initConfig.getStartId() + "_needToAddHash";
+                String re = jedis.hmset(needToAddKey, needToAdd);
+                jedis.expire(needToAddKey, 86400);
+            }
         }
-        if (needToReplace.size()!=0){
-            String needToReplaceKey = initConfig.getStartId() + "_needToReplaceHash";
-            String re1 = jedis.hmset(needToReplaceKey, needToReplace);
-            jedis.expire(needToReplaceKey, 86400);
+        if (needToReplace!=null) {
+            if (needToReplace.size() != 0) {
+                String needToReplaceKey = initConfig.getStartId() + "_needToReplaceHash";
+                String re1 = jedis.hmset(needToReplaceKey, needToReplace);
+                jedis.expire(needToReplaceKey, 86400);
+            }
         }
-
+        jedis.close();
     }
+
 
     @Resource(name = "jedisPool")
     private JedisPool pool;
@@ -98,9 +80,7 @@ public class InitQiniuCdn {
     @Resource(name = "init/initService/initConfig")
     private InitConfig initConfig;
 
-    @Resource(name="qiniu/UploadFile")
-    private UploadFile uploadFile;
-
     @Resource(name="qiniu/CompareLocalAndCDN")
     private CompareLocalAndCDN compareLocalAndCDN;
+
 }

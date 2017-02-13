@@ -10,10 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by cao on 2017/1/19.
- */
-
 @Service("qiniu/CompareLocalAndCDN")
 public class CompareLocalAndCDN {
 

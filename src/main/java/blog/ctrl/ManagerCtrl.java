@@ -73,4 +73,9 @@ public class ManagerCtrl {
         return map;
     }
 
+    @GetMapping("/test.do")
+    public String test(HttpSession httpSession) {
+        return "";
+    }
+
 }

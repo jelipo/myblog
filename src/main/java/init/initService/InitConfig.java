@@ -8,6 +8,8 @@ import init.pojo.QiniuZoneParameters;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Properties;
+
 /**
  * Created by cao on 2017/1/15.
  */
@@ -19,7 +21,7 @@ public class InitConfig {
     private Auth auth;
     private String rootPath;
     private QiniuZoneParameters mainQiniuZone;
-
+    private String tempPath;
     @Value("#{config['qiniu.ACCESS_KEY']}")
     private String ACCESS_KEY;
 
@@ -38,21 +40,28 @@ public class InitConfig {
     @Value("#{config['qiniu.cdnDomainName']}")
     private String cdnDomainName;
 
+    @Value("#{config['blog.tempWin']}")
+    private String tempWin;
+
+    @Value("#{config['blog.tempLinux']}")
+    private String tempLinux;
+
     void init() {
         long startTime = System.currentTimeMillis();
         startId = "startID_" + startTime;
-
-        String currentPath = getClass().getResource(".").getFile().toString();
-        rootPath = currentPath.split("WEB-INF")[0].replace("\\", "/");
-        if (rootPath.charAt(0) == '/') {
-            rootPath = rootPath.substring(1);
-        }
+        rootPath = System.getProperty("web.root").replace("\\","/");
         auth = Auth.create(ACCESS_KEY, SECRET_KEY);
         Configuration c = new Configuration(Zone.zone0());
         UploadManager uploadManager = new UploadManager(c);
         String CDN_Prefix=(new StringBuilder(projectName).append("/").append(localResourceFloder).append("/")).toString();
         mainQiniuZone = new QiniuZoneParameters(uploadManager,mainBucketName,auth,CDN_Prefix,cdnDomainName);
 
+        String os =System.getProperties().getProperty("os.name");
+        if (os.contains("win") || os.contains("Win")){
+            this.tempPath=tempWin;
+        }else{
+            this.tempPath=tempLinux;
+        }
     }
 
     public String getRootPath() {
@@ -69,5 +78,9 @@ public class InitConfig {
 
     public QiniuZoneParameters getMainQiniuZone() {
         return mainQiniuZone;
+    }
+
+    public String getTempPath(){
+        return tempPath;
     }
 }

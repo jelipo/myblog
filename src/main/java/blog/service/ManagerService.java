@@ -5,6 +5,9 @@ import init.initService.InitConfig;
 import init.pojo.QiniuZoneParameters;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -83,12 +86,16 @@ public class ManagerService {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         int result;
         try {
-            File htmlFile = new File(initConfig.getRootPath() + "/local/upload/" + nowTime + ".html");
+            File htmlFile = new File(initConfig.getTempPath() + nowTime + ".html");
             blogFiles.transferTo(htmlFile);
-            String[] name = backgroundImage.getOriginalFilename().split("\\.");
-            String suffix = "." + name[name.length - 1];
-            File imageFile = new File(initConfig.getRootPath() + "/local/upload/" + nowTime + suffix);
+            String imageRealName=backgroundImage.getOriginalFilename();
+            String suffix = imageRealName.substring(imageRealName.lastIndexOf("."));
+            File imageFile = new File(initConfig.getTempPath() + nowTime + suffix);
             backgroundImage.transferTo(imageFile);
+            Document document=Jsoup.parse(htmlFile,"UTF-8");
+            String body=document.body().html();
+
+
             QiniuZoneParameters qiniuZoneParameters = initConfig.getMainQiniuZone();
             String htmlCDNFileName = CDNBlogHtmlPath + simpleDateFormat.format(nowTime) + ".html";
             String imageCDNFileName = CDNBLogBackgroundImagePath + simpleDateFormat.format(nowTime) + suffix;
@@ -113,12 +120,12 @@ public class ManagerService {
         long nowTime = System.currentTimeMillis();
         String fileRealName = file.getOriginalFilename();
         String suffix = fileRealName.substring(fileRealName.lastIndexOf("."));
-        File loaclFile = new File(initConfig.getRootPath() + "/local/upload/" + nowTime + suffix);
+        File loaclFile = new File(initConfig.getTempPath() + nowTime + suffix);
         String link;
         try {
             file.transferTo(loaclFile);
             QiniuZoneParameters qiniuZoneParameters = initConfig.getMainQiniuZone();
-            fileName = (fileName == null) || (fileName.equals("")) ? String.valueOf(nowTime)+suffix : fileName+suffix;
+            fileName = CDNOtherPath + ((fileName == null) || (fileName.equals("")) ? String.valueOf(nowTime) + suffix : fileName + suffix);
             link = uploadFile.simpleUpload(loaclFile.getAbsolutePath(), fileName, qiniuZoneParameters);
         } catch (IOException e) {
             e.printStackTrace();

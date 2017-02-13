@@ -4,12 +4,12 @@ import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import init.initService.InitConfig;
 import init.pojo.QiniuZoneParameters;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.io.IOException;
+import java.io.File;
 
 /**
  * Created by cao on 2017/1/23.
@@ -17,13 +17,14 @@ import java.io.IOException;
 
 @Service("qiniu/UploadFile")
 public class UploadFile {
+    private static final Logger logger = LogManager.getLogger(UploadFile.class);
 
-    public String simpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) throws IOException {
+    public String simpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) {
         UploadManager uploadManager = qiniuZoneParameters.getUploadManager();
         Auth auth = qiniuZoneParameters.getAuth();
         String bucketName = qiniuZoneParameters.getMainBucketName();
         upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName));
-        return qiniuZoneParameters.getCdnDomainName()+CDNFileName;
+        return qiniuZoneParameters.getCdnDomainName() + CDNFileName;
     }
 
     public void simpleUploadByCustom(String localPath, String CDNFileName, UploadManager uploadManager, Auth auth, String bucketName) {
@@ -34,22 +35,25 @@ public class UploadFile {
         UploadManager uploadManager = qiniuZoneParameters.getUploadManager();
         Auth auth = qiniuZoneParameters.getAuth();
         String bucketName = qiniuZoneParameters.getMainBucketName();
-        upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName,CDNFileName));
+        upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName, CDNFileName));
     }
 
     private void upload(String localPath, String CDNFileName, UploadManager uploadManager, String uploadToken) {
-        try {
-            Response res = uploadManager.put(localPath, CDNFileName, uploadToken);
-            System.out.println(res.bodyString());
-        } catch (QiniuException e) {
-            Response r = e.response;
-            System.out.println(r.toString());
+        File file =new File(localPath);
+        if (file.exists()){
+            Response res = null;
             try {
-                //响应的文本信息
-                System.out.println(r.bodyString());
-            } catch (QiniuException e1) {
+                res = uploadManager.put(localPath, CDNFileName, uploadToken);
+                Boolean isSuccess = res.isJson();
+                if (isSuccess) {
+                    System.out.println(res.body());
+                }
+            } catch (QiniuException e) {
+                logger.error("上传失败,fileName:"+CDNFileName+",localPath:"+localPath);
 
             }
+        }else {
+            logger.error("本地文件不存在！ fileName:"+CDNFileName+",localPath:"+localPath);
         }
     }
 

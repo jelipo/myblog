@@ -25,6 +25,7 @@
         <!--<url-pattern>/druid/*</url-pattern>-->
     <!--</servlet-mapping>-->
 
+
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.html</url-pattern>
@@ -48,6 +49,14 @@
 
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>web.root</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>
 
     <filter>
