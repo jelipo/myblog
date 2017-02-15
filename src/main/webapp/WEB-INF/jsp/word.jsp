@@ -20,7 +20,6 @@
 <body class="mdui-drawer-body-left ">
 
 <!--参数-->
-
 <input id="wordId" value="${wordId}" type="hidden">
 <input id="title" value="${title}" type="hidden">
 <input id="date" value="${date}" type="hidden">
@@ -41,57 +40,62 @@
     <div class="mainPage" style="display: none;">
 
         <div class="mdui-row mdui-row-margin">
-            <div class="mdui-col-xs-12 " >
+            <div class="mdui-col-xs-12 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
                     <a class="MY-mdui-card-media">
-                        <img id="wordBackgroundImage" class="MY-card-img" src="res/img/first.jpg"/>
+                        <img id="wordBackgroundImage" class="MY-card-img" src=""/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                             <div class="mdui-card-primary ">
                                 <div id="wordTitle" class="MY-card-tilte">标题</div>
                             </div>
                         </div>
                     </a>
-
                     <div class="mdui-card-actions word-msg-height">
                         <img src="res/img/head.jpg">
                         <span>Springmarker</span>
-                        <i mdui-menu="{target: '#example-attr'}"
-                           class="mdui-ripple mdui-icon material-icons MY-card-more">more_vert</i>
                         <div id="wordDate" class="MY-card-data">11月25,2016</div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page" style="min-height: 600px;">
-                        <div  class="maxaingBody">
-                            ${wordText}
-                        </div>
+                        <div class="maxaingBody">${wordText}</div>
                     </div>
                     <div class="mdui-divider"></div>
-                    <div class="card-pageOther" >
-                        <a id="lastPage" class="mdui-valign card-turnPage" style="float:left;text-decoration:none;">
-                            <i class="mdui-icon material-icons">arrow_back</i>
-                            <div>上一篇</div>
-                        </a>
-                        <a id="nextPage" class="mdui-valign card-turnPage" style="float:right;text-decoration:none;">
-                            <div >下一篇</div>
-                            <i class="mdui-icon material-icons">arrow_forward</i>
-                        </a>
-                    </div>
-
-                    <div class="mdui-divider"></div>
-                    <div class="card-comment">
-                        <div style="width: 100%;height: 100px;">
-                            <div style="font-size: 25px;font-weight: 900;color:#616161">评论：</div>
-                            <div class="mdui-textfield mdui-textfield-floating-label " onclick="newMainCommentShowDialog()">
-                                <label class="mdui-textfield-label">留下你的见解吧！</label>
-                                <input class="mdui-textfield-input newComment"  disabled/>
-                            </div>
-
-                        </div>
+                    <div class="card-pageOther" style="height: 40px">
                     </div>
                 </div>
 
             </div>
         </div>
+
+        <!--翻页-->
+        <div class="card-pageOther" style="height: 40px">
+            <a id="lastPage" href="" mdui-tooltip="{content: '上一篇'}" class="mdui-btn mdui-btn-icon mdui-ripple">
+                <i class="mdui-icon material-icons">arrow_back</i>
+            </a>
+            <a id="nextPage" href="" mdui-tooltip="{content: '下一篇'}" style="float:right;" class="mdui-btn mdui-btn-icon mdui-ripple">
+                <i class="mdui-icon material-icons">arrow_forward</i>
+            </a>
+        </div>
+        <!--翻页-->
+        <!--评论-->
+        <div class="mdui-row mdui-row-margin">
+            <div class="mdui-col-xs-12 ">
+                <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
+                    <div class="card-comment">
+                        <div style="width: 100%;height: 100px;">
+                            <div style="font-size: 25px;font-weight: 900;color:#616161">评论：</div>
+                            <div class="mdui-textfield mdui-textfield-floating-label "
+                                 onclick="newMainCommentShowDialog()">
+                                <label class="mdui-textfield-label">留下你的见解吧！</label>
+                                <input class="mdui-textfield-input newComment" disabled/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--评论-->
 
     </div>
 </div>
@@ -137,34 +141,36 @@
 
 <!--回复对话框-->
 <div class="mdui-dialog" id="dialog">
-    <form  onsubmit="return chaeckDialogForm(this)">
-        <input id="observername" type="hidden" name="observername" value="" >
-        <input id="mainCommentId" type="hidden" name="mainCommentId" value="" >
-        <input id="viceCommentId" type="hidden" name="viceCommentId" value="" >
-        <input id="isNewMainComment" type="hidden" name="isNewMainComment" value="" >
+    <form onsubmit="return chaeckDialogForm(this)">
+        <input id="observername" type="hidden" name="observername" value="">
+        <input id="mainCommentId" type="hidden" name="mainCommentId" value="">
+        <input id="viceCommentId" type="hidden" name="viceCommentId" value="">
+        <input id="isNewMainComment" type="hidden" name="isNewMainComment" value="">
         <div class="dialog-main">
             <div class="dialog-tilte">您要向<span class="observername"></span>回复消息
                 <span>（由于是游客制，所以会有所限制发言频率）</span>
             </div>
             <div>
                 <div class="mdui-textfield dialog-msgInput">
-                    <input id="nickname"  class="mdui-textfield-input" type="text" name="nickname" placeholder="请输入昵称（可选）"/>
+                    <input id="nickname" class="mdui-textfield-input" type="text" name="nickname"
+                           placeholder="请输入昵称（可选）"/>
                     <div>不填写时随机分配</div>
                 </div>
                 <div class="mdui-textfield dialog-msgInput">
-                    <input id="email" type="email" class="mdui-textfield-input"  placeholder="请输入邮箱(可选)"/>
+                    <input id="email" type="email" class="mdui-textfield-input" placeholder="请输入邮箱(可选)"/>
                     <div>收到回复时，会向邮箱发送邮件</div>
                 </div>
             </div>
             <div class="mdui-textfield" style="width: 100%;padding-top: 10px;">
-                <textarea id="value" name="value" id="dialog_textarea" style="max-height: 80px" class="mdui-textfield-input"
+                <textarea id="value" name="value" id="dialog_textarea" style="max-height: 80px"
+                          class="mdui-textfield-input"
                           placeholder="请输入您的回复消息!"></textarea>
             </div>
             <div class="g-recaptcha" data-sitekey="6LdoOBQUAAAAAP5Q-qMbFDphzLteAvdMGmHZXzxQ"></div>
             <div class="mdui-dialog-actions">
 
-                <input type="button" value="取消" onclick="closeDialog()" class="mdui-btn mdui-ripple" >
-                <input type="submit" value="确认"  class="mdui-btn mdui-ripple" >
+                <input type="button" value="取消" onclick="closeDialog()" class="mdui-btn mdui-ripple">
+                <input type="submit" value="确认" class="mdui-btn mdui-ripple">
             </div>
         </div>
     </form>
@@ -172,5 +178,6 @@
 <!--回复对话框-->
 
 </body>
+
 
 </html>

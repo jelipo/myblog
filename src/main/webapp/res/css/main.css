@@ -134,7 +134,7 @@ body {
 
 .MY-card-tilte {
     font-size: 30px;
-    text-shadow: 1px 1px 9px grey;
+    text-shadow: 1px 1px 5px #8c8c8c;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -257,6 +257,10 @@ body {
     color:#e3e3e3;
     text-decoration: none;
 }
+.MY-footer a:hover{
+    color:#e3e3e3;
+    text-decoration: none;
+}
 .footer-main{
     height:190px;
     width:100%;
@@ -284,11 +288,9 @@ body {
     max-width: 1330px;
     line-height: 15px;
 }
-.footer-href{
 
-}
 .noHrefCss{
-    text-decoration:none;
+    text-decoration: none;
 }
 @media only screen and (max-width: 800px) {
     .MY-card-tilte {

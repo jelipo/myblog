@@ -69,8 +69,4 @@ public class BlogMainCtrl {
         return "none";
     }
 
-
-
-
-
 }

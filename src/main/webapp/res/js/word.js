@@ -5,9 +5,9 @@ $(function () {
     $("#wordDate").html($("#date").val());
     $("#wordBackgroundImage").attr("src",$("#backgroundImage").val());
     $("#lastPage").attr("href","toWord.do?id="+$("#lastwordId").val());
-    $("#lastPage").find("div").html($("#lastwordTitle").val());
+    $("#lastPage").attr("mdui-tooltip","{content: '上一篇："+$("#lastwordTitle").val()+"'}");
     $("#nextPage").attr("href","toWord.do?id="+$("#nextwordId").val());
-    $("#nextPage").find("div").html($("#nextwordTitle").val());
+    $("#nextPage").attr("mdui-tooltip","{content: '下一篇："+$("#nextwordTitle").val()+"'}");
     dialog = new mdui.Dialog('#dialog');
     getCemments();
     $(".mainPage").fadeIn(1500);

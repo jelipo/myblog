@@ -1,7 +1,5 @@
 .card-pageOther {
-    height: 40px;
     padding: 20px;
-
 }
 
 .card-turnPage {
@@ -12,6 +10,8 @@
     out-line: none;
     color: #424242;
     font-weight: 900;
+    width: 50%;
+
 }
 
 
