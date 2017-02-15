@@ -39,7 +39,7 @@
 <body class="mdui-drawer-body-left ">
 <%@include file="../webParts/drawer.html" %>
 
-<input id="msg" value="${msg}" type="hidden">
+
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px"></div>
@@ -86,7 +86,7 @@
                         <h2>上传文件到七牛：</h2>
                         <div class="mdui-textfield" style="float: left;width:100%;height: 70px;">
                             <input id="filename" name="filename" class="mdui-textfield-input"
-                                   type="text" placeholder="输入保存后的文件名（为空时默认使用文件真实名）"/>
+                                   type="text" placeholder="输入保存后的文件名（为空时使用随机名称）"/>
                         </div>
                         <div style="width: 100%;height: 50px;float: left">
                             <div class="form-selectFile-text">选择文件：</div>
@@ -119,35 +119,32 @@
     function check() {
         var title = $("#title").val();
         var writer = $("#writer").val();
-        var file = $("#file").val();
-        var isNull = (title == null) || (writer == null) || (file == '');
+        var summary=$("#summary").val();
+        var blogFile = $("#blogFile").val();
+        var imageFile=$("#backgroundImage").val();
+        var isNull = (title == "") || (writer == "") ||(summary=="")|| (file =="")||(imageFile=="");
         if (isNull) {
-            mdui.snackbar({
-                message: '值为空！'
-            });
+            mdui.snackbar({message: '值为空！'});
             return false;
         } else {
             return true;
         }
     }
-    //检查是否有信息
-    var msg = $("#msg").val();
-    if (msg != "") {
-        alert(msg);
-    }
+
     //初始化对话框
     var linkDialog = new mdui.Dialog('#linkDialog');
     //文件上传
     function uploadToCDN() {
         var file = $("#cdnFile").val();
         if (file==''){
-            alert("文件为空！");
+            mdui.snackbar({message: '未选择文件'});
             return false;
         }
         var formData = new FormData();
         var filename=$("#filename").val();
         formData.append("cdnFile", $("#cdnFile")[0].files[0]);
         formData.append("filename", filename);
+        mdui.snackbar({message: '正在上传。'});
         var data=ajaxUploadFile("/uploadFile.do", formData);
         var link=data.link;
         $("#link").html(link)

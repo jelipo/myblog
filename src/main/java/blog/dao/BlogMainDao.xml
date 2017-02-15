@@ -24,6 +24,8 @@
           #{date},#{viceComment_mainComment_id,jdbcType=VARCHAR},#{value},#{email});
     </insert>
 
-
+    <select id="getWordText" resultType="java.util.HashMap">
+        select * from word_text where wordTextId=#{0} ;
+    </select>
 
 </mapper>

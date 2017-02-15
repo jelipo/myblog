@@ -54,9 +54,9 @@ public class ManagerCtrl {
         }
         Boolean isSuccess=managerService.uploadBlog(blogFiles,backgroundImage,title,writer,summary,allowComment);
         if (isSuccess){
-            request.setAttribute("msg","上传成功！");
+            request.setAttribute("message","上传成功！");
         }else {
-            request.setAttribute("msg","上传失败，请检查上传是否为空，或者检查日志！");
+            request.setAttribute("message","上传失败，请检查上传是否为空，或者检查日志！");
         }
         return "redirect:/gotoManager.do";
     }

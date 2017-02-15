@@ -93,16 +93,17 @@ public class ManagerService {
             File imageFile = new File(initConfig.getTempPath() + nowTime + suffix);
             backgroundImage.transferTo(imageFile);
             Document document=Jsoup.parse(htmlFile,"UTF-8");
-            String body=document.body().html();
-
+            String wordBody=document.body().html();
 
             QiniuZoneParameters qiniuZoneParameters = initConfig.getMainQiniuZone();
-            String htmlCDNFileName = CDNBlogHtmlPath + simpleDateFormat.format(nowTime) + ".html";
             String imageCDNFileName = CDNBLogBackgroundImagePath + simpleDateFormat.format(nowTime) + suffix;
-            String htmlLink = uploadFile.simpleUpload(htmlFile.getAbsolutePath(), htmlCDNFileName, qiniuZoneParameters);
             String imageLink = uploadFile.simpleUpload(imageFile.getAbsolutePath(), imageCDNFileName, qiniuZoneParameters);
             Date date = new Date(nowTime);
-            result = managerDao.insertBlog(title, 1, summary, writer, imageLink, htmlLink, date, 1, (allowComment == null) || (allowComment == false) ? 0 : 1);
+            String wordTextId=String.valueOf(nowTime);
+            result = managerDao.insertBlog(title, 1, summary, writer, imageLink,  date, 1, (allowComment == null) || (allowComment == false) ? 0 : 1,wordTextId);
+            if (result==1){
+                managerDao.insertWordText(wordBody,wordTextId);
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return false;

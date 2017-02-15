@@ -78,8 +78,8 @@ public class BlogMainService {
             request.setAttribute("nextWordId",list.get(2).getId());
             request.setAttribute("nextWordTitle",list.get(2).getTitle());
         }
-
-        request.setAttribute("htmlSrc",mainWordPojo.getHtmlsrc());
+        Map textResult=blogMainDao.getWordText(mainWordPojo.getWordTextID());
+        request.setAttribute("wordText",textResult.get("text"));
         request.setAttribute("wordId",id);
         request.setAttribute("title",mainWordPojo.getTitle());
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy");

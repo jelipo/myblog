@@ -9,7 +9,7 @@
     <link href="res/css/mdui.min.css" rel="stylesheet">
     <link href="res/css/main.css" rel="stylesheet">
     <link href="res/css/word.css" rel="stylesheet">
-
+    <link href="res/css/marxico.css" rel="stylesheet">
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
     <script type="text/javascript" src="res/js/main.js"></script>
@@ -20,7 +20,7 @@
 <body class="mdui-drawer-body-left ">
 
 <!--参数-->
-<input id="htmlSrc" value="${htmlSrc}" type="hidden">
+
 <input id="wordId" value="${wordId}" type="hidden">
 <input id="title" value="${title}" type="hidden">
 <input id="date" value="${date}" type="hidden">
@@ -34,14 +34,14 @@
 
 <%@include file="webParts/drawer.html" %>
 <!--主要内容-->
-<div class="mdui-container">
+<div class="mdui-container" style="min-height: 1200px">
     <div style="height: 150px">
 
     </div>
-    <div class="mainPage">
+    <div class="mainPage" style="display: none;">
 
         <div class="mdui-row mdui-row-margin">
-            <div class="mdui-col-xs-12 ">
+            <div class="mdui-col-xs-12 " >
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
                     <a class="MY-mdui-card-media">
                         <img id="wordBackgroundImage" class="MY-card-img" src="res/img/first.jpg"/>
@@ -61,17 +61,17 @@
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page" style="min-height: 600px;">
-                        <iframe style="display: none;" id="wordIframe" src="" scrolling="no"
-                                onload="changeFrameHeight()" frameborder="0" height="100%" width="100%">
-                        </iframe>
+                        <div  class="maxaingBody">
+                            ${wordText}
+                        </div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-pageOther" >
-                        <a id="lastPage" class="mdui-valign card-turnPage" style="float:left">
+                        <a id="lastPage" class="mdui-valign card-turnPage" style="float:left;text-decoration:none;">
                             <i class="mdui-icon material-icons">arrow_back</i>
                             <div>上一篇</div>
                         </a>
-                        <a id="nextPage" class="mdui-valign card-turnPage" style="float:right">
+                        <a id="nextPage" class="mdui-valign card-turnPage" style="float:right;text-decoration:none;">
                             <div >下一篇</div>
                             <i class="mdui-icon material-icons">arrow_forward</i>
                         </a>
@@ -129,7 +129,7 @@
                 <a class="to">李四(层主)</a>
                 <div>：</div>
             </div>
-            <span class="comment-mian-scomment-conntent">这不对啊。</span>
+            <span class="comment-mian-scomment-conntent">内容</span>
         </div>
     </div>
     <!--副评论-->

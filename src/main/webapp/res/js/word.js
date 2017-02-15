@@ -1,14 +1,6 @@
-function changeFrameHeight() {
-    var iframeHeight = $("#wordIframe").contents().find("body").height();
-    $("#wordIframe").height(iframeHeight + 50);
-    setTimeout("changeFrameHeight()", 2000);
-}
+
 var dialog;
 $(function () {
-    $('#wordIframe').attr("src", $('#htmlSrc').val());
-    $("#wordIframe").on("load",function(){
-        $("#wordIframe").fadeIn(1000);
-    });
     $("#wordTitle").html($("#title").val());
     $("#wordDate").html($("#date").val());
     $("#wordBackgroundImage").attr("src",$("#backgroundImage").val());
@@ -18,7 +10,7 @@ $(function () {
     $("#nextPage").find("div").html($("#nextwordTitle").val());
     dialog = new mdui.Dialog('#dialog');
     getCemments();
-
+    $(".mainPage").fadeIn(1500);
 
 
 });

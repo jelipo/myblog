@@ -5,8 +5,13 @@
 
 
     <insert id="insertBlog" useGeneratedKeys="true">
-        INSERT INTO word(title,permission,summary,writer,backgroundImage,htmlSrc,date,typeId,allowComment)
+        INSERT INTO word(title,permission,summary,writer,backgroundImage,date,typeId,allowComment,wordTextId)
          VALUE (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8});
+    </insert>
+
+    <insert id="insertWordText" useGeneratedKeys="true" >
+        INSERT INTO word_text(text,wordTextId)
+        VALUE (#{0},#{1});
     </insert>
 
 

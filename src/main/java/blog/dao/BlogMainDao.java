@@ -22,4 +22,6 @@ public interface BlogMainDao {
     List<CommentPojo> getComments(int id);
 
     int putReply(Map parm);
+
+    Map getWordText(String wordTextId);
 }

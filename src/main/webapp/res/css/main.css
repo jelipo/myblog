@@ -135,6 +135,9 @@ body {
 .MY-card-tilte {
     font-size: 30px;
     text-shadow: 1px 1px 9px grey;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .rippleButton {
@@ -291,6 +294,9 @@ body {
     .MY-card-tilte {
         font-size: 20px;
         text-shadow: 1px 1px 9px grey;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
     .mdui-card-content {
         position: relative;
