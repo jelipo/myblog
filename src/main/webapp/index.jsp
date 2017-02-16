@@ -118,28 +118,9 @@
     $(function () {
         indexAppendWord(getAjaxData("getWord.do?pageNum=1&getBlogNum=10"));
         var nextPageNum = 2;
-
-        //监听滚动条到底部
-//        var appendFlag = true;
-//        $(window).scroll(function () {
-//            if (appendFlag && ($(window).scrollTop() + 20 > $(document).height() - $(window).height())) {
-//                appendFlag = false;
-//                var getWordNum = appendWord(getAjaxData("getWord.do?pageNum=" + nextPageNum + "&getBlogNum=10"));
-//                if (getWordNum == 0) {
-//                    appendNoMore();
-//                    return;
-//                }
-//                nextPageNum = nextPageNum + getWordNum;
-//                appendFlag = true;
-//            }
-//        });
-
-
     });
 
-
     function indexAppendWord(list) {
-
         for (var i = 0; i < list.length; i++) {
             var copyHtml = $('#word').clone();
             copyHtml.attr("id", "word" + (i + 1));
@@ -158,14 +139,6 @@
         return list.length;
     }
 
-</script>
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-92012528-1', 'auto');
-    ga('send', 'pageview');
 </script>
 </body>
 </html>
