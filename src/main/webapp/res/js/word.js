@@ -104,6 +104,8 @@ function chaeckDialogForm(form) {
         if ( result.resultCode!=200){
             alert(result.wrong);
             return ;
+        }else {
+            mdui.snackbar({message: '回复成功，可能有缓存，稍后刷新查看。'});
         }
         var data = result.data;
     });
