@@ -10,9 +10,6 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by cao on 2017/2/12.
- */
 @Service("init/initService/initFileListen")
 public class InitFileListen {
 

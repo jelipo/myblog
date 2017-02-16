@@ -1,20 +1,18 @@
 package corn.service;
 
-import com.qiniu.common.QiniuException;
 import init.initService.InitConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import qiniu.CompareLocalAndCDN;
-import qiniu.SimpleTools;
+import qiniu.RefreshFiles;
 import qiniu.UploadFile;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 
@@ -29,6 +27,9 @@ public class LocalFileListenService {
 
     @Resource(name = "jedisPool")
     private JedisPool pool;
+
+    @Resource(name = "qiniu/RefreshFiles")
+    private RefreshFiles refreshFiles;
 
     private static final Logger logger = LogManager.getLogger(LocalFileListenService.class);
 
@@ -45,12 +46,16 @@ public class LocalFileListenService {
             uploadFile.simpleUpload(needToAdd.get(key), key, initConfig.getMainQiniuZone());
             jedis.hdel(needToAddHashKey, key);
         }
+        List<String> list=new ArrayList();
         Iterator<String> replace = needToReplace.keySet().iterator();
         while (replace.hasNext()) {
             String key = replace.next();
-            uploadFile.coverSimpleUpload(needToReplace.get(key), key, initConfig.getMainQiniuZone());
+            String url=uploadFile.coverSimpleUpload(needToReplace.get(key), key, initConfig.getMainQiniuZone());
+            list.add(url);
             jedis.hdel(needToReplaceHashKey, key);
-
+        }
+        if (needToReplace.size()!=0){
+            refreshFiles.refreshCDNFiles(list);
         }
         jedis.close();
     }

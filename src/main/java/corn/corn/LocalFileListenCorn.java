@@ -24,9 +24,4 @@ public class LocalFileListenCorn {
         localFileListenService.checkRedisAndUpload();
     }
 
-
-
-
-
-
 }

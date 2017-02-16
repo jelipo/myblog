@@ -54,7 +54,7 @@ public class InitConfig {
         Configuration c = new Configuration(Zone.zone0());
         UploadManager uploadManager = new UploadManager(c);
         String CDN_Prefix=(new StringBuilder(projectName).append("/").append(localResourceFloder).append("/")).toString();
-        mainQiniuZone = new QiniuZoneParameters(uploadManager,mainBucketName,auth,CDN_Prefix,cdnDomainName);
+        mainQiniuZone = new QiniuZoneParameters(uploadManager,mainBucketName,auth,CDN_Prefix,cdnDomainName,ACCESS_KEY,SECRET_KEY);
 
         String os =System.getProperties().getProperty("os.name");
         if (os.contains("win") || os.contains("Win")){

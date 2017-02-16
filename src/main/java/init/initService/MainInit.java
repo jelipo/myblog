@@ -2,6 +2,7 @@ package init.initService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +24,12 @@ public class MainInit {
     @Resource(name = "init/initService/initFileListen")
     private InitFileListen initFileListen;
 
+    @Resource(name = "init/initService/initHttpClient")
+    private InitHttpClient initHttpClient;
+
+    @Value("#{config['qiniu.autoCheckLocalFile']}")
+    private String autoCheckLocalFile;
+
     private static final Logger logger = LogManager.getLogger(MainInit.class);
 
     @PostConstruct
@@ -35,8 +42,14 @@ public class MainInit {
         initQiniuCdn.init();
         logger.info("检验完成，并开启定时上传任务");
 
-        logger.info("开启监听本地文件更改");
-        initFileListen.init();
+        if (autoCheckLocalFile.equals("true")){
+            logger.info("开启监听本地文件更改");
+            initFileListen.init();
+        }
+
+        logger.info("初始化HTTP客户端");
+        initHttpClient.init();
+
 
     }
 

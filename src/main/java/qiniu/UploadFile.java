@@ -31,11 +31,12 @@ public class UploadFile {
         upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName));
     }
 
-    public void coverSimpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) {
+    public String coverSimpleUpload(String localPath, String CDNFileName, QiniuZoneParameters qiniuZoneParameters) {
         UploadManager uploadManager = qiniuZoneParameters.getUploadManager();
         Auth auth = qiniuZoneParameters.getAuth();
         String bucketName = qiniuZoneParameters.getMainBucketName();
         upload(localPath, CDNFileName, uploadManager, auth.uploadToken(bucketName, CDNFileName));
+        return qiniuZoneParameters.getCdnDomainName() + CDNFileName;
     }
 
     private void upload(String localPath, String CDNFileName, UploadManager uploadManager, String uploadToken) {
@@ -46,7 +47,7 @@ public class UploadFile {
                 res = uploadManager.put(localPath, CDNFileName, uploadToken);
                 Boolean isSuccess = res.isJson();
                 if (isSuccess) {
-                    System.out.println(res.body());
+                    System.out.println(new String(res.body()));
                 }
             } catch (QiniuException e) {
                 logger.error("上传失败,fileName:"+CDNFileName+",localPath:"+localPath);
