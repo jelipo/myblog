@@ -1,11 +1,7 @@
 package qiniu;
 
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
-import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.model.FileInfo;
@@ -15,13 +11,8 @@ import init.initService.InitConfig;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by cao on 2017/1/15.
- */
 
 @Service("qiniu/SimpleTools")
 public class SimpleTools {

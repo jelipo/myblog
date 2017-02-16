@@ -33,6 +33,11 @@ public class PackingResult {
         result.put("data", json);
         return result;
     }
+    public static Map toSuccessMap() {
+        Map result = new HashMap();
+        result.put("resultCode", 200);
+        return result;
+    }
 
     public static Map toWorngMap(String detailed) {
         Map result = new HashMap();

@@ -28,4 +28,12 @@
         select * from word_text where wordTextId=#{0} ;
     </select>
 
+    <select id="getMessages" resultType="blog.bean.MessagePojo">
+        select * from message ORDER by date DESC limit 0,30 ;
+    </select>
+
+    <insert id="putMessage"  useGeneratedKeys="true">
+        INSERT INTO message(nick_name,date,content,contactway)
+        VALUE (#{0},#{1},#{2},#{3});
+    </insert>
 </mapper>

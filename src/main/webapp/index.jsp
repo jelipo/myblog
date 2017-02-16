@@ -49,11 +49,13 @@
             </div>
 
             <div id="top_card_right" class="mdui-col-xs-5">
-                <div style="" class="mdui-card-top-right mdui-hoverable secondColorAndBackgroundColor ">
+                <button onclick="" style="z-index: 1000"
+                        class="mdui-fab mdui-ripple mdui-color-teal rippleButton">
+                    <i class="mdui-icon material-icons">attach_file</i>
+                </button>
+                <div id="top-right-text" style="position:absolute;z-index: 1;"
+                     class="mdui-card-top-right mdui-hoverable secondColorAndBackgroundColor ">
                     <div class="top-card-right" style="padding: 20px;box-sizing:border-box;">
-                        <button onclick="changeColor()" class="mdui-fab mdui-ripple mdui-color-teal rippleButton">
-                            <i class="mdui-icon material-icons">attach_file</i>
-                        </button>
                         <div style="width: 100%;height: 100%;color:#9E9E9E">
                             <div style="font-size: 35px;">欢迎</div>
                             <div style="font-size: 15px;line-height:25px;padding-top: 20px">
@@ -64,6 +66,12 @@
                                 　　本站服务器由于性能较小，所以做了一些限制,所以可能会对您正常的浏览造成影响，一般正常浏览是没有问题的。
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div id="top-right-img"  style="position:absolute;z-index: 2;overflow: hidden"
+                     class="mdui-card-top-right mdui-hoverable secondColorAndBackgroundColor top-card-rght-img">
+                    <div class="top-card-right" style="box-sizing:border-box;">
+                        <img id="rightImg" class="" src="res/img/rightImg.jpg" width="100%">
                     </div>
                 </div>
             </div>
@@ -117,7 +125,7 @@
 <script>
     $(function () {
         indexAppendWord(getAjaxData("getWord.do?pageNum=1&getBlogNum=10"));
-        var nextPageNum = 2;
+
     });
 
     function indexAppendWord(list) {

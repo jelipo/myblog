@@ -28,13 +28,13 @@ public class BlogMainCtrl {
 
 
     @ResponseBody
-    @RequestMapping("/getWord.do")
+    @GetMapping("/getWord.do")
     public Map getWord(HttpServletRequest request,@RequestParam int pageNum, @RequestParam int getBlogNum){
         Map result=blogMainService.getBlogByPageNum(request,pageNum,getBlogNum);
         return result;
     }
 
-    @RequestMapping("/toWord.do")
+    @GetMapping("/toWord.do")
     public String toWord(HttpServletRequest request,@RequestParam int id){
         Boolean isSuccess=blogMainService.toWord(request,id);
         if (isSuccess){
@@ -45,7 +45,7 @@ public class BlogMainCtrl {
     }
 
     @ResponseBody
-    @RequestMapping("/getComments.do")
+    @GetMapping("/getComments.do")
     public Map getComments(HttpServletRequest request, @RequestParam int id){
 
         return blogMainService.getComments(id);
@@ -58,15 +58,36 @@ public class BlogMainCtrl {
         return resultMap;
     }
 
-    @RequestMapping("/moreWords.do")
+    @GetMapping("/moreWords.do")
     public String moreWords(HttpServletRequest request,@RequestParam int pageNum){
         request.setAttribute("pageNum",pageNum);
         return "wordList";
     }
 
-    @RequestMapping("/toNone.do")
+    @GetMapping("/toNone.do")
     public String toNone(HttpServletRequest request){
         return "none";
     }
+
+    @GetMapping("/message.do")
+    public String toMessageBook(){
+        return "messageBook";
+    }
+
+    @ResponseBody
+    @GetMapping ("/getMessages.do")
+    public Map getMessages(HttpServletRequest request){
+        Map result=blogMainService.getMessages(request);
+        return result;
+    }
+
+    @ResponseBody
+    @PostMapping("/postMessage.do")
+    public Map postMessage(HttpServletRequest request,@RequestParam("nickname") String nickname,
+                           @RequestParam("contactway") String  contactway,@RequestParam("message") String  message){
+        Map map=blogMainService.putMessage(request,nickname,message,contactway);
+        return map;
+    }
+
 
 }

@@ -13,96 +13,186 @@
     <schema id="7" parent="1" name="sys"/>
     <schema id="8" parent="1" name="world"/>
     <table id="9" parent="2" name="comment"/>
-    <table id="10" parent="2" name="word"/>
-    <column id="11" parent="9" name="id">
+    <table id="10" parent="2" name="message"/>
+    <table id="11" parent="2" name="word"/>
+    <table id="12" parent="2" name="word_text"/>
+    <table id="13" parent="2" name="wordtype"/>
+    <column id="14" parent="9" name="id">
       <Position>1</Position>
       <DataType>int(5)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="12" parent="9" name="wordId">
+    <column id="15" parent="9" name="wordId">
       <Position>2</Position>
       <Comment>哪篇文章的评论</Comment>
       <DataType>int(5)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="9" name="isMainComment">
+    <column id="16" parent="9" name="isMainComment">
       <Position>3</Position>
       <Comment>是否是主评论 是1 不是（副评论）2</Comment>
       <DataType>int(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="9" name="observerName">
+    <column id="17" parent="9" name="observerName">
       <Position>4</Position>
       <Comment>评论者的名称 可以是主评论者，也可以是副评论者</Comment>
       <DataType>varchar(15)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="9" name="toObserverName">
+    <column id="18" parent="9" name="toObserverName">
       <Position>5</Position>
       <Comment>向谁回复（如果是主评论，此项为空）</Comment>
       <DataType>varchar(15)|0</DataType>
     </column>
-    <column id="16" parent="9" name="date">
-      <Position>6</Position>
+    <column id="19" parent="9" name="date">
+      <Position>9</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="17" parent="9" name="viceComment_mainComment_id">
-      <Position>7</Position>
+    <column id="20" parent="9" name="viceComment_mainComment_id">
+      <Position>6</Position>
       <Comment>副评论对应主评论的ID</Comment>
-      <DataType>int(5)|0</DataType>
+      <DataType>varchar(5)|0</DataType>
     </column>
-    <column id="18" parent="9" name="value">
-      <Position>8</Position>
+    <column id="21" parent="9" name="value">
+      <Position>7</Position>
       <Comment>评论内容</Comment>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="19" parent="9" name="PRIMARY">
+    <column id="22" parent="9" name="email">
+      <Position>8</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <key id="23" parent="9" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="20" parent="10" name="id">
+    <column id="24" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>int(3)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="10" name="nick_name">
+      <Position>2</Position>
+      <Comment>昵称</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="10" name="date">
+      <Position>3</Position>
+      <Comment>添加的日期</Comment>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="10" name="content">
+      <Position>4</Position>
+      <Comment>留言内容</Comment>
+      <DataType>varchar(1024)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="10" name="contactway">
+      <Position>5</Position>
+      <Comment>联系方式</Comment>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <key id="29" parent="10" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="30" parent="11" name="id">
       <Position>1</Position>
       <DataType>int(5)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="21" parent="10" name="title">
+    <column id="31" parent="11" name="title">
       <Position>2</Position>
       <Comment>文章的标题</Comment>
       <DataType>varchar(50)|0</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="22" parent="10" name="permission">
+    <column id="32" parent="11" name="permission">
       <Position>3</Position>
       <DataType>int(2)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="10" name="date">
-      <Position>4</Position>
+    <column id="33" parent="11" name="date">
+      <Position>7</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="10" name="summary">
-      <Position>5</Position>
+    <column id="34" parent="11" name="summary">
+      <Position>4</Position>
+      <Comment>文章的简介</Comment>
       <DataType>varchar(1000)|0</DataType>
     </column>
-    <column id="25" parent="10" name="writer">
-      <Position>6</Position>
+    <column id="35" parent="11" name="writer">
+      <Position>5</Position>
+      <Comment>作者</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="26" parent="10" name="backgroundImage">
-      <Position>7</Position>
-      <DataType>varchar(255)|0</DataType>
+    <column id="36" parent="11" name="backgroundImage">
+      <Position>6</Position>
+      <Comment>背景图片的url</Comment>
+      <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="27" parent="10" name="htmlSrc">
+    <column id="37" parent="11" name="typeId">
       <Position>8</Position>
-      <DataType>varchar(50)|0</DataType>
+      <Comment>文章的分类</Comment>
+      <DataType>int(2)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <key id="28" parent="10" name="PRIMARY">
+    <column id="38" parent="11" name="allowComment">
+      <Position>9</Position>
+      <Comment>是否允许评论（1：是，0不是）</Comment>
+      <DataType>int(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="11" name="wordTextId">
+      <Position>10</Position>
+      <Comment>与“word_text”表“id”对应的id</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="40" parent="11" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="41" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>int(5)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="42" parent="12" name="text">
+      <Position>2</Position>
+      <Comment>内容</Comment>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="12" name="wordTextId">
+      <Position>3</Position>
+      <Comment>与“word”表&quot;wordTextId&quot;对应的id</Comment>
+      <DataType>varchar(15)|0</DataType>
+    </column>
+    <key id="44" parent="12" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="45" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="13" name="typeName">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <key id="47" parent="13" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

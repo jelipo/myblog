@@ -38,14 +38,13 @@ $(function () {
             if (width < minWidth) {
                 $('#top_card_left').removeClass('mdui-col-xs-7');
                 $('#top_card_left').addClass('mdui-col-xs-12');
-                $('#top_card_right').removeClass('mdui-col-xs-5');
-                $('#top_card_right').addClass('mdui-col-xs-12');
+                $('#top_card_right').css("display","none");
             }
             else {
                 $('#top_card_left').removeClass('mdui-col-xs-12');
                 $('#top_card_left').addClass('mdui-col-xs-7');
                 $('#top_card_right').removeClass('mdui-col-xs-12');
-                $('#top_card_right').addClass('mdui-col-xs-5');
+                $('#top_card_right').css("display","block");
             }
         }
     }

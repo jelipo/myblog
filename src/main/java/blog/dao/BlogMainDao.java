@@ -2,9 +2,11 @@ package blog.dao;
 
 import blog.bean.BlogMainPojo;
 import blog.bean.CommentPojo;
+import blog.bean.MessagePojo;
 import blog.bean.WordPojo;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,4 +26,8 @@ public interface BlogMainDao {
     int putReply(Map parm);
 
     Map getWordText(String wordTextId);
+
+    List<MessagePojo> getMessages();
+
+    int putMessage(String nickname, Date date,String content,String contactway);
 }

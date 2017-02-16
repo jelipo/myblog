@@ -2,7 +2,6 @@ $(function () {
     var pageNumNow = parseInt($("#pageNum").val());
     appendWord(getAjaxData("getWord.do?pageNum=" + pageNumNow + "&getBlogNum=10"));
 
-
     //监听滚动条到底部
     var appendFlag = true;
     $(window).scroll(function () {
@@ -17,7 +16,6 @@ $(function () {
             appendFlag = true;
         }
     });
-
 
 });
 function appendWord(list) {

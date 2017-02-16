@@ -147,6 +147,13 @@ body {
     position: relative;
     float: right;
 }
+.top-card-rght-img{
+    transition: 1s;
+}
+.top-card-rght-img:hover{
+    transition: 1s;
+    opacity: 0;
+}
 
 .leftbar-navi {
     transition: 0.3s;
