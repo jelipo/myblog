@@ -1,6 +1,6 @@
 $(function () {
     var pageNumNow = parseInt($("#pageNum").val());
-    appendWord(getAjaxData("getWord.do?pageNum=" + pageNumNow + "&getBlogNum=10"));
+    appendWord(getAjaxData("getWord.do?pageNum=" + pageNumNow + "&getBlogNum=10&type="+$("#type").val()));
 
     //监听滚动条到底部
     var appendFlag = true;

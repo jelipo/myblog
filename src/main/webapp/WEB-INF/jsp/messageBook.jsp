@@ -29,7 +29,7 @@
 
         .message_name {
             float: left;
-            font-weight: 900;
+            color: #009688;
         }
 
         .message_time {
@@ -85,11 +85,11 @@
                             <div style="float: left;width: 100%">
                                 <div style="float: left;" class="mdui-textfield halfinput-width">
                                     <input id="nickname" name="nickname" class="mdui-textfield-input" type="text"
-                                           placeholder="请输入昵称（不输入时随机）"/>
+                                           placeholder="请输入昵称（可选）"/>
                                 </div>
                                 <div style="float: right;" class="mdui-textfield halfinput-width">
                                     <input id="contactway" name="contactway" class="mdui-textfield-input" type="text"
-                                           placeholder="联系方式（可选，如果需要我联系您）"/>
+                                           placeholder="联系方式（如果需要我联系您可填写）"/>
                                 </div>
                             </div>
                             <div style="float: left;width: 100%" class="mdui-textfield">

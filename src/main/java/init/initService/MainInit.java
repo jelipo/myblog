@@ -49,7 +49,8 @@ public class MainInit {
 
         logger.info("初始化HTTP客户端");
         initHttpClient.init();
-
+        WyMusic music=new WyMusic();
+        System.out.println(music.search("周杰伦",1,20));
 
     }
 

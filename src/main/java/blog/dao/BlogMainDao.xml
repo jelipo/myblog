@@ -3,7 +3,11 @@
 <mapper namespace="blog.dao.BlogMainDao">
 
     <select id="getWord" resultType="blog.bean.BlogMainPojo">
-      select * from word where permission=1 ORDER BY date DESC LIMIT #{startNum},#{getBlogNum};
+        select * from word where permission=1
+        <if test="type != null">
+            AND typeId=#{type}
+        </if>
+        ORDER BY date DESC LIMIT #{startNum},#{getBlogNum};
     </select>
 
     <select id="toWord" resultType="blog.bean.WordPojo">
@@ -32,7 +36,7 @@
         select * from message ORDER by date DESC limit 0,30 ;
     </select>
 
-    <insert id="putMessage"  useGeneratedKeys="true">
+    <insert id="putMessage" useGeneratedKeys="true">
         INSERT INTO message(nick_name,date,content,contactway)
         VALUE (#{0},#{1},#{2},#{3});
     </insert>

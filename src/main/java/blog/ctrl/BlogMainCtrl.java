@@ -29,8 +29,8 @@ public class BlogMainCtrl {
 
     @ResponseBody
     @GetMapping("/getWord.do")
-    public Map getWord(HttpServletRequest request,@RequestParam int pageNum, @RequestParam int getBlogNum){
-        Map result=blogMainService.getBlogByPageNum(request,pageNum,getBlogNum);
+    public Map getWord(HttpServletRequest request,@RequestParam int pageNum, @RequestParam int getBlogNum,@RequestParam(required = false) String type){
+        Map result=blogMainService.getBlogByPageNum(request,pageNum,getBlogNum,type);
         return result;
     }
 
@@ -59,8 +59,9 @@ public class BlogMainCtrl {
     }
 
     @GetMapping("/moreWords.do")
-    public String moreWords(HttpServletRequest request,@RequestParam int pageNum){
+    public String moreWords(HttpServletRequest request,@RequestParam int pageNum ,@RequestParam(required = false) String type){
         request.setAttribute("pageNum",pageNum);
+        request.setAttribute("type",type);
         return "wordList";
     }
 

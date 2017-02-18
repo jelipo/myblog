@@ -28,7 +28,7 @@ public class BlogMainService {
     @Resource(name = "redisServer/service/CommentLimit")
     private CommentLimit commentLimit;
 
-    public Map getBlogByPageNum(HttpServletRequest request, int pageNum, int getBlogNum) {
+    public Map getBlogByPageNum(HttpServletRequest request, int pageNum, int getBlogNum,String type) {
         if (ipLimit.isBlackIp(request, "10")) {
             return PackingResult.toWorngMap("Please stop!");
         }
@@ -38,6 +38,7 @@ public class BlogMainService {
         Map map = new HashMap();
         map.put("getBlogNum", getBlogNum);
         map.put("startNum", (pageNum - 1) * getBlogNum);
+        map.put("type",type);
         List<BlogMainPojo> list = blogMainDao.getWord(map);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd,yyyy");
         for (int i = 0; i < list.size(); i++) {

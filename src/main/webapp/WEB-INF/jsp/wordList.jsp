@@ -18,6 +18,7 @@
 
 <!--参数-->
 <input id="pageNum" value="${pageNum}" type="hidden">
+<input id="type" value="${type}" type="hidden">
 <!--参数-->
 <%@include file="webParts/drawer.html" %>
 <!--主要内容-->
