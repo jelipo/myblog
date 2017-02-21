@@ -23,31 +23,28 @@ public class CommentLimit {
     @Value("#{config['commentLimit.banTime']}")
     private int limitTime ;
 
+    private final String prefix="comment_limit_";
+
     public Boolean isBanIp(HttpServletRequest httpServletRequest) {
         Jedis jedis = pool.getResource();
+        String ip=httpServletRequest.getRemoteAddr();
         try {
-            String creatTime = jedis.hget("commentIpLimit", httpServletRequest.getRemoteAddr());
-            if (creatTime == null) {
+            String result=jedis.get(prefix+ip);
+            if (result==null){
                 return false;
             }else {
-                if((System.currentTimeMillis()-Long.valueOf(creatTime))/1000>limitTime){
-                    long a=jedis.hset("commentIpLimit",httpServletRequest.getRemoteAddr(),String.valueOf(System.currentTimeMillis()));
-                    return false;
-                }else {
-                    return true;
-                }
+                return true;
             }
         }finally {
             jedis.close();
         }
-
-
-
     }
 
     public Boolean insertIp(HttpServletRequest httpServletRequest) {
+        String ip=httpServletRequest.getRemoteAddr();
         Jedis jedis = pool.getResource();
-        jedis.hset("commentIpLimit",httpServletRequest.getRemoteAddr(),String.valueOf(System.currentTimeMillis()));
+        jedis.set(prefix+ip,"");
+        jedis.expire(prefix+ip,limitTime);
         jedis.close();
         return true;
     }
