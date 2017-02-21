@@ -2,6 +2,7 @@ package blog.service;
 
 import blog.dao.ManagerDao;
 import init.initService.InitConfig;
+import init.initService.service.MyServletContex;
 import init.pojo.QiniuZoneParameters;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,7 @@ import redisServer.service.IpLimit;
 import util.PackingResult;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -54,6 +56,9 @@ public class ManagerService {
 
     @Resource(name = "qiniu/UploadFile")
     private UploadFile uploadFile;
+
+    @Resource(name="init/initService/service/MyServletContex")
+    private MyServletContex myServletContex;
 
     private static final Logger logger = LogManager.getLogger(ManagerService.class);
 
@@ -109,6 +114,9 @@ public class ManagerService {
             return false;
         }
         if (result == 1) {
+            ServletContext servletContext=myServletContex.getServletContext();
+            int wordNum= (int) servletContext.getAttribute("wordNum");
+            servletContext.setAttribute("wordNum",wordNum+1);
             return true;
         }
         return false;

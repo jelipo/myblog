@@ -11,6 +11,7 @@ import redisServer.service.IpLimit;
 import util.PackingResult;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -148,6 +149,7 @@ public class BlogMainService {
     }
 
     public Map putMessage(HttpServletRequest request, String nickname, String content, String contactway) {
+
         if (commentLimit.isBanIp(request)) {
             return PackingResult.toWorngMap("您暂时还不能操作！");
         }
@@ -161,7 +163,13 @@ public class BlogMainService {
         Date date = new Date(nowTime);
         int result = blogMainDao.putMessage(StringEscapeUtils.escapeHtml4(nickname), date, StringEscapeUtils.escapeHtml4(content), StringEscapeUtils.escapeHtml4(contactway));
         if (result > 0) {
+            //加入暂时黑名单
             commentLimit.insertIp(request);
+            //留言计数器+1
+            ServletContext servletContext=request.getServletContext();
+            int messageNUm= (int) servletContext.getAttribute("messageNum");
+            servletContext.setAttribute("messageNum",messageNUm+1);
+            
             return PackingResult.toSuccessMap();
         } else {
             return PackingResult.toWorngMap("回复失败！");
