@@ -6,15 +6,10 @@
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="res/css/mdui.min.css" rel="stylesheet">
+    <link href="https://res.springmarker.com/blog/res/css/my-mdui.min.css" rel="stylesheet">
     <link href="res/css/main.css" rel="stylesheet">
     <link href="res/css/word.css" rel="stylesheet">
-    <link href="res/css/marxico.css" rel="stylesheet">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
-    <script type="text/javascript" src="res/js/main.js"></script>
-    <script type="text/javascript" src="res/js/word.js"></script>
-
+    <link href="//res.springmarker.com/blog/res/css/marxico.css" rel="stylesheet">
 </head>
 
 <body class="mdui-drawer-body-left ">
@@ -31,7 +26,7 @@
 <!--参数-->
 
 
-<%@include file="webParts/drawer.html" %>
+<%@include file="webParts/drawer.jsp" %>
 <!--主要内容-->
 <div class="mdui-container" style="min-height: 1200px">
     <div style="height: 150px">
@@ -82,9 +77,9 @@
             <div class="mdui-col-xs-12 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
                     <div class="card-comment">
-                        <div style="width: 100%;height: 100px;">
+                        <div style="width: 100%;height: 100px;margin-bottom: 30px;">
                             <div style="font-size: 25px;font-weight: 900;color:#616161">评论：</div>
-                            <div class="mdui-textfield mdui-textfield-floating-label "
+                            <div  class="mdui-textfield mdui-textfield-floating-label "
                                  onclick="newMainCommentShowDialog()">
                                 <label class="mdui-textfield-label">留下你的见解吧！</label>
                                 <input class="mdui-textfield-input newComment" disabled/>
@@ -176,8 +171,9 @@
     </form>
 </div>
 <!--回复对话框-->
-
 </body>
-
-
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//res.springmarker.com/other/js/mdui.min.js"></script>
+<script type="text/javascript" src="res/js/main.js"></script>
+<script type="text/javascript" src="res/js/word.js"></script>
 </html>

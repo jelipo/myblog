@@ -1,11 +1,13 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--侧边栏-->
 <i onclick="toggle()" class="mdui-icon material-icons" style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
 <div id="drawer" class="mdui-drawer leftbar secondColorAndBackgroundColor">
     <div class="leftbar-head" style="background-image: url('res/img/first.jpg')">
         <img src="res/img/head.jpg" class="mdui-img-circle">
-        <div class="leftbar-head-msg">
-            <div>Springmarker</div>
-            <span>A coder</span>
+        <div class="mdui-grid-tile-actions">
+            <div class="mdui-grid-tile-text">
+                <div class="mdui-grid-tile-title">Springmarker</div>
+            </div>
         </div>
     </div>
     <div class="leftbar-navi mdui-ripple" onclick="window.location.href='/'">
@@ -33,11 +35,11 @@
     </a>
     <a href="/moreWords.do?pageNum=1" class="leftbar-other mdui-ripple">
         <span>所有文章</span>
-        <p>10</p>
+        <p>${applicationScope.wordNum}</p>
     </a>
     <a href="/message.do" class="leftbar-other mdui-ripple" >
         <span>留言</span>
-        <p>12</p>
+        <p>${applicationScope.messageNum}</p>
     </a>
     <div style="margin: 5px 0 5px 0;" class="mdui-divider"></div>
     <div class="mdui-collapse" mdui-collapse>

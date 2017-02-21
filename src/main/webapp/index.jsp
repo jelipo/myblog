@@ -7,11 +7,8 @@
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="res/css/mdui.min.css" rel="stylesheet">
+    <link href="//res.springmarker.com/blog/res/css/my-mdui.min.css" rel="stylesheet">
     <link href="res/css/main.css" rel="stylesheet">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
-    <script type="text/javascript" src="res/js/main.js"></script>
 </head>
 
 <body class="mdui-drawer-body-left ">
@@ -20,7 +17,7 @@
    style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
 
 
-<%@include file="WEB-INF/jsp/webParts/drawer.html" %>
+<%@include file="WEB-INF/jsp/webParts/drawer.jsp" %>
 
 
 <!--主要内容-->
@@ -121,13 +118,14 @@
     <!--底部信息“查看更多”-->
 
 </div>
-
+</body>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//res.springmarker.com/other/js/mdui.min.js"></script>
+<script type="text/javascript" src="res/js/main.js"></script>
 <script>
     $(function () {
-        indexAppendWord(getAjaxData("getWord.do?pageNum=1&getBlogNum=10"));
-
+        indexAppendWord(getAjaxData("getWord.do?pageNum=1&getBlogNum=10&type=0"));
     });
-
     function indexAppendWord(list) {
         for (var i = 0; i < list.length; i++) {
             var copyHtml = $('#word').clone();
@@ -146,7 +144,6 @@
         $(".mainPage").append($('#lookMore').clone());
         return list.length;
     }
-
 </script>
-</body>
+
 </html>

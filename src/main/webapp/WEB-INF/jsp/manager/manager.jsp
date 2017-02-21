@@ -37,7 +37,7 @@
 </head>
 
 <body class="mdui-drawer-body-left ">
-<%@include file="../webParts/drawer.html" %>
+<%@include file="../webParts/drawer.jsp" %>
 
 
 <!--主要内容-->

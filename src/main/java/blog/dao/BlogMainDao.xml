@@ -4,9 +4,15 @@
 
     <select id="getWord" resultType="blog.bean.BlogMainPojo">
         select * from word where permission=1
-        <if test="type != null">
-            AND typeId=#{type}
-        </if>
+        <choose>
+            <when test="type == '' "></when>
+            <when test="type == null "></when>
+            <when test="type == 0 "></when>
+            <otherwise>
+                AND typeId=#{type}
+            </otherwise>
+        </choose>
+
         ORDER BY date DESC LIMIT #{startNum},#{getBlogNum};
     </select>
 

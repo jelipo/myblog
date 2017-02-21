@@ -7,15 +7,13 @@
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="res/css/mdui.min.css" rel="stylesheet">
+    <link href="https://res.springmarker.com/blog/res/css/my-mdui.min.css" rel="stylesheet">
     <link href="res/css/main.css" rel="stylesheet">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
-    <script type="text/javascript" src="res/js/main.js"></script>
+
 </head>
 
 <body class="mdui-drawer-body-left ">
-<%@include file="webParts/drawer.html" %>
+<%@include file="webParts/drawer.jsp" %>
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px"></div>
@@ -43,5 +41,8 @@
 
 <%@include file="webParts/footer.html" %>
 </body>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://res.springmarker.com/other/js/mdui.min.js"></script>
+<script type="text/javascript" src="res/js/main.js"></script>
 
 </html>

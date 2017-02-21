@@ -101,26 +101,6 @@ body {
     margin-left: 10px;
 }
 
-.leftbar-head-msg {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    color: #fff;
-    padding: 10px;
-    background: rgba(0, 0, 0, .2);
-}
-
-.leftbar-head-msg > div {
-    padding-bottom: 2px;
-    font-size: 14px;
-}
-
-.leftbar-head-msg > span {
-    font-size:1px;
-    color: rgba(255, 255, 255, .8);;
-}
-
 .mainPage {
     width: 100%;
     max-width: 950px;

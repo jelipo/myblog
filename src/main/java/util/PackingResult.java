@@ -1,15 +1,10 @@
 package util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class PackingResult {
 

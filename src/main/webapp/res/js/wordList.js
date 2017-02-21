@@ -7,7 +7,7 @@ $(function () {
     $(window).scroll(function () {
         if (appendFlag && ($(window).scrollTop() + 20 > $(document).height() - $(window).height())) {
             appendFlag = false;
-            var getWordNum = appendWord(getAjaxData("getWord.do?pageNum=" + (pageNumNow + 1) + "&getBlogNum=10"));
+            var getWordNum = appendWord(getAjaxData("getWord.do?pageNum=" + (pageNumNow + 1) + "&getBlogNum=10&type="+$("#type").val()));
             if (getWordNum == 0) {
                 appendNoMore();
                 return;

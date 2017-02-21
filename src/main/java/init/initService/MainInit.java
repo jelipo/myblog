@@ -27,6 +27,9 @@ public class MainInit {
     @Resource(name = "init/initService/initHttpClient")
     private InitHttpClient initHttpClient;
 
+    @Resource(name = "init/initService/service/InitGetInitDataFromSql")
+    private InitGetInitDataFromSql initGetInitDataFromSql;
+
     @Value("#{config['qiniu.autoCheckLocalFile']}")
     private String autoCheckLocalFile;
 
@@ -42,19 +45,18 @@ public class MainInit {
         initQiniuCdn.init();
         logger.info("检验完成，并开启定时上传任务");
 
-        if (autoCheckLocalFile.equals("true")){
+        if (autoCheckLocalFile.equals("true")) {
             logger.info("开启监听本地文件更改");
             initFileListen.init();
         }
 
         logger.info("初始化HTTP客户端");
         initHttpClient.init();
-        WyMusic music=new WyMusic();
-        System.out.println(music.search("周杰伦",1,20));
+
+        logger.info("从数据库获得初始化参数");
+        initGetInitDataFromSql.init();
 
     }
-
-
 
 
 }

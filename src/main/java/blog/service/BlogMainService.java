@@ -126,10 +126,10 @@ public class BlogMainService {
         }
         map.put("wordId", replyPojo.getWordId());
         map.put("isMainComment", replyPojo.getIsNewMainComment().equals("1") ? 1 : 2);
-        map.put("observerName", replyPojo.getNickname());
+        map.put("observerName",StringEscapeUtils.escapeHtml4( replyPojo.getNickname()));
         map.put("date", new Date(System.currentTimeMillis()));
         map.put("value", StringEscapeUtils.escapeHtml4(replyPojo.getValue()).replace("\n", "<br>"));
-        map.put("email", replyPojo.getEmail());
+        map.put("email", StringEscapeUtils.escapeHtml4(replyPojo.getEmail()));
         int result = blogMainDao.putReply(map);
         if (result > 0) {
             commentLimit.insertIp(request);
@@ -159,7 +159,7 @@ public class BlogMainService {
             nickname="游客"+ nowTime % 10000000;
         }
         Date date = new Date(nowTime);
-        int result = blogMainDao.putMessage(nickname, date, content, contactway);
+        int result = blogMainDao.putMessage(StringEscapeUtils.escapeHtml4(nickname), date, StringEscapeUtils.escapeHtml4(content), StringEscapeUtils.escapeHtml4(contactway));
         if (result > 0) {
             commentLimit.insertIp(request);
             return PackingResult.toSuccessMap();
