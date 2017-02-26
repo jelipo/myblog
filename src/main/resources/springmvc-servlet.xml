@@ -11,7 +11,11 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!-- 扫描注解的类 -->
+<<<<<<< HEAD
     <context:component-scan base-package="blog,redisServer,init,qiniu,corn,init,hls"/>
+=======
+    <context:component-scan base-package="blog,redisServer,init,qiniu,corn,init.initService.dao"/>
+>>>>>>> origin/master
     <task:annotation-driven />
 
     <mvc:annotation-driven>
