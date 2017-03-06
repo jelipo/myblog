@@ -9,6 +9,9 @@
     <meta name="format-detection" content="telephone=no"/>
     <link href="https://res.springmarker.com/blog/res/css/my-mdui.min.css" rel="stylesheet">
     <link href="res/css/main.css" rel="stylesheet">
+    <link href="res/css/video-js.min.css" rel="stylesheet">
+    <script type="text/javascript" src="res/js/video.min.js"></script>
+    <script type="text/javascript" src="res/js/videojs-contrib-hls.min.js"></script>
 
 </head>
 
@@ -23,7 +26,9 @@
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
 
                     <div style="padding: 30px 20px 30px 20px">
-                        <h1>hello</h1>
+                        <video id=example-video width=600 height=400 class="video-js vjs-default-skin" controls>
+                            <source src="http://hls.springmarker.com/getM3u8.do" type="application/x-mpegURL">
+                        </video>
                     </div>
 
                 </div>
