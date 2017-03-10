@@ -1,5 +1,6 @@
 package hls.ctrl;
 
+import com.alibaba.fastjson.JSONObject;
 import hls.service.HlsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,4 +32,10 @@ public class HlsCtrl {
         hlsService.getM3u8(response);
     }
 
+    @ResponseBody
+    @GetMapping("switch.do")
+    public JSONObject switchLED(){
+        JSONObject result=hlsService.getSwitchResult();
+        return result;
+    }
 }

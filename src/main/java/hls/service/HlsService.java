@@ -1,19 +1,24 @@
 package hls.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.io.FileUtils;
+import hls.service.connect.SwitchService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import util.PackingResult;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +31,11 @@ public class HlsService {
 
     @Resource(name = "jedisPool")
     private JedisPool pool;
+
+    @Resource(name = "hls/service/connect/SwitchService")
+    private SwitchService switchService;
+
+    private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH时mm分ss秒");
 
     /**
      * 将上传来的参数存入redis中
@@ -82,7 +92,7 @@ public class HlsService {
             //先把列表第一个放入m3u8的Body中
             body.append("#EXTINF:").append(firstMap.get("videoTime")).append(",\n").append(firstMap.get("url") + "\n");
             //把列表剩下的一次装入Body中
-            for (int i = 1; i < list.size(); i++) {
+            for (int i = list.size()-2; i >=0; i--) {
                 Map<String, String> map = jedis.hgetAll(list.get(i));
                 body.append("#EXTINF:").append(map.get("videoTime")).append(",\n").append(map.get("url") + "\n");
                 int formatTime = Integer.valueOf(map.get("formatTime"));
@@ -108,4 +118,41 @@ public class HlsService {
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @return
+     */
+    public JSONObject getSwitchResult(){
+        Jedis jedis = this.pool.getResource();
+        try {
+            String switchFlagKey = "switch";
+            int switchTime = 20;
+            String value = jedis.get(switchFlagKey);
+            if (value == null) {
+                try {
+                    this.switchService.sendMessage("switch\n");
+                } catch (IOException e) {
+                    return JSON.parseObject("{'resultCode':200,'data':'服务器内部错误！'}");
+                }
+                value=this.simpleDateFormat.format(System.currentTimeMillis());
+                jedis.set(switchFlagKey, value);
+                jedis.expire(switchFlagKey, switchTime);
+                return JSON.parseObject("{'resultCode':200,'data':'您控制了开关！将在视频中" + value+ "开/关'}");
+
+            } else {
+                return JSON.parseObject("{'resultCode':200,'data':'已经由别人抢先了！将在视频中" + value + "开/关'}");
+            }
+        }finally {
+            jedis.close();
+        }
+
+    }
+
+
+
+
+
+
+
 }
