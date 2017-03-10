@@ -13,6 +13,7 @@ public class ConnectThread implements Runnable {
     private SwitchService.PackegSocket packegSocket;
 
     public ConnectThread(int port, SwitchService.PackegSocket packegSocket) throws IOException {
+        System.out.println("创建Socket服务");
         this.serverSocket = new ServerSocket(port);
         this.packegSocket = packegSocket;
     }
@@ -57,7 +58,6 @@ public class ConnectThread implements Runnable {
                 String mess;
                 while (true) {
                     mess=SocketTool.getMessage(bis);
-                    System.out.println(System.currentTimeMillis());
                     System.out.println(mess);
                     String resultMessage = select(mess);
                     if (resultMessage != null) {

@@ -46,9 +46,12 @@ public class SwitchService {
 
     public void sendMessage(String message) throws IOException {
         Socket socket1=packegSocket.socket;
+        System.out.println("q");
         if (socket1==null){
+            System.out.println("w");
             throw new IOException();
         }
+        System.out.println("e");
         SocketTool.send(socket1,message);
 
     }

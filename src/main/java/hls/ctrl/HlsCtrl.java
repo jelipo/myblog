@@ -38,4 +38,16 @@ public class HlsCtrl {
         JSONObject result=hlsService.getSwitchResult();
         return result;
     }
+
+    @GetMapping("/hls.do")
+    public String toHlsPage(){
+        return "/WEB-INF/jsp/hls.html";
+    }
+
+    @ResponseBody
+    @GetMapping("/nextSwitchTime.do")
+    public JSONObject nextSwitchTime(){
+        JSONObject result=hlsService.nextSwitchTime();
+        return result;
+    }
 }
