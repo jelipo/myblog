@@ -107,9 +107,9 @@ public class HlsService {
         }
         try {
             OutputStream os = response.getOutputStream();
-            response.setHeader("Content-Disposition", "attachment; filename=1.m3u8");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Max-Age", "2592000");
+            response.setHeader("Cache-Control","max-age=4");
+            response.setHeader("Connection","keep-alive");
+            response.setHeader("Content-Type","application/vnd.apple.mpegurl");
             os.write(wirteStr.getBytes());
             jedis.close();
             os.flush();

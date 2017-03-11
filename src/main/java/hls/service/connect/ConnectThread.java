@@ -10,12 +10,12 @@ import java.net.SocketException;
 public class ConnectThread implements Runnable {
 
     private ServerSocket serverSocket;
-    private SwitchService.PackegSocket packegSocket;
+    private SocketPojo socketPojo;
 
-    public ConnectThread(int port, SwitchService.PackegSocket packegSocket) throws IOException {
+    public ConnectThread(int port, SocketPojo socketPojo) throws IOException {
         System.out.println("创建Socket服务");
         this.serverSocket = new ServerSocket(port);
-        this.packegSocket = packegSocket;
+        this.socketPojo = socketPojo;
     }
 
     /**
@@ -25,8 +25,9 @@ public class ConnectThread implements Runnable {
     public void run() {
         try {
             while (true) {
-                packegSocket.socket=serverSocket.accept();
-                ConnectChildThread connectChildThread = new ConnectChildThread(packegSocket.socket);
+                Socket newSocket=serverSocket.accept();
+                socketPojo.setSocket(newSocket);
+                ConnectChildThread connectChildThread = new ConnectChildThread(socketPojo);
                 Thread thread = new Thread(connectChildThread);
                 thread.start();
             }
@@ -41,10 +42,10 @@ public class ConnectThread implements Runnable {
      */
     public class ConnectChildThread implements Runnable {
 
-        private Socket socket;
+        private SocketPojo socketPojo;
 
-        ConnectChildThread(Socket socket) {
-            this.socket = socket;
+        ConnectChildThread(SocketPojo socketPojo) {
+            this.socketPojo= socketPojo;
         }
 
         /**
@@ -53,7 +54,7 @@ public class ConnectThread implements Runnable {
         @Override
         public void run() {
             try {
-                BufferedInputStream bis=new BufferedInputStream(socket.getInputStream());
+                BufferedInputStream bis=new BufferedInputStream(socketPojo.getSocket().getInputStream());
                 //读取客户端发送来的消息
                 String mess;
                 while (true) {
@@ -61,7 +62,10 @@ public class ConnectThread implements Runnable {
                     System.out.println(mess);
                     String resultMessage = select(mess);
                     if (resultMessage != null) {
-                        SocketTool.send(socket,resultMessage);
+                        SocketTool.send(socketPojo.getSocket(),resultMessage);
+                    }
+                    if (socketPojo.getSocket().isClosed()||socketPojo.getSocket()==null){
+                        socketPojo.getSocket().close();
                     }
                 }
 
@@ -70,7 +74,7 @@ public class ConnectThread implements Runnable {
             }finally {
                 System.out.println("与客户端连接断开");
                 try {
-                    socket.close();
+                    socketPojo.getSocket().close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -86,7 +90,7 @@ public class ConnectThread implements Runnable {
         private String select(String message) {
             switch (message) {
                 case "I'm client":
-                    return "I'm Server啊哈哈";
+                    return "I'm Server";
                 case "hello":
                     return "hello";
                 default:

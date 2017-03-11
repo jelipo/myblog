@@ -17,6 +17,7 @@ public class SocketTool {
      * @param message
      */
     public static void send(Socket socket, String message) {
+
         int bodyLength = message.getBytes().length;
         int blLength = sizeOfInt(bodyLength);
         StringBuilder str = new StringBuilder(headFlag).append(getZeroStr(blLength)).append(bodyLength).append(message);
@@ -81,11 +82,11 @@ public class SocketTool {
      * @return
      */
     public static String getMessage(BufferedInputStream br) throws IOException {
+        int single = 0;
         synchronized (br) {
             while (true) {
-                int first = br.read();
-                if (first == -1) throw new IOException();
-                if (first != headFlagByte[0]) continue;
+                if ((single = br.read()) == -1) throw new IOException();
+                if (single != headFlagByte[0]) continue;
                 if (br.read() != headFlagByte[1]) continue;
                 if (br.read() != headFlagByte[2]) continue;
                 int length = 0;

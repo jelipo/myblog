@@ -1,5 +1,6 @@
 package hls.service.connect;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import util.PackingResult;
@@ -12,22 +13,21 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 @Service("hls/service/connect/SwitchService")
-public class SwitchService {
+public class SwitchService implements InitializingBean {
 
     @Value("#{config['switch.serverPort']}")
     private int port;
 
-    private PackegSocket packegSocket;
+    private SocketPojo socketPojo;
 
     /**
      * 初始化服务，另起线程创建新的ServerSocket，并处理与client的连接
      */
-    @PostConstruct
-    public void init() {
-        Socket socket = null;
-        packegSocket=new PackegSocket(socket);
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        socketPojo = new SocketPojo();
         try {
-            ConnectThread connectServer = new ConnectThread(this.port, packegSocket);
+            ConnectThread connectServer = new ConnectThread(this.port, socketPojo);
             Thread connect = new Thread(connectServer);
             connect.start();
         } catch (IOException e) {
@@ -41,26 +41,19 @@ public class SwitchService {
      * @return
      */
     public Socket getHlsClientSocket() {
-        return packegSocket.socket;
+        return socketPojo.getSocket();
     }
 
     public void sendMessage(String message) throws IOException {
-        Socket socket1=packegSocket.socket;
+        Socket socket1 = socketPojo.getSocket();
         System.out.println("q");
-        if (socket1==null){
-            System.out.println("w");
-            throw new IOException();
+        if (socket1 == null || socket1.isClosed()) {
+            System.out.println("尚未有连接接入或者连接已关闭");
         }
         System.out.println("e");
-        SocketTool.send(socket1,message);
+        SocketTool.send(socket1, message);
 
     }
-
-    protected class PackegSocket{
-        protected Socket socket;
-        public PackegSocket(Socket socket){
-            this.socket=socket;
-        }
-    }
-
 }
+
+
