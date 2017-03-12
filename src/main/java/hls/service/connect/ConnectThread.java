@@ -59,12 +59,12 @@ public class ConnectThread implements Runnable {
                 String mess;
                 while (true) {
                     mess=SocketTool.getMessage(bis);
-                    System.out.println(mess);
+                    System.out.println("客户端消息："+mess);
                     String resultMessage = select(mess);
                     if (resultMessage != null) {
                         SocketTool.send(socketPojo.getSocket(),resultMessage);
                     }
-                    if (socketPojo.getSocket().isClosed()||socketPojo.getSocket()==null){
+                    if (socketPojo.getSocket().isClosed()){
                         socketPojo.getSocket().close();
                     }
                 }
