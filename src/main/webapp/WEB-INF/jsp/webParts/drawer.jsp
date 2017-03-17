@@ -51,8 +51,8 @@
                 </div>
             </div>
             <div class="mdui-collapse-item-body ">
-                <div class="leftbar-item mdui-ripple">技术</div>
-                <div class="leftbar-item mdui-ripple">随写</div>
+                <div class="leftbar-item mdui-ripple">暂无</div>
+                <div class="leftbar-item mdui-ripple">暂无</div>
             </div>
         </div>
     </div>

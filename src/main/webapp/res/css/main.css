@@ -208,7 +208,6 @@ body {
 }
 
 .secondColorAndBackgroundColor{
-    transition: 1000ms;
     color: #696969;
     background-color:#ffffff;
 }
