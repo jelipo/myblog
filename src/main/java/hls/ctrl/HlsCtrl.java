@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 public class HlsCtrl {
@@ -20,9 +23,9 @@ public class HlsCtrl {
 
     @ResponseBody
     @PostMapping("m3u8Parm.do")
-    public Map putM3u8Parm(@RequestParam("fileUrl") String fileUrl, @RequestParam("fileName") String fileName,@RequestParam("some") String some,
-                            @RequestParam("videoTime") String videoTime, @RequestParam("num") String num,@RequestParam("formatTime") String formatTime) {
-        Map result = hlsService.putM3u8Parm(fileUrl, fileName, some, videoTime, num,formatTime);
+    public Map putM3u8Parm(@RequestParam("fileUrl") String fileUrl, @RequestParam("fileName") String fileName, @RequestParam("some") String some,
+                           @RequestParam("videoTime") String videoTime, @RequestParam("num") String num, @RequestParam("formatTime") String formatTime) {
+        Map result = hlsService.putM3u8Parm(fileUrl, fileName, some, videoTime, num, formatTime);
         return result;
     }
 
@@ -34,20 +37,20 @@ public class HlsCtrl {
 
     @ResponseBody
     @GetMapping("switch.do")
-    public JSONObject switchLED(){
-        JSONObject result=hlsService.getSwitchResult();
+    public JSONObject switchLED() {
+        JSONObject result = hlsService.getSwitchResult();
         return result;
     }
 
     @GetMapping("/hls.do")
-    public String toHlsPage(){
-        return "/WEB-INF/jsp/hls.html";
+    public String toHlsPage() {
+        return "hls";
     }
 
     @ResponseBody
     @GetMapping("/nextSwitchTime.do")
-    public JSONObject nextSwitchTime(){
-        JSONObject result=hlsService.nextSwitchTime();
+    public JSONObject nextSwitchTime() {
+        JSONObject result = hlsService.nextSwitchTime();
         return result;
     }
 }
