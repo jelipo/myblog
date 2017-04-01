@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="JavaCamera" target="1.8" />
       <module name="MyBlog" target="1.8" />
     </bytecodeTargetLevel>
   </component>

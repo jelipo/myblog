@@ -27,9 +27,9 @@ public class InitQiniuCdn {
         Map localFileMap = FileTools.getAllFileMapFromFloder(resPath);
         FileInfo[] cdnFilesInfList;
         try {
-            cdnFilesInfList = simpleTools.getCdnFileList(bucketName, null);
+            cdnFilesInfList = simpleTools.getCdnFileList(bucketName, "blog/res/");
         } catch (Exception e) {
-            cdnFilesInfList = simpleTools.getCdnFileList(bucketName, null);
+            cdnFilesInfList = simpleTools.getCdnFileList(bucketName, "blog/res/");
         }
         Map<String, FileInfo> cdnFilesInfoMap = SimpleTools.FileInfoArray2MapByKey(cdnFilesInfList);
         String CDN_Prefix = initConfig.getMainQiniuZone().getCDN_Prefix();

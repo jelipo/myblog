@@ -30,6 +30,7 @@
 
 	<!-- 1. 数据源 : druid连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
 		<!-- 基本属性 url、user、password -->
 		<property name="url" value="${mysql.url}" />
 		<property name="username" value="${mysql.username}" />
