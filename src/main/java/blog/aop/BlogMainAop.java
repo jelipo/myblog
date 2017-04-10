@@ -10,6 +10,5 @@ public class BlogMainAop {
     @Before(value = "execution(* blog.ctrl.BlogMainCtrl.init(..))")
     public void som(){
         //System.out.println("执行方法");
-
     }
 }

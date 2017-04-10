@@ -13,8 +13,6 @@
     <!-- 扫描注解的类 -->
     <context:component-scan base-package="blog,redisServer,init,qiniu,corn,init,hls"/>
 
-    <context:component-scan base-package="blog,redisServer,init,qiniu,corn,init.initService.dao"/>
-
     <task:annotation-driven />
 
     <aop:aspectj-autoproxy />
@@ -49,8 +47,6 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="config"/>
     </bean>
-
-
 
     <!-- redis连接池的配置 -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">

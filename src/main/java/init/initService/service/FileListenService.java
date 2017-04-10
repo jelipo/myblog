@@ -1,12 +1,9 @@
 package init.initService.service;
 
-import corn.corn.LocalFileListenCorn;
-import init.initService.InitConfig;
 import init.initService.InitQiniuCdn;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import java.io.File;
 import java.util.HashMap;
@@ -14,7 +11,7 @@ import java.util.Map;
 
 public class FileListenService extends FileAlterationListenerAdaptor {
 
-    private static final Logger logger = LogManager.getLogger(LocalFileListenCorn.class);
+    private static final Logger logger = LogManager.getLogger(FileListenService.class);
 
     private InitQiniuCdn initQiniuCdn;
     private String rootPath;
