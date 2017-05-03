@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 public class HlsCtrl {
@@ -37,8 +35,8 @@ public class HlsCtrl {
 
     @ResponseBody
     @GetMapping("switch.do")
-    public JSONObject switchLED() {
-        JSONObject result = hlsService.getSwitchResult();
+    public JSONObject switchLED(HttpServletRequest request) {
+        JSONObject result = hlsService.getSwitchResult(request);
         return result;
     }
 

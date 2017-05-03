@@ -10,7 +10,7 @@ $(function () {
     $("#nextPage").attr("mdui-tooltip","{content: '下一篇："+$("#nextwordTitle").val()+"'}");
     dialog = new mdui.Dialog('#dialog');
     getCemments();
-    $(".mainPage").fadeIn(1500);
+    $(".mainPage").fadeIn(500);
 
 
 });

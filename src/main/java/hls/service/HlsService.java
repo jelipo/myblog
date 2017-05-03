@@ -8,17 +8,14 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import util.PackingResult;
+import util.TimeTools;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -107,9 +104,9 @@ public class HlsService {
         }
         try {
             OutputStream os = response.getOutputStream();
-            response.setHeader("Cache-Control","max-age=4");
-            response.setHeader("Connection","keep-alive");
-            response.setHeader("Content-Type","application/vnd.apple.mpegurl");
+            response.setHeader("Cache-Control", "max-age=4");
+            response.setHeader("Connection", "keep-alive");
+            response.setHeader("Content-Type", "application/vnd.apple.mpegurl");
             os.write(wirteStr.getBytes());
             jedis.close();
             os.flush();
@@ -122,8 +119,11 @@ public class HlsService {
     /**
      * @return
      */
-    public JSONObject getSwitchResult() {
+    public JSONObject getSwitchResult(HttpServletRequest request) {
         Jedis jedis = this.pool.getResource();
+        String ip = request.getRemoteAddr();
+        String nowTime = TimeTools.getDefaultFormatTime();
+        jedis.hset("switchLog", nowTime, ip);
         try {
             String switchFlagKey = "switch";
             int switchTime = 24;
@@ -153,10 +153,10 @@ public class HlsService {
         try {
             String switchFlagKey = "switch";
             String value = jedis.get(switchFlagKey);
-            if (value==null){
+            if (value == null) {
                 return JSONObject.parseObject("{'resultCode':200,'data':'没有人控制，试试点下面的按钮'}");
             }
-            return JSONObject.parseObject("{'resultCode':200,'data':'"+value+"'}");
+            return JSONObject.parseObject("{'resultCode':200,'data':'" + value + "'}");
         } finally {
             jedis.close();
         }
