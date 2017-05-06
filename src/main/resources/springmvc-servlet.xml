@@ -11,11 +11,13 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 扫描注解的类 -->
-    <context:component-scan base-package="blog,redisServer,init,qiniu,corn,init,hls"/>
+    <context:component-scan base-package="blog,redisServer,init,qiniu,corn,init,hls,annotation"/>
 
     <task:annotation-driven />
 
     <aop:aspectj-autoproxy />
+
+    <!--<import resource="classpath*:spring-mybatis.xml" />-->
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
@@ -72,6 +74,11 @@
                 p:uploadTempDir="local/upload">
     </bean>
 
+    <bean id="IpLimit" class="annotation.aop.IpLimitAop">
+        <property name="longBlackTimes" value="5" />
+        <property name="temporarilyLimitTime" value="300" />
+        <property name="totalValue" value="500" />
+    </bean>
 </beans>
 
 

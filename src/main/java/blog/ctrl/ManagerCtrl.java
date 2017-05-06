@@ -1,5 +1,6 @@
 package blog.ctrl;
 
+import annotation.myInterface.IpLimit;
 import blog.service.ManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,9 +74,11 @@ public class ManagerCtrl {
         return map;
     }
 
+    @IpLimit(20)
     @GetMapping("/test.do")
-    public String test(HttpSession httpSession) {
-        return "";
+    public String test(HttpSession httpSession,HttpServletRequest request) {
+        System.out.println("执行了ctrl方法");
+        return "manager/login";
     }
 
 }

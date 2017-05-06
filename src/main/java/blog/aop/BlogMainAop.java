@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class BlogMainAop {
+
     @Before(value = "execution(* blog.ctrl.BlogMainCtrl.init(..))")
     public void som(){
-        //System.out.println("执行方法");
+        System.out.println("执行方法");
     }
 }

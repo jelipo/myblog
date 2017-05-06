@@ -4,9 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
-        <setting name="logImpl" value="LOG4J2" />
+        <setting name="logImpl" value="LOG4J2"/>
     </settings>
-
 
 
 </configuration>
