@@ -75,9 +75,11 @@
     </bean>
 
     <bean id="IpLimit" class="annotation.aop.IpLimitAop">
-        <property name="longBlackTimes" value="5" />
-        <property name="temporarilyLimitTime" value="300" />
-        <property name="totalValue" value="500" />
+        <property name="longBlackTimes" value="${ipLimit.longBlackTimes}" />
+        <property name="temporarilyLimitTime" value="${ipLimit.temporarilyLimitTime}" />
+        <property name="totalValue" value="${ipLimit.totalValue}" />
+        <!--单位 秒-->
+        <property name="longBlackTime" value="${ipLimit.longBlackTime}" />
     </bean>
 </beans>
 

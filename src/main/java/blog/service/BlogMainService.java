@@ -7,7 +7,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.stereotype.Service;
 import redisServer.service.CommentLimit;
-import redisServer.service.IpLimit;
 import util.PackingResult;
 
 import javax.annotation.Resource;
@@ -23,16 +22,13 @@ public class BlogMainService {
     private BlogMainDao blogMainDao;
 
 
-    @Resource(name = "redisServer/service/IpLimit")
-    private IpLimit ipLimit;
+//    @Resource(name = "redisServer/service/IpLimit")
+//    private IpLimit ipLimit;
 
     @Resource(name = "redisServer/service/CommentLimit")
     private CommentLimit commentLimit;
 
     public Map getBlogByPageNum(HttpServletRequest request, int pageNum, int getBlogNum,String type) {
-        if (ipLimit.isBlackIp(request, "10")) {
-            return PackingResult.toWorngMap("Please stop!");
-        }
         if (pageNum == 0 || getBlogNum == 0) {
             return PackingResult.toWorngMap("参数错误");
         }
@@ -141,9 +137,6 @@ public class BlogMainService {
     }
 
     public Map getMessages(HttpServletRequest request) {
-        if (ipLimit.isBlackIp(request, "10")) {
-            return PackingResult.toWorngMap("Please stop!");
-        }
         List<MessagePojo> list = blogMainDao.getMessages();
         return PackingResult.toSuccessMap(list);
     }

@@ -27,6 +27,7 @@ public class ManagerCtrl {
         return "manager/login";
     }
 
+    @IpLimit(20)
     @PostMapping("bossLogin.do")
     public String bossLogin(@RequestParam String username, @RequestParam String password, HttpSession httpSession, HttpServletRequest request) {
         Boolean isSuccess = managerService.checkLogin(request, username, password);
@@ -74,10 +75,9 @@ public class ManagerCtrl {
         return map;
     }
 
-    @IpLimit(20)
+    @IpLimit(50)
     @GetMapping("/test.do")
     public String test(HttpSession httpSession,HttpServletRequest request) {
-        System.out.println("执行了ctrl方法");
         return "manager/login";
     }
 

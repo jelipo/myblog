@@ -8,12 +8,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import qiniu.UploadFile;
-import redisServer.service.IpLimit;
 import util.PackingResult;
 
 import javax.annotation.Resource;
@@ -45,9 +43,6 @@ public class ManagerService {
     @Value("#{config['qiniu.otherPath']}")
     private String CDNOtherPath;
 
-    @Resource(name = "redisServer/service/IpLimit")
-    private IpLimit ipLimit;
-
     @Resource(name = "blog/dao/ManagerDao")
     private ManagerDao managerDao;
 
@@ -63,10 +58,6 @@ public class ManagerService {
     private static final Logger logger = LogManager.getLogger(ManagerService.class);
 
     public Boolean checkLogin(HttpServletRequest request, String username, String password) {
-        Boolean isBlackIp = ipLimit.isBlackIp(request, "50");
-        if (isBlackIp) {
-            return false;
-        }
         Boolean isSuccess = username.equals(userName) && password.equals(passWord);
         return isSuccess;
     }

@@ -1,5 +1,6 @@
 package blog.ctrl;
 
+import annotation.myInterface.IpLimit;
 import blog.bean.ReplyPojo;
 import blog.service.BlogMainService;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class BlogMainCtrl {
 //        System.out.println(jedis.get("name"));
     }
 
-
+    @IpLimit(10)
     @ResponseBody
     @GetMapping("/getWord.do")
     public Map getWord(HttpServletRequest request,@RequestParam int pageNum, @RequestParam int getBlogNum,@RequestParam(required = false) String type){
@@ -30,6 +31,7 @@ public class BlogMainCtrl {
         return result;
     }
 
+    @IpLimit(10)
     @GetMapping("/toWord.do")
     public String toWord(HttpServletRequest request,@RequestParam int id){
         Boolean isSuccess=blogMainService.toWord(request,id);
@@ -40,6 +42,7 @@ public class BlogMainCtrl {
         }
     }
 
+    @IpLimit(10)
     @ResponseBody
     @GetMapping("/getComments.do")
     public Map getComments(HttpServletRequest request, @RequestParam int id){
@@ -54,6 +57,7 @@ public class BlogMainCtrl {
         return resultMap;
     }
 
+    @IpLimit(10)
     @GetMapping("/moreWords.do")
     public String moreWords(HttpServletRequest request,@RequestParam int pageNum ,@RequestParam(required = false) String type){
         request.setAttribute("pageNum",pageNum);
@@ -67,11 +71,13 @@ public class BlogMainCtrl {
         return "none";
     }
 
+    @IpLimit(10)
     @GetMapping("/message.do")
     public String toMessageBook(){
         return "messageBook";
     }
 
+    @IpLimit(10)
     @ResponseBody
     @GetMapping ("/getMessages.do")
     public Map getMessages(HttpServletRequest request){
