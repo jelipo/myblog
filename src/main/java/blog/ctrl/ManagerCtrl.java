@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-
 @Controller
 public class ManagerCtrl {
 
@@ -27,7 +26,6 @@ public class ManagerCtrl {
         return "manager/login";
     }
 
-    @IpLimit(20)
     @PostMapping("bossLogin.do")
     public String bossLogin(@RequestParam String username, @RequestParam String password, HttpSession httpSession, HttpServletRequest request) {
         Boolean isSuccess = managerService.checkLogin(request, username, password);

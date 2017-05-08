@@ -12,7 +12,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
 @Aspect
 public class IpLimitAop {
 
@@ -33,12 +32,14 @@ public class IpLimitAop {
      * 从HttpServletRequest或者RequestFacade获取ip地址。然后根据ip判断是否被限制或者拉黑，是的话直接返回null。
      * 并更新redis的项具体数据。
      * 没有被限制或者拉黑，执行完方法，返回相应的结果。
+     *
      * @param pjp
      * @param ipLimit
      * @return
      * @throws Throwable
      */
-    @Around(" @annotation(ipLimit)")
+    @Around("@annotation(ipLimit)")
+    //@Before("execution(* blog.ctrl.BlogMainCtrl.init(..))")
     public Object checkIp(ProceedingJoinPoint pjp, IpLimit ipLimit) throws Throwable {
         Jedis jedis = pool.getResource();
         try {
@@ -46,15 +47,15 @@ public class IpLimitAop {
             Object[] args = pjp.getArgs();
             HttpServletRequest request = null;
             for (int i = 0; i < args.length; i++) {
-                if (args[i] instanceof HttpServletRequest||args[i] instanceof RequestFacade){
-                    request=(HttpServletRequest) args[i];
+                if (args[i] instanceof HttpServletRequest || args[i] instanceof RequestFacade) {
+                    request = (HttpServletRequest) args[i];
                     break;
                 }
             }
             if (request == null) return null;
             String ip = request.getRemoteAddr();
             int blackTimes = getBlackTimes(ip, jedis);
-            if (blackTimes > longBlackTimes) return null;
+            if (blackTimes >= longBlackTimes) return null;
             if (isLimitIpAndUpdate(jedis, ip, ipLimit, blackTimes)) return null;
             //执行方法
             Object ob = pjp.proceed();
@@ -93,7 +94,7 @@ public class IpLimitAop {
         if (times >= totalValue) return true;
         times += addTimes;
         setIpTimes(jedis, ip, String.valueOf(times), this.temporarilyLimitTime);
-        if (times >=totalValue) {
+        if (times >= totalValue) {
             setBlackTimes(jedis, ip, blackTimes + 1);
             return true;
         }
@@ -115,13 +116,14 @@ public class IpLimitAop {
 
     /**
      * 向redis插入或者更新黑名单数据的方法。
+     *
      * @param jedis
      * @param ip
      * @param blackTimes
      */
     private void setBlackTimes(Jedis jedis, String ip, int blackTimes) {
         jedis.set("black_" + ip, String.valueOf(blackTimes + 1));
-        jedis.expire("black_" + ip,longBlackTime);
+        jedis.expire("black_" + ip, longBlackTime);
     }
 
     /**

@@ -3,17 +3,15 @@
 <mapper namespace="blog.dao.ManagerDao">
 
 
-
     <insert id="insertBlog" useGeneratedKeys="true">
         INSERT INTO word(title,permission,summary,writer,backgroundImage,date,typeId,allowComment,wordTextId)
-         VALUE (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8});
+         VALUE (#{title},#{permission},#{summary},#{writer},#{backgroundImage},#{date},#{typeId},#{allowComment},#{wordTextId});
     </insert>
 
-    <insert id="insertWordText" useGeneratedKeys="true" >
+    <insert id="insertWordText" useGeneratedKeys="true">
         INSERT INTO word_text(text,wordTextId)
-        VALUE (#{0},#{1});
+        VALUE (#{text},#{wordTextId});
     </insert>
-
 
 
 </mapper>

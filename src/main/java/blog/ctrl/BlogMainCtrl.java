@@ -71,6 +71,7 @@ public class BlogMainCtrl {
         return "none";
     }
 
+
     @IpLimit(10)
     @GetMapping("/message.do")
     public String toMessageBook(){
