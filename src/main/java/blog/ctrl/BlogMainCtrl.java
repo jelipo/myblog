@@ -74,7 +74,7 @@ public class BlogMainCtrl {
 
     @IpLimit(10)
     @GetMapping("/message.do")
-    public String toMessageBook(){
+    public String toMessageBook(HttpServletRequest request){
         return "messageBook";
     }
 

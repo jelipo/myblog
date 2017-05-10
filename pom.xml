@@ -204,6 +204,12 @@
             <version>1.9</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>8.0.39</version>
+        </dependency>
+
         <!--jackson-->
         <!--<dependency>-->
         <!--<groupId>org.codehaus.jackson</groupId>-->
