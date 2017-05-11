@@ -2,16 +2,16 @@ package blog.bean;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MessagePojo {
+public class MessagePojo implements Serializable {
 
     private String nick_name;
     private Date date;
     private String content;
     private String messageTime;
-
     private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MM月dd,yyyy HH:mm:ss");
 
     @JSONField(name = "messageName")

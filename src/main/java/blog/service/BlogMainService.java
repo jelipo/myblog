@@ -1,6 +1,7 @@
 package blog.service;
 
 
+import annotation.myInterface.ResultCache;
 import blog.bean.*;
 import blog.dao.BlogMainDao;
 import com.alibaba.fastjson.JSONObject;
@@ -82,6 +83,7 @@ public class BlogMainService {
         request.setAttribute("backgroundImage", mainWordPojo.getBackgroundimage());
         return true;
     }
+
 
     public Map getComments(int id) {
         List<CommentPojo> list = blogMainDao.getComments(id);

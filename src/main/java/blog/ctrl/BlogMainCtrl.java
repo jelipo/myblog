@@ -1,13 +1,16 @@
 package blog.ctrl;
 
 import annotation.myInterface.IpLimit;
+import annotation.myInterface.ResultCache;
 import blog.bean.ReplyPojo;
 import blog.service.BlogMainService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
 import java.util.Map;
 
 
@@ -42,12 +45,15 @@ public class BlogMainCtrl {
         }
     }
 
+
     @IpLimit(10)
     @ResponseBody
     @GetMapping("/getComments.do")
     public Map getComments(HttpServletRequest request, @RequestParam int id){
 
-        return blogMainService.getComments(id);
+        Map map= blogMainService.getComments(id);
+
+        return map;
     }
 
     @ResponseBody
@@ -78,11 +84,14 @@ public class BlogMainCtrl {
         return "messageBook";
     }
 
+    @ResultCache(60)
     @IpLimit(10)
     @ResponseBody
     @GetMapping ("/getMessages.do")
     public Map getMessages(HttpServletRequest request){
+        long a=System.currentTimeMillis();
         Map result=blogMainService.getMessages(request);
+        System.out.println(System.currentTimeMillis()-a);
         return result;
     }
 
