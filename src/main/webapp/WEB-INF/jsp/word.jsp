@@ -173,7 +173,7 @@
 <!--回复对话框-->
 </body>
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="//res.springmarker.com/other/js/mdui.min.js"></script>
+<script type="text/javascript" src="//res.springmarker.com/blog/res/js/mdui.min.js"></script>
 <script type="text/javascript" src="res/js/main.js"></script>
 <script type="text/javascript" src="res/js/word.js"></script>
 </html>
