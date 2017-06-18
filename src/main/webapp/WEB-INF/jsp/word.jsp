@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>${title} - Springmarker</title>
+    <link rel="bookmark"  type="image/x-icon"  href="/res/img/favicon.ico"/>
+    <link rel="shortcut icon" href="/res/img/favicon.ico">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>

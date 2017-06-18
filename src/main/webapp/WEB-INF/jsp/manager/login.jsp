@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>登录</title>
+    <link rel="bookmark"  type="image/x-icon"  href="/res/img/favicon.ico"/>
+    <link rel="shortcut icon" href="/res/img/favicon.ico">
 </head>
 <body>
 <form action="bossLogin.do" method="post">
