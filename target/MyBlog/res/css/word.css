@@ -1,0 +1,181 @@
+.card-pageOther {
+    padding: 20px;
+}
+
+.card-turnPage {
+    float: left;
+    height: 100%;
+    display: block;
+    text-decoration:none;
+    out-line: none;
+    color: #424242;
+    font-weight: 900;
+    width: 50%;
+
+}
+
+
+.card-turnPage>div{
+    float: left;
+    line-height: 23px;
+    font-size: 16px;
+}
+.card-turnPage>i{
+    float: left;
+    font-size: 23px;
+
+}
+
+.word-msg-height {
+    height: 55px;
+}
+
+.card-comment {
+    padding: 20px;
+}
+
+.comment-mian {
+    padding: 7px 0px 13px 0px;
+    width: 100%;
+    min-height: 70px;
+    border-bottom: 1px solid #d0d0d0
+}
+
+.comment-mian-msg {
+    padding: 3px 0px 3px 0px;
+    width: 100%;
+    height: 36px;
+}
+
+.comment-mian-msg > img {
+    height: 100%;
+    float: left;
+    margin-right: 8px;
+}
+
+.comment-mian-msg > div {
+    float: left;
+}
+
+.comment-mian-msg > span {
+    float: right;
+    margin-right: 40px;
+}
+
+.comment-mian-msg-lz {
+    font-size: 13px;
+    color: #616161;
+    padding: 1px 0px 8px 0px;
+    font-weight: 900;
+}
+
+.comment-mian-msg-time {
+    font-size: 10px;
+}
+
+.comment-mian-content {
+    padding: 8px 0px 8px 40px;
+    font-size: 15px;
+    line-height: 22px;
+    color: #616161;
+}
+
+.comment-mian-scomment {
+    padding: 0px 38px 0px 38px;
+    box-sizing: border-box;
+}
+
+.comment-mian-scomment-main {
+    width: 100%;
+    display: flex;
+    font-size: 13px;
+    padding: 8px 0px 5px 5px;
+    border-bottom: 0px solid #e1e1e1;
+}
+
+.comment-mian-scomment-msg {
+    float: left;
+}
+
+.comment-mian-scomment-msg > a {
+    float: left;
+    padding-left: 4px;
+    color: #4CAF50;
+}
+
+.comment-mian-scomment-msg > div {
+    float: left;
+    padding-left: 4px;
+}
+
+.comment-mian-scomment-conntent {
+    flex: 1;
+    float: left;
+    padding-left: 5px;
+    line-height: 15px;
+}
+
+.dialog-main {
+    width: 100%;
+    padding: 15px 20px 10px 20px;
+    box-sizing: border-box;
+}
+
+.dialog-tilte {
+    height: 30px;
+    width: 100%;
+    color: #5a5a5a;
+}
+
+.dialog-tilte > span {
+    font-size: 13px;
+}
+
+.dialog-msgInput {
+    width: 50%;
+    float: left;
+    -width: 280px;
+}
+
+.dialog-msgInput > input {
+    width: 98%;
+    font-size: 13px
+}
+
+.dialog-msgInput > div {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #ff9713
+}
+.newComment:hover{
+
+}
+.newComment:hover{
+    cursor:text;
+}
+.observername{
+    color: #F44336;
+}
+.card-pagedownmsg{
+    font-size: 15px;
+    height: 100%;
+    width: 100px;
+}
+@media only screen and (max-width: 800px) {
+    .card-comment {
+        padding: 20px 10px 20px 10px;
+    }
+
+    .word-msg-height {
+        height: 38px;
+    }
+
+    .comment-mian-scomment-main {
+        display: block;
+    }
+    .card-turnPage {
+       font-size: 12px;
+        font-weight: 300;
+    }
+
+}

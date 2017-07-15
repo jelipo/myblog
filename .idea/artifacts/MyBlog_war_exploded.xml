@@ -57,9 +57,9 @@
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-util:8.0.39" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-util-scan:8.0.39" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-pool2:2.4.2" />
-          <element id="library" level="project" name="Maven: org.junit.jupiter:junit-jupiter-api:5.0.0-M4" />
+          <element id="library" level="project" name="Maven: org.junit.jupiter:junit-jupiter-api:5.0.0-M5" />
           <element id="library" level="project" name="Maven: org.opentest4j:opentest4j:1.0.0-M2" />
-          <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-commons:1.0.0-M4" />
+          <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-commons:1.0.0-M5" />
         </element>
       </element>
       <element id="directory" name="META-INF">
