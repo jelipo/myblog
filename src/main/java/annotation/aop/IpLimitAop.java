@@ -15,6 +15,7 @@ import java.util.Map;
 @Aspect
 public class IpLimitAop {
 
+
     //总数值
     private int totalValue;
     //触发长时间ip限制的次数
