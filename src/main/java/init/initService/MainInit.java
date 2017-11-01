@@ -41,14 +41,14 @@ public class MainInit {
         initConfig.init();
         logger.info("配置信息初始化完成");
 
-        logger.info("检验本地和CDN资源文件");
-        initQiniuCdn.init();
-        logger.info("检验完成，并开启定时上传任务");
-
-        if (autoCheckLocalFile.equals("true")) {
-            logger.info("开启监听本地文件更改");
-            initFileListen.init();
-        }
+//        logger.info("检验本地和CDN资源文件");
+//        initQiniuCdn.init();
+//        logger.info("检验完成，并开启定时上传任务");
+//
+//        if (autoCheckLocalFile.equals("true")) {
+//            logger.info("开启监听本地文件更改");
+//            initFileListen.init();
+//        }
 
         logger.info("初始化HTTP客户端");
         initHttpClient.init();

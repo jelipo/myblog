@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="https://res.springmarker.com/blog/res/css/my-mdui.min.css" rel="stylesheet">
+    <link href="res/css/my-mdui.min.css" rel="stylesheet">
     <link href="res/css/main.css" rel="stylesheet">
 
     <style>
@@ -128,8 +128,8 @@
 <%@include file="webParts/footer.html" %>
 
 </body>
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://res.springmarker.com/blog/res/js/mdui.min.js"></script>
+<script type="text/javascript" src="res/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="res/js/mdui.min.js"></script>
 <script type="text/javascript" src="res/js/main.js"></script>
 <script>
     $(function () {

@@ -9,14 +9,6 @@
   http://www.springframework.org/schema/tx
   http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<!--<bean id="dataSource"-->
-		<!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-		<!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
-		<!--<property name="url" value="jdbc:mysql://localhost:3306/blog?characterEncoding=utf-8&amp;useSSL=false" />-->
-		<!--<property name="username" value="{mysql.username}" />-->
-		<!--<property name="password" value="{mysql.password}" />-->
-	<!--</bean>-->
-
     <bean id="config" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
@@ -28,54 +20,54 @@
         <property name="properties" ref="config"/>
     </bean>
 
-	<!-- 1. 数据源 : druid连接池 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<!-- 基本属性 url、user、password -->
-		<property name="url" value="${mysql.url}" />
-		<property name="username" value="${mysql.username}" />
-		<property name="password" value="${mysql.password}" />
-		<!-- 配置初始化大小、最小、最大 -->
-		<property name="initialSize" value="1" />
-		<property name="minIdle" value="1" />
-		<property name="maxActive" value="20" />
-		<!-- 配置获取连接等待超时的时间 -->
-		<property name="maxWait" value="60000" />
-		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-		<property name="minEvictableIdleTimeMillis" value="300000" />
-		<property name="validationQuery" value="SELECT 'x'" />
-		<property name="testWhileIdle" value="true" />
-		<property name="testOnBorrow" value="false" />
-		<property name="testOnReturn" value="false" />
-		<!-- 打开PSCache，并且指定每个连接上PSCache的大小。如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。分库分表较多的数据库，建议配置为false。 -->
-		<property name="poolPreparedStatements" value="false" />
-		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
-		<!-- 配置监控统计拦截的filters -->
-		<property name="filters" value="stat" />
-	</bean>
+    <!-- 1. 数据源 : druid连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="20"/>
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小。如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。分库分表较多的数据库，建议配置为false。 -->
+        <property name="poolPreparedStatements" value="false"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat"/>
+    </bean>
 
-	<!-- 2. mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="blog.bean" />
-		<property name="configLocation" value="classpath:mybatis-config.xml" />
-	</bean>
+    <!-- 2. mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="blog.bean"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
 
 
-	<!-- 3. 自动扫描mybatis映射文件和接口的包 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="blog.dao,init.initService.dao"></property>
-	</bean>
+    <!-- 3. 自动扫描mybatis映射文件和接口的包 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="blog.dao,init.initService.dao"></property>
+    </bean>
 
-	<!-- 4.配置事务管理 -->
-	<bean id="txManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+    <!-- 4.配置事务管理 -->
+    <bean id="txManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
 
-	<!-- 5. 使用声明式事务 transaction-manager：引用上面定义的事务管理器 -->
-	<tx:annotation-driven transaction-manager="txManager" />
+    <!-- 5. 使用声明式事务 transaction-manager：引用上面定义的事务管理器 -->
+    <tx:annotation-driven transaction-manager="txManager"/>
 
 </beans>
