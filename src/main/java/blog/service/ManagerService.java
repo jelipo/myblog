@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,7 +44,7 @@ public class ManagerService {
     @Value("#{config['qiniu.otherPath']}")
     private String CDNOtherPath;
 
-    @Resource(name = "blog/dao/ManagerDao")
+    @Autowired
     private ManagerDao managerDao;
 
     @Resource(name = "init/initService/initConfig")

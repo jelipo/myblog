@@ -5,9 +5,9 @@
     <select id="getWord" resultType="blog.bean.BlogMainPojo">
         select * from word where permission=1
         <choose>
-            <when test="type == '' "></when>
-            <when test="type == null "></when>
-            <when test="type == 0 "></when>
+            <when test="type == '' "/>
+            <when test="type == null "/>
+            <when test="type == 0 "/>
             <otherwise>
                 AND typeId=#{type}
             </otherwise>
