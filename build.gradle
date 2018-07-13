@@ -52,4 +52,6 @@ dependencies {
     runtime('org.postgresql:postgresql')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.projectreactor:reactor-test')
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
 }

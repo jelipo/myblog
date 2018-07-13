@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Service("blog/service/BlogMainService")
+@Service
 public class BlogMainService {
 
     @Resource(name = "blog/dao/BlogMainDao")
@@ -42,19 +42,19 @@ public class BlogMainService {
     }
 
     public Boolean toWord(HttpServletRequest request, int id) {
-        List<WordPojo> list = blogMainDao.toWord(id);
+        List<Word> list = blogMainDao.toWord(id);
         int listSize = list.size();
-        WordPojo mainWordPojo;
+        Word mainWord;
         if (listSize == 2) {
             if (list.get(0).getId() == id) {
-                mainWordPojo = list.get(0);
+                mainWord = list.get(0);
                 request.setAttribute("lastWordId", id);
                 request.setAttribute("lastWordTitle", "没有上一篇了");
                 request.setAttribute("nextWordId", list.get(1).getId());
                 request.setAttribute("nextWordTitle", list.get(1).getTitle());
 
             } else {
-                mainWordPojo = list.get(1);
+                mainWord = list.get(1);
                 request.setAttribute("lastWordId", list.get(0).getId());
                 request.setAttribute("lastWordTitle", list.get(0).getTitle());
                 request.setAttribute("nextWordId", id);
@@ -63,19 +63,19 @@ public class BlogMainService {
         } else if (listSize == 1) {
             return false;
         } else {
-            mainWordPojo = list.get(1);
+            mainWord = list.get(1);
             request.setAttribute("lastWordId", list.get(0).getId());
             request.setAttribute("lastWordTitle", list.get(0).getTitle());
             request.setAttribute("nextWordId", list.get(2).getId());
             request.setAttribute("nextWordTitle", list.get(2).getTitle());
         }
-        Map textResult = blogMainDao.getWordText(mainWordPojo.getWordTextID());
+        Map textResult = blogMainDao.getWordText(mainWord.getWordTextID());
         request.setAttribute("wordText", textResult.get("text"));
         request.setAttribute("wordId", id);
-        request.setAttribute("title", mainWordPojo.getTitle());
+        request.setAttribute("title", mainWord.getTitle());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd,yyyy");
-        request.setAttribute("date", simpleDateFormat.format(mainWordPojo.getDate()));
-        request.setAttribute("backgroundImage", mainWordPojo.getBackgroundimage());
+        request.setAttribute("date", simpleDateFormat.format(mainWord.getDate()));
+        request.setAttribute("backgroundImage", mainWord.getBackgroundimage());
         return true;
     }
 

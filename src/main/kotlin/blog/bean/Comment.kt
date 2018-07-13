@@ -1,19 +1,19 @@
 package blog.bean
 
-import java.time.LocalDate
+import java.util.*
 
 /**
  * @author Frank
- * @date 2018/7/7 15:30
+ * @date 2018/7/11 21:46
  */
 class Comment(
-        val id: Int = 0,
-        val maincomment: Int = 0,
-        val observername: String,
-        val toobservername: String,
-        val date: LocalDate,
-        val formatDate: String,
-        val vicecomment_maincomment_id: Int,
-        val value: String,
-        val viceComment: List<CommentPojo>
+        var id: Int = 0,
+        var ismaincomment: Int = 0,
+        var observername: String,
+        var toobservername: String,
+        var date: Date,
+        var formatDate: String,
+        var vicecomment_maincomment_id: Int = 0,
+        var value: String,
+        var viceComment: List<CommentPojo>
 )
