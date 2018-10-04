@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmarker.blog.mapper.WordMapper">
+
+    <resultMap id="word" type="com.springmarker.blog.bean.Word">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="permission" jdbcType="BIGINT" property="permission"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="writer" jdbcType="VARCHAR" property="writer"/>
+        <result column="backgroundImage" jdbcType="VARCHAR" property="backgroundImage"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="type_id" jdbcType="INTEGER" property="typeId"/>
+        <result column="allow_comment" jdbcType="INTEGER" property="allowComment"/>
+        <result column="html" jdbcType="LONGVARCHAR" property="html"/>
+    </resultMap>
+
+    <select id="findById" resultMap="word">
+       SELECT * from word where id = #{id}
+    </select>
+
+</mapper>

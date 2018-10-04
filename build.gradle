@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.51'
-        springBootVersion = '2.0.3.RELEASE'
+        kotlinVersion = '1.2.71'
+        springBootVersion = '2.1.0.M4'
     }
     repositories {
         mavenCentral()
@@ -16,6 +16,7 @@ buildscript {
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -39,6 +40,11 @@ repositories {
     mavenCentral()
 }
 
+idea {
+    module {
+        downloadSources = true
+    }
+}
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-freemarker')
@@ -49,9 +55,10 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compile("org.jetbrains.kotlin:kotlin-reflect")
     runtime('org.springframework.boot:spring-boot-devtools')
-    runtime('org.postgresql:postgresql')
+    compile('org.postgresql:postgresql')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.projectreactor:reactor-test')
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'com.google.guava', name: 'guava', version: '26.0-jre'
 
 }

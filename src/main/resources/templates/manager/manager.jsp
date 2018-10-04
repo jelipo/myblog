@@ -39,7 +39,7 @@
 </head>
 
 <body class="mdui-drawer-body-left ">
-<%@include file="../webParts/drawer.jsp" %>
+<%@include file="../webparts/drawer.jsp" %>
 
 
 <!--主要内容-->
@@ -155,6 +155,6 @@
     }
 </script>
 
-<%@include file="../webParts/footer.html" %>
+<%@include file="../webparts/footer.html" %>
 </body>
 </html>
