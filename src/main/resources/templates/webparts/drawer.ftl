@@ -3,18 +3,17 @@
    style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
 <div id="drawer" class="mdui-drawer leftbar secondColorAndBackgroundColor">
     <div class="leftbar-head" style="background-image: url('${request.contextPath}/static/img/first.jpg')">
-        <img src="${request.contextPath}/static/img/head.jpg" class="mdui-img-circle">
+        <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}" class="mdui-img-circle">
         <div class="mdui-grid-tile-actions">
             <div class="mdui-grid-tile-text">
                 <div class="mdui-grid-tile-title">Springmarker</div>
             </div>
         </div>
     </div>
-    <div class="leftbar-navi mdui-ripple" href="${request.contextPath}"
-    ">
-    <i class="mdui-icon material-icons leftbar-navi-icon">home</i>
-    <span style="font-weight:bold">主页</span>
-</div>
+    <div class="leftbar-navi mdui-ripple" onclick="window.location.href='${request.contextPath}'">
+        <i class="mdui-icon material-icons leftbar-navi-icon">home</i>
+        <span style="font-weight:bold">主页</span>
+    </div>
     <div class="mdui-collapse" mdui-collapse>
         <div class="mdui-collapse-item ">
             <div class="mdui-collapse-item-header mdui-ripple">
@@ -42,7 +41,6 @@
         <span>留言</span>
         <p></p>
     </a>
-
 
 
     <div style="margin: 5px 0 5px 0;" class="mdui-divider"></div>

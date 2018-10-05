@@ -1,35 +1,38 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<#-- @ftlvariable name="word" type="com.springmarker.blog.bean.Word" -->
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>${title} - Springmarker</title>
-    <link rel="bookmark"  type="image/x-icon"  href="/${request.contextPath}/static/img/favicon.ico"/>
-    <link rel="shortcut icon" href="/${request.contextPath}/static/img/favicon.ico">
+    <title>${word.title} - Springmarker</title>
+    <link rel="bookmark" type="image/x-icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}"/>
+    <link rel="shortcut icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="${request.contextPath}/static/css/my-mdui.min.css" rel="stylesheet">
-    <link href="${request.contextPath}/static/css/main.css" rel="stylesheet">
-    <link href="${request.contextPath}/static/css/word.css" rel="stylesheet">
-    <link href="${request.contextPath}/static/css/marxico.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/my-mdui.min.css?v=${randomStr}" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/main.css?v=${randomStr}" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/word.css?v=${randomStr}" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/marxico.css?v=${randomStr}" rel="stylesheet">
 </head>
 
 <body class="mdui-drawer-body-left ">
 
+
 <!--参数-->
-<input id="wordId" value="${wordId}" type="hidden">
-<input id="title" value="${title}" type="hidden">
-<input id="date" value="${date}" type="hidden">
-<input id="lastwordId" value="${lastWordId}" type="hidden">
-<input id="lastwordTitle" value="${lastWordTitle}" type="hidden">
-<input id="nextwordId" value="${nextWordId}" type="hidden">
-<input id="nextwordTitle" value="${nextWordTitle}" type="hidden">
-<input id="backgroundImage" value="${backgroundImage}" type="hidden">
-<!--参数-->
+<input id="contextPath" value="${request.contextPath}" type="hidden">
+<input id="nickTitle" value="${word.nickTitle}" type="hidden">
+<#--<input id="wordId" value="${wordId}" type="hidden">-->
+<#--<input id="title" value="${title}" type="hidden">-->
+<#--<input id="date" value="${date}" type="hidden">-->
+<#--<input id="lastwordId" value="${lastWordId}" type="hidden">-->
+<#--<input id="lastwordTitle" value="${lastWordTitle}" type="hidden">-->
+<#--<input id="nextwordId" value="${nextWordId}" type="hidden">-->
+<#--<input id="nextwordTitle" value="${nextWordTitle}" type="hidden">-->
+<#--<input id="backgroundImage" value="${backgroundImage}" type="hidden">-->
+    <!--参数-->
 
 
-<%@include file="webparts/drawer.jsp" %>
-<!--主要内容-->
+<#include "webparts/drawer.ftl" />
+    <!--主要内容-->
 <div class="mdui-container" style="min-height: 1200px">
     <div style="height: 150px">
 
@@ -37,24 +40,25 @@
     <div class="mainPage" style="display: none;">
 
         <div class="mdui-row mdui-row-margin">
-            <div class="mdui-col-xs-12 ">
+            <div class="mdui-col-xs-14 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
                     <a class="MY-mdui-card-media">
-                        <img id="wordBackgroundImage" class="MY-card-img" src=""/>
+                        <img id="wordBackgroundImage" class="MY-card-img" src="${word.backgroundImage}"/>
                         <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                             <div class="mdui-card-primary ">
-                                <div id="wordTitle" class="MY-card-tilte">标题</div>
+                                <div id="wordTitle" class="MY-card-tilte">${word.title}</div>
                             </div>
                         </div>
                     </a>
                     <div class="mdui-card-actions word-msg-height">
-                        <img src="${request.contextPath}/static/img/head.jpg">
-                        <span>Springmarker</span>
-                        <div id="wordDate" class="MY-card-data">11月25,2016</div>
+                        <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}">
+                        <span>${word.writer}</span>
+                        <div id="wordDate"
+                             class="MY-card-data">${word.date.monthValue}月${word.date.dayOfMonth},${(word.date.year)?c}</div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page" style="min-height: 600px;">
-                        <div class="maxaingBody">${wordText}</div>
+                        <div class="maxaingBody">${word.html}</div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-pageOther" style="height: 40px">
@@ -69,7 +73,8 @@
             <a id="lastPage" href="" mdui-tooltip="{content: '上一篇'}" class="mdui-btn mdui-btn-icon mdui-ripple">
                 <i class="mdui-icon material-icons">arrow_back</i>
             </a>
-            <a id="nextPage" href="" mdui-tooltip="{content: '下一篇'}" style="float:right;" class="mdui-btn mdui-btn-icon mdui-ripple">
+            <a id="nextPage" href="" mdui-tooltip="{content: '下一篇'}" style="float:right;"
+               class="mdui-btn mdui-btn-icon mdui-ripple">
                 <i class="mdui-icon material-icons">arrow_forward</i>
             </a>
         </div>
@@ -81,7 +86,7 @@
                     <div class="card-comment">
                         <div style="width: 100%;height: 100px;margin-bottom: 30px;">
                             <div style="font-size: 25px;font-weight: 900;color:#616161">评论：</div>
-                            <div  class="mdui-textfield mdui-textfield-floating-label "
+                            <div class="mdui-textfield mdui-textfield-floating-label "
                                  onclick="newMainCommentShowDialog()">
                                 <label class="mdui-textfield-label">留下你的见解吧！</label>
                                 <input class="mdui-textfield-input newComment" disabled/>
@@ -97,7 +102,7 @@
     </div>
 </div>
 
-<%@include file="webparts/footer.html" %>
+<#include "webparts/footer.ftl" />
 <div id="toReplace" style="display:none">
 
     <!--评论-->
@@ -175,7 +180,7 @@
 <!--回复对话框-->
 </body>
 <script type="text/javascript" src="${request.contextPath}/static/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="${request.contextPath}/static/js/mdui.min.js"></script>
-<script type="text/javascript" src="${request.contextPath}/static/js/main.js"></script>
-<script type="text/javascript" src="${request.contextPath}/static/js/word.js"></script>
+<script type="text/javascript" src="${request.contextPath}/static/js/mdui.min.js?v=${randomStr}"></script>
+<script type="text/javascript" src="${request.contextPath}/static/js/main.js?v=${randomStr}"></script>
+<script type="text/javascript" src="${request.contextPath}/static/js/word.js?v=${randomStr}"></script>
 </html>

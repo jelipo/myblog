@@ -18,7 +18,7 @@ interface BlogMainDao {
 
     fun toWord(id: Int): List<Word>
 
-    fun getComments(id: Int): List<Comment>
+    fun getComments(nickTitle: String): List<Comment>
 
     fun putReply(parm: Map<*, *>): Int
 

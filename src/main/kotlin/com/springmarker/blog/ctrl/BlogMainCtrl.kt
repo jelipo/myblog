@@ -1,9 +1,11 @@
 package com.springmarker.blog.ctrl
 
 import com.springmarker.blog.bean.Reply
+import com.springmarker.blog.dao.WordDao
 import com.springmarker.blog.service.BlogMainService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
+import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.servlet.http.HttpServletRequest
@@ -19,15 +21,14 @@ class BlogMainCtrl {
     private lateinit var blogMainService: BlogMainService
 
 
-    @GetMapping("/","/index")
-    fun index(): String = "index"
-
-    @ResponseBody
-    @GetMapping("/getComments.do")
-    fun getComments(request: HttpServletRequest, @RequestParam id: Int): Map<*, *> {
-
-        return blogMainService.getComments(id)
+    @GetMapping("/", "/index")
+    fun index(modelMap: ModelMap): String {
+        val wordList = blogMainService.getIndexWordList()
+        modelMap["list"] = wordList
+        return "index"
     }
+
+
 
     @ResponseBody
     @PostMapping("/postComment.do")
@@ -59,7 +60,7 @@ class BlogMainCtrl {
     @GetMapping("/getMessages.do")
     fun getMessages(request: HttpServletRequest): Map<*, *> {
         val a = System.currentTimeMillis()
-        val result = blogMainService!!.getMessages(request)
+        val result = blogMainService.getMessages(request)
         println(System.currentTimeMillis() - a)
         return result
     }

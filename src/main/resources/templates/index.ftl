@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
@@ -20,8 +21,9 @@
     <div class="mainPage">
 
         <#include "webparts/top.ftl" />
-
-        <#include "webparts/item/normal.ftl"/>
+        <#list list as word>
+            <#include "webparts/item/normal.ftl"/>
+        </#list>
 
     </div>
 </div>

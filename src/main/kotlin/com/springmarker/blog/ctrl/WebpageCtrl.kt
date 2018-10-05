@@ -4,8 +4,10 @@ import com.springmarker.blog.service.BlogMainService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.servlet.ModelAndView
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -26,14 +28,17 @@ class WebpageCtrl {
         return blogMainService.getBlogByPageNum(request, pageNum, getBlogNum, type)
     }
 
-    @GetMapping("/toWord.do")
-    fun toWord(request: HttpServletRequest, @RequestParam id: Int): String {
-        val isSuccess = blogMainService.toWord(request, id)
-        return if (isSuccess!!) {
-            "word"
-        } else {
-            "404"
+    @GetMapping("/word/{nickTitle}.html")
+    fun toWord(request: HttpServletRequest, @PathVariable nickTitle: String, modelAndView: ModelAndView): ModelAndView {
+        val word = blogMainService.getWordByNickTitle(nickTitle)
+        if (word == null) {
+            modelAndView.viewName = "404"
+            return modelAndView
         }
+        modelAndView.model["word"] = word
+        modelAndView.viewName = "word"
+        return modelAndView
     }
+
 
 }

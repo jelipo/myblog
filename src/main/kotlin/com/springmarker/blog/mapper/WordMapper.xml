@@ -8,15 +8,35 @@
         <result column="permission" jdbcType="BIGINT" property="permission"/>
         <result column="summary" jdbcType="VARCHAR" property="summary"/>
         <result column="writer" jdbcType="VARCHAR" property="writer"/>
-        <result column="backgroundImage" jdbcType="VARCHAR" property="backgroundImage"/>
+        <result column="background_image" jdbcType="VARCHAR" property="backgroundImage"/>
         <result column="date" jdbcType="TIMESTAMP" property="date"/>
         <result column="type_id" jdbcType="INTEGER" property="typeId"/>
         <result column="allow_comment" jdbcType="INTEGER" property="allowComment"/>
-        <result column="html" jdbcType="LONGVARCHAR" property="html"/>
+        <result column="html" jdbcType="VARCHAR" property="html"/>
+        <result column="nick_title" jdbcType="VARCHAR" property="nickTitle"/>
     </resultMap>
 
+
     <select id="findById" resultMap="word">
-       SELECT * from word where id = #{id}
+        SELECT *
+        from word
+        where id = #{id}
+    </select>
+
+
+    <select id="getWordListByPermission" resultMap="word">
+        SELECT *
+        from word
+        where permission = #{permission}
+        order by date DESC
+        LIMIT #{num}
+        OFFSET #{start};
+    </select>
+
+    <select id="getWordByNickTitle" resultMap="word">
+        SELECT *
+        from word
+        where nick_title = #{nickTitle}
     </select>
 
 </mapper>

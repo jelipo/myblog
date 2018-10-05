@@ -4,6 +4,7 @@ import com.springmarker.blog.bean.Comment
 import com.springmarker.blog.bean.Reply
 import com.springmarker.blog.bean.Word
 import com.springmarker.blog.dao.BlogMainDao
+import com.springmarker.blog.dao.WordDao
 import org.apache.commons.lang3.StringEscapeUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -19,8 +20,21 @@ import kotlin.collections.HashMap
  */
 @Service
 class BlogMainService {
+
     @Autowired
     private lateinit var blogMainDao: BlogMainDao
+
+    @Autowired
+    private lateinit var wordDao: WordDao
+
+    fun getIndexWordList(): MutableList<Word?> {
+        val wordList = wordDao.getWordListByPermission(1, 0, 10)
+        return wordList
+    }
+
+    fun getWordByNickTitle(nickTitle: String): Word? {
+        return wordDao.getWordByNickTitle(nickTitle)
+    }
 
     fun getBlogByPageNum(request: HttpServletRequest, pageNum: Int, getBlogNum: Int, type: String): Map<*, *> {
         if (pageNum == 0 || getBlogNum == 0) {
@@ -67,7 +81,7 @@ class BlogMainService {
             request.setAttribute("nextWordId", list[2].id)
             request.setAttribute("nextWordTitle", list[2].title)
         }
-        val textResult = blogMainDao.getWordText(mainWord.wordTextID)
+        val textResult = blogMainDao.getWordText(mainWord.html)
         request.setAttribute("wordText", textResult["text"])
         request.setAttribute("wordId", id)
         request.setAttribute("title", mainWord.title)
@@ -78,8 +92,8 @@ class BlogMainService {
     }
 
 
-    fun getComments(id: Int): Map<*, *> {
-        val list = blogMainDao!!.getComments(id)
+    fun getComments(nickTitle: String): Map<*, *> {
+        val list = blogMainDao.getComments(nickTitle)
         val simpleDateFormat = SimpleDateFormat("MM月dd,yyyy HH:mm:ss")
         val json = HashMap<String, Any>()
         for (i in list.indices) {

@@ -13,4 +13,8 @@ import org.springframework.stereotype.Repository
 interface WordMapper {
 
     fun findById(id: Int): Word?
+
+    fun getWordListByPermission(permission: Int, start: Int, num: Int): MutableList<Word?>
+
+    fun getWordByNickTitle(nickTitle: String): Word?
 }
