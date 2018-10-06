@@ -18,7 +18,7 @@
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px"></div>
-    <div class="mainPage">
+    <div class="word-list">
 
         <#include "webparts/top.ftl" />
         <#list list as word>

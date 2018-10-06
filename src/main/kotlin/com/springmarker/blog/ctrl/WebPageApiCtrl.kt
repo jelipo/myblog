@@ -1,15 +1,13 @@
 package com.springmarker.blog.ctrl
 
-import com.springmarker.blog.service.BlogMainService
+import com.springmarker.blog.bean.Reply
+import com.springmarker.blog.service.CommentService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/10/5 20:14
  */
 @RestController
@@ -17,12 +15,27 @@ import javax.servlet.http.HttpServletRequest
 class WebPageApiCtrl {
 
     @Autowired
-    private lateinit var blogMainService: BlogMainService
+    private lateinit var commentService: CommentService
 
-    @GetMapping("/word/{nickTitle}/comments")
-    fun getComments(request: HttpServletRequest, @PathVariable nickTitle: String): Map<*, *> {
+    /**
+     * 获取评论
+     */
+    @GetMapping("/word/{wordId}/comments")
+    fun getComments(request: HttpServletRequest, @PathVariable wordId: String): Map<*, *> {
 
-        return blogMainService.getComments(nickTitle)
+        val comments = commentService.getComments(wordId)
+        return comments
+    }
+
+
+    /**
+     * 保存评论
+     */
+    @PostMapping("/word/{wordId}/comments")
+    fun postComment(httpServletRequest: HttpServletRequest, @PathVariable wordId: String,
+                    @ModelAttribute("replyPojo") replyPojo: Reply): Map<*, *> {
+        replyPojo.wordId = wordId.toInt()
+        return commentService.putReply(httpServletRequest, replyPojo)
     }
 
 

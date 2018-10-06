@@ -1,11 +1,11 @@
 package com.springmarker.blog.bean
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/7/11 22:32
  */
 class Reply(
-        var wordId: String? = null,
+        var wordId: Int? = null,
         var toObservername: String? = null,
         var mainCommentId: String? = null,
         var viceCommentId: String? = null,

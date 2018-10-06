@@ -108,6 +108,13 @@ body {
     min-height: 900px;
 }
 
+.word-list {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    min-height: 900px;
+}
+
 .mdui-row-margin {
     margin-top: 30px;
 }

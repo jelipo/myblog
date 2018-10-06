@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/7/11 21:51
  */
 class Message(

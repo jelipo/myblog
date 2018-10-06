@@ -1,12 +1,12 @@
 var dialog;
 $(function () {
-    $("#wordTitle").html($("#title").val());
-    $("#wordDate").html($("#date").val());
-    $("#wordBackgroundImage").attr("src", $("#backgroundImage").val());
-    $("#lastPage").attr("href", "toWord.do?id=" + $("#lastwordId").val());
-    $("#lastPage").attr("mdui-tooltip", "{content: '上一篇：" + $("#lastwordTitle").val() + "'}");
-    $("#nextPage").attr("href", "toWord.do?id=" + $("#nextwordId").val());
-    $("#nextPage").attr("mdui-tooltip", "{content: '下一篇：" + $("#nextwordTitle").val() + "'}");
+    // $("#wordTitle").html($("#title").val());
+    // $("#wordDate").html($("#date").val());
+    // $("#wordBackgroundImage").attr("src", $("#backgroundImage").val());
+    // $("#lastPage").attr("href", "toWord.do?id=" + $("#lastwordId").val());
+    // $("#lastPage").attr("mdui-tooltip", "{content: '上一篇：" + $("#lastwordTitle").val() + "'}");
+    // $("#nextPage").attr("href", "toWord.do?id=" + $("#nextwordId").val());
+    // $("#nextPage").attr("mdui-tooltip", "{content: '下一篇：" + $("#nextwordTitle").val() + "'}");
     dialog = new mdui.Dialog('#dialog');
     getCemments();
     $(".mainPage").fadeIn(500);
@@ -16,18 +16,17 @@ $(function () {
 
 function getCemments() {
     var id = getUrlParam("id");
-    var contextPath = $("#contextPath").val();
-    var nickTitle = $("#nickTitle").val();
+    var wordId = $("#wordId").val();
     $.ajax({
-        url: contextPath+"/api/word/"+nickTitle+"/comments", success: function (result) {
+        url: getContenxtPath() + "/api/word/" + wordId + "/comments", success: function (result) {
             var comments = result.data;
             var i = 1;
             for (var key in comments) {
                 var comment = comments[key];
                 var copyHtml = $('#comment').clone();
                 copyHtml.attr("id", "comment" + i);
-                copyHtml.find(".comment-mian-msg-lz").html(comment.observername);
-                copyHtml.find(".comment-mian-msg-time").html(i + "楼　" + comment.date);
+                copyHtml.find(".comment-mian-msg-lz").html(comment.observerName);
+                copyHtml.find(".comment-mian-msg-time").html(i + "楼　" + comment.formatDate);
                 copyHtml.find(".comment-mian-content").html(comment.value);
                 copyHtml.find(".replyButton").attr("commentid", comment.id);
                 if (comment.viceComment != null) {
@@ -35,8 +34,8 @@ function getCemments() {
                     for (var a = 0; a < viceComments.length; a++) {
                         var viceComment = $("#viceComment").clone();
                         viceComment.attr("id", "");
-                        viceComment.find(".from").html(viceComments[a].observername);
-                        viceComment.find(".to").html(viceComments[a].toobservername);
+                        viceComment.find(".from").html(viceComments[a].observerName);
+                        viceComment.find(".to").html(viceComments[a].toObserverName);
                         viceComment.find(".comment-mian-scomment-conntent").html(viceComments[a].value);
                         viceComment.find(".comment-mian-scomment-main").attr("commentid", viceComments[a].id);
                         copyHtml.append(viceComment);
@@ -70,8 +69,8 @@ function newMainCommentShowDialog() {
 }
 
 function realShowDialog(mainCommentId, viceCommentId, name, isNewMainComment) {
-    $("#dialog").find(".observername").html(name);
-    $("#observername").val(name);
+    $("#dialog").find(".observerName").html(name);
+    $("#observerName").val(name);
     $("#mainCommentId").val(mainCommentId);
     $("#viceCommentId").val(viceCommentId);
     $("#isNewMainComment").val(isNewMainComment);
@@ -86,7 +85,7 @@ function closeDialog() {
 function chaeckDialogForm(form) {
 
     var wordId = $("#wordId").val();
-    var toObservername = $("#observername").val();
+    var toObservername = $("#observerName").val();
     var mainCommentId = $("#mainCommentId").val();
     var viceCommentId = $("#viceCommentId").val();
     var nickname = $("#nickname").val();
@@ -97,7 +96,7 @@ function chaeckDialogForm(form) {
         alert("内容不可为空");
         return false;
     }
-    $.post("postComment.do", {
+    $.post(getContenxtPath() + "/api/word/" + wordId + "/comments", {
         wordId: wordId, //文章的id
         toObservername: toObservername, // 向谁回复 （创建新主评论时为空）
         mainCommentId: mainCommentId,// 主评论的id（创建新主评论时为空）
@@ -117,5 +116,10 @@ function chaeckDialogForm(form) {
         var data = result.data;
     });
     return false;
+}
+
+function getContenxtPath() {
+    return $("#contextPath").val();
+
 }
 

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 import javax.annotation.PostConstruct
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/10/4 20:50
  */
 @Configuration

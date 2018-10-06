@@ -3,7 +3,7 @@ package com.springmarker.blog.bean
 import java.time.LocalDate
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/7/7 15:22
  */
 data class BlogMain(

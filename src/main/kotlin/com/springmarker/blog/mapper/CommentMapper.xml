@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmarker.blog.mapper.CommentMapper">
+
+    <resultMap id="comment" type="com.springmarker.blog.bean.Comment">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="word_id" jdbcType="INTEGER" property="wordId"/>
+        <result column="main_comment" jdbcType="INTEGER" property="mainComment"/>
+        <result column="observer_name" jdbcType="VARCHAR" property="observerName"/>
+        <result column="to_observer_name" jdbcType="VARCHAR" property="toObserverName"/>
+        <result column="vice_comment_main_comment_id" jdbcType="VARCHAR" property="viceCommentMainCommentId"/>
+        <result column="value" jdbcType="VARCHAR" property="value"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+    </resultMap>
+
+
+    <select id="getCommentsByNickTitle" resultType="com.springmarker.blog.bean.Comment">
+        SELECT *
+        FROM "comment"
+                 JOIN word ON "comment"."word_id" = word."id"
+        WHERE word."nick_title" = #{nickname}
+        ORDER BY "main_comment", "comment"."date";
+    </select>
+
+    <insert id="putReply" parameterType="java.util.HashMap" useGeneratedKeys="true">
+        INSERT INTO comment (wordId,
+                             isMainComment,
+                             observerName,
+                             toObserverName,
+                             date,
+                             viceComment_mainComment_id,
+                             value,
+                             email)
+                VALUE (#{wordId}, #{isMainComment}, #{observerName}, #{toObserverName,jdbcType=VARCHAR}, #{date}, #{viceComment_mainComment_id,jdbcType=VARCHAR}, #{value}, #{email});
+    </insert>
+
+    <select id="getWordText" resultType="java.util.HashMap">
+        select *
+        from word_text
+        where wordTextId = #{0};
+    </select>
+
+    <select id="getMessages" resultType="com.springmarker.blog.bean.Message">
+        select *
+        from message
+        ORDER by date DESC
+        limit 0,30;
+    </select>
+
+    <insert id="putMessage" useGeneratedKeys="true">
+        INSERT INTO message (nick_name, date, content, contactway)
+                VALUE (#{0}, #{1}, #{2}, #{3});
+    </insert>
+</mapper>

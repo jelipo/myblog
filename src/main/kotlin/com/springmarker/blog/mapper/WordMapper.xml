@@ -39,4 +39,14 @@
         where nick_title = #{nickTitle}
     </select>
 
+    <select id="getNearWordsByNickTitle" resultMap="word">
+        ( SELECT * FROM word WHERE permission = 1 AND "date" &lt;  (SELECT "date" FROM word WHERE nick_title=#{nickTitle}) ORDER BY "date" DESC LIMIT 1 )
+        UNION ALL
+        ( SELECT * FROM word WHERE permission = 1 AND "date" = (SELECT "date" FROM word WHERE nick_title=#{nickTitle}) )
+        UNION ALL
+        ( SELECT * FROM word WHERE permission = 1 AND "date" &gt; (SELECT "date" FROM word WHERE nick_title=#{nickTitle}) ORDER BY "date" ASC LIMIT 1 );
+    </select>
+
+
+
 </mapper>

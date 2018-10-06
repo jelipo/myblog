@@ -20,6 +20,7 @@
 <!--参数-->
 <input id="contextPath" value="${request.contextPath}" type="hidden">
 <input id="nickTitle" value="${word.nickTitle}" type="hidden">
+<input id="wordId" value="${word.id}" type="hidden">
 <#--<input id="wordId" value="${wordId}" type="hidden">-->
 <#--<input id="title" value="${title}" type="hidden">-->
 <#--<input id="date" value="${date}" type="hidden">-->
@@ -70,13 +71,20 @@
 
         <!--翻页-->
         <div class="card-pageOther" style="height: 40px">
-            <a id="lastPage" href="" mdui-tooltip="{content: '上一篇'}" class="mdui-btn mdui-btn-icon mdui-ripple">
+            <#if (lastWord??)>
+                <a id="lastPage" href="${request.contextPath}/word/${lastWord.nickTitle}.html"
+            mdui-tooltip="{content: '${lastWord.title}'}" class="mdui-btn mdui-btn-icon mdui-ripple">
                 <i class="mdui-icon material-icons">arrow_back</i>
-            </a>
-            <a id="nextPage" href="" mdui-tooltip="{content: '下一篇'}" style="float:right;"
-               class="mdui-btn mdui-btn-icon mdui-ripple">
+                </a>
+            </#if>
+            <#if (nextWord??)>
+                <a id="nextPage" href="${request.contextPath}/word/${nextWord.nickTitle}.html"
+            mdui-tooltip="{content: '${nextWord.title}'}"
+                style="float:right;"
+                class="mdui-btn mdui-btn-icon mdui-ripple">
                 <i class="mdui-icon material-icons">arrow_forward</i>
-            </a>
+                </a>
+            </#if>
         </div>
         <!--翻页-->
         <!--评论-->
@@ -144,7 +152,7 @@
 <!--回复对话框-->
 <div class="mdui-dialog" id="dialog">
     <form onsubmit="return chaeckDialogForm(this)">
-        <input id="observername" type="hidden" name="observername" value="">
+        <input id="observerName" type="hidden" name="observerName" value="">
         <input id="mainCommentId" type="hidden" name="mainCommentId" value="">
         <input id="viceCommentId" type="hidden" name="viceCommentId" value="">
         <input id="isNewMainComment" type="hidden" name="isNewMainComment" value="">
@@ -170,7 +178,6 @@
             </div>
             <div class="g-recaptcha" data-sitekey="6LdoOBQUAAAAAP5Q-qMbFDphzLteAvdMGmHZXzxQ"></div>
             <div class="mdui-dialog-actions">
-
                 <input type="button" value="取消" onclick="closeDialog()" class="mdui-btn mdui-ripple">
                 <input type="submit" value="确认" class="mdui-btn mdui-ripple">
             </div>

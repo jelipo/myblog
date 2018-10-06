@@ -1,17 +1,18 @@
 package com.springmarker.blog.ctrl
 
-import com.springmarker.blog.bean.Reply
-import com.springmarker.blog.dao.WordDao
 import com.springmarker.blog.service.BlogMainService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseBody
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/7/7 14:18
  */
 @Controller
@@ -26,14 +27,6 @@ class BlogMainCtrl {
         val wordList = blogMainService.getIndexWordList()
         modelMap["list"] = wordList
         return "index"
-    }
-
-
-
-    @ResponseBody
-    @PostMapping("/postComment.do")
-    fun postComment(httpServletRequest: HttpServletRequest, @ModelAttribute("replyPojo") replyPojo: Reply): Map<*, *> {
-        return blogMainService.putReply(httpServletRequest, replyPojo)
     }
 
 
@@ -83,4 +76,5 @@ class BlogMainCtrl {
         map.put("data", "hello")
         return map
     }
+
 }
