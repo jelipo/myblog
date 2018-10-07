@@ -66,9 +66,11 @@ public class SocketTool {
      * @return
      */
     static int sizeOfInt(int x) {
-        for (int i = 0; ; i++)
-            if (x <= sizeTable[i])
+        for (int i = 0; ; i++) {
+            if (x <= sizeTable[i]) {
                 return i + 1;
+            }
+        }
     }
 
 

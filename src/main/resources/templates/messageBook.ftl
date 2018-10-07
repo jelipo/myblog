@@ -1,10 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
     <title>留言 - Springmarker</title>
-    <link rel="bookmark"  type="image/x-icon"  href="${request.contextPath}/static/img/favicon.ico"/>
+    <link rel="bookmark" type="image/x-icon" href="${request.contextPath}/static/img/favicon.ico"/>
     <link rel="shortcut icon" href="${request.contextPath}/static/img/favicon.ico">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -45,14 +44,22 @@
             width: 100%;
             font-size: 16px;
         }
-        .messageBox_buttom{
-            float: right;color:#ff4081;font-size: 15px;width: 50px;margin-right: 50px;height: 35px;
+
+        .messageBox_buttom {
+            float: right;
+            color: #ff4081;
+            font-size: 15px;
+            width: 50px;
+            margin-right: 50px;
+            height: 35px;
         }
-        .halfinput-width{
+
+        .halfinput-width {
             width: 49%;
         }
+
         @media only screen and (max-width: 800px) {
-            .halfinput-width{
+            .halfinput-width {
                 width: 100%;
             }
         }
@@ -60,7 +67,7 @@
 </head>
 
 <body class="mdui-drawer-body-left ">
-<%@include file="webparts/drawer.jsp" %>
+<#include "webparts/drawer.ftl"/>
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px"></div>
@@ -68,7 +75,8 @@
         <div class="mdui-row mdui-row-margin">
             <div class="mdui-col-xs-12 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor ">
-                    <div id="main-message" style="padding: 30px 20px 30px 20px;float: left;width: 100%;box-sizing:border-box;">
+                    <div id="main-message"
+                         style="padding: 30px 20px 30px 20px;float: left;width: 100%;box-sizing:border-box;">
                         <h2 class="seconfTitle">留言：</h2>
 
                     </div>
@@ -110,7 +118,7 @@
 <!--部件-->
 <div style="display: none">
     <!--单个留言-->
-    <div id="singleMessage" class="message" >
+    <div id="singleMessage" class="message">
         <div style="float: left;width: 100%">
             <div class="message_name">Springmarker</div>
             <div class="message_time">10月26,2016 20:15</div>
@@ -125,7 +133,7 @@
 </div>
 <!--部件-->
 
-<%@include file="webparts/footer.html" %>
+<#include "webparts/footer.ftl" />
 
 </body>
 <script type="text/javascript" src="${request.contextPath}/static/js/jquery-3.3.1.min.js"></script>
@@ -133,7 +141,7 @@
 <script type="text/javascript" src="${request.contextPath}/static/js/main.js"></script>
 <script>
     $(function () {
-        var list=getAjaxData("/getMessages.do");
+        var list = getAjaxData("/getMessages.do");
         for (var i = 0; i < list.length; i++) {
             var copyHtml = $('#singleMessage').clone();
             copyHtml.find(".message_name").html(list[i].messageName);
@@ -143,22 +151,23 @@
             //copyHtml.fadeIn(1000);
         }
     });
+
     function check(form) {
-        var nickname=$("#nickname").val();
-        var contactway=$("#contactway").val();
-        var message=$("#message").val();
-        if (message==""){
+        var nickname = $("#nickname").val();
+        var contactway = $("#contactway").val();
+        var message = $("#message").val();
+        if (message == "") {
             mdui.snackbar({message: '内容不能为空！'});
         }
-        $.post("postMessage.do",{
-            nickname:nickname,
-            contactway:contactway,
-            message:message
-        },function(result){
-            if ( result.resultCode!=200){
+        $.post("postMessage.do", {
+            nickname: nickname,
+            contactway: contactway,
+            message: message
+        }, function (result) {
+            if (result.resultCode != 200) {
                 alert(result.wrong);
                 return false;
-            }else {
+            } else {
                 mdui.snackbar({message: '留言成功，可能有缓存，稍后刷新查看。'});
             }
         });

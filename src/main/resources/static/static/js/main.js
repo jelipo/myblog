@@ -5,6 +5,7 @@
 $(function () {
     leftbar = new mdui.Drawer('#drawer');
     var dayOrNightNow = 'day';
+
     function changeColor() {
         if (dayOrNightNow == 'day') {
             var Color = '#eaeaea';
@@ -31,6 +32,7 @@ $(function () {
     });
     change(true);
     var lastWidth = 0;
+
     function change(isFirst) {
         var minWidth = 800;
         var width = $(this).width();
@@ -38,68 +40,67 @@ $(function () {
             if (width < minWidth) {
                 $('#top_card_left').removeClass('mdui-col-xs-7');
                 $('#top_card_left').addClass('mdui-col-xs-12');
-                $('#top_card_right').css("display","none");
+                $('#top_card_right').css("display", "none");
             }
             else {
                 $('#top_card_left').removeClass('mdui-col-xs-12');
                 $('#top_card_left').addClass('mdui-col-xs-7');
                 $('#top_card_right').removeClass('mdui-col-xs-12');
-                $('#top_card_right').css("display","block");
+                $('#top_card_right').css("display", "block");
             }
         }
     }
 
 
-
 });
+
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg); //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
+    if (r != null) return unescape(r[2]);
+    return null; //返回参数值
 }
+
 var leftbar;
+
 function toggle() {
     leftbar.toggle();
 }
+
 //ajax
 function getAjaxData(url) {
     var data;
     $.ajax({
-        url: url,async: false, success: function (result) {
-            if (result.resultCode == 200) {
-                data=result.data;
-            } else {
-                alert("服务器出现错误，错误代码"+result.resultCode + ',错误内容' + result.wrong);
-                return null;
-            }
+        url: url, async: false, success: function (result) {
+            data = result;
         }
     });
     return data;
 }
 
-function ajaxUploadFile(Url,formData) {
+function ajaxUploadFile(Url, formData) {
     var data;
     $.ajax({
-        url : Url,
+        url: Url,
         async: false,
-        type : 'POST',
-        data : formData,
+        type: 'POST',
+        data: formData,
         // 告诉jQuery不要去处理发送的数据
-        processData : false,
+        processData: false,
         // 告诉jQuery不要去设置Content-Type请求头
-        contentType : false,
-        beforeSend:function(){
+        contentType: false,
+        beforeSend: function () {
             console.log("正在进行，请稍候");
         },
-        success : function(result) {
+        success: function (result) {
             if (result.resultCode == 200) {
-                data=result.data;
-            }else{
-                alert("服务器出现错误，错误代码"+result.resultCode + ',错误内容' + result.wrong);
+                data = result.data;
+            } else {
+                alert("服务器出现错误，错误代码" + result.resultCode + ',错误内容' + result.wrong);
                 return null;
             }
         },
-        error : function(responseStr) {
+        error: function (responseStr) {
             alert("error");
         }
     });

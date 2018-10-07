@@ -3,10 +3,11 @@ package com.springmarker.blog.service
 import com.springmarker.blog.bean.Comment
 import com.springmarker.blog.bean.Reply
 import com.springmarker.blog.mapper.CommentMapper
+import com.springmarker.blog.util.PackingResults
 import org.apache.commons.lang3.StringEscapeUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import util.PackingResult
+
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.servlet.http.HttpServletRequest
@@ -40,13 +41,13 @@ class CommentService {
             }
         }
 
-        return PackingResult.toSuccessMap(json)
+        return PackingResults.toSuccessMap(json)
     }
 
     fun putReply(request: HttpServletRequest, reply: Reply): Map<*, *> {
         val comment = Comment()
         if (reply.value == "" || reply.isNewMainComment == "") {
-            return PackingResult.toWorngMap("服务器出现错误！")
+            return PackingResults.toWorngMap("服务器出现错误！")
         }
         val timeNow = System.currentTimeMillis()
         if (reply.nickname == "") {
@@ -54,7 +55,7 @@ class CommentService {
         }
         if (reply.isNewMainComment != "1") {
             if (reply.mainCommentId == "") {
-                return PackingResult.toWorngMap("服务器出现错误！")
+                return PackingResults.toWorngMap("服务器出现错误！")
             }
             comment.apply {
                 toObserverName = if (reply.toObservername == "") null else reply.toObservername
@@ -73,9 +74,9 @@ class CommentService {
         val result = commentMapper.insert(comment)
         return if (result > 0) {
 //            commentLimit.insertIp(request)
-            PackingResult.toSuccessMap(HashMap<String, String>(0))
+            PackingResults.toSuccessMap(HashMap<String, String>(0))
         } else {
-            PackingResult.toWorngMap("服务器出现错误！")
+            PackingResults.toWorngMap("服务器出现错误！")
         }
     }
 

@@ -23,24 +23,6 @@
         ORDER BY "main_comment", "comment"."date";
     </select>
 
-    <insert id="putReply" parameterType="java.util.HashMap" useGeneratedKeys="true">
-        INSERT INTO comment (wordId,
-                             isMainComment,
-                             observerName,
-                             toObserverName,
-                             date,
-                             viceComment_mainComment_id,
-                             value,
-                             email)
-                VALUE (#{wordId}, #{isMainComment}, #{observerName}, #{toObserverName,jdbcType=VARCHAR}, #{date}, #{viceComment_mainComment_id,jdbcType=VARCHAR}, #{value}, #{email});
-    </insert>
-
-    <select id="getWordText" resultType="java.util.HashMap">
-        select *
-        from word_text
-        where wordTextId = #{0};
-    </select>
-
     <select id="getMessages" resultType="com.springmarker.blog.bean.Message">
         select *
         from message

@@ -16,13 +16,6 @@ interface BlogMainDao {
 
     fun getWord(map: Map<*, *>): List<BlogMain>
 
-    fun toWord(id: Int): List<Word>
-
-    fun getComments(nickTitle: String): List<Comment>
-
-    fun putReply(parm: Map<*, *>): Int
-
-    fun getWordText(wordTextId: String): Map<*, *>
 
     fun getMessages(): List<Message>
 

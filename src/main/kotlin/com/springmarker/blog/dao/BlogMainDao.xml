@@ -2,63 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springmarker.blog.dao.BlogMainDao">
 
-    <select id="getWord" resultType="com.springmarker.blog.bean.BlogMain">
-        select * from word where permission=1
-        <choose>
-            <when test="type == '' "/>
-            <when test="type == null "/>
-            <when test="type == 0 "/>
-            <otherwise>
-                AND typeId=#{type}
-            </otherwise>
-        </choose>
-
-        ORDER BY date DESC LIMIT #{startNum},#{getBlogNum};
-    </select>
-
-    <select id="toWord" resultType="com.springmarker.blog.bean.Word">
-        (SELECT *
-         FROM word
-         WHERE id &lt; #{0}
-         ORDER BY id DESC
-         LIMIT 1)
-        union
-                (SELECT *
-                 FROM word
-                 WHERE id = #{0})
-        union
-                (SELECT *
-                 FROM word
-                 WHERE id &gt; #{0}
-                 LIMIT 1)
-    </select>
-
-    <select id="getComments" resultType="com.springmarker.blog.bean.Comment">
-        SELECT *
-        FROM "comment"
-                 JOIN word ON "comment"."wordId" = word."id"
-        WHERE word."nick_title" = #{nickname}
-        ORDER BY "isMainComment", "comment"."date" DESC;
-    </select>
-
-    <insert id="putReply" parameterType="java.util.HashMap" useGeneratedKeys="true">
-        INSERT INTO comment ("word_id",
-                             "main_comment",
-                             "observer_name",
-                             "to_observer_name",
-                             "date",
-                             "vice_comment_main_comment_id",
-                             "value",
-                             "email")
-                VALUES (#{wordId}, #{isMainComment}, #{observerName}, #{toObserverName,jdbcType=VARCHAR}, #{date}, #{viceComment_mainComment_id,jdbcType=VARCHAR}, #{value}, #{email});
-    </insert>
-
-    <select id="getWordText" resultType="java.util.HashMap">
-        select *
-        from word_text
-        where wordTextId = #{0};
-    </select>
-
     <select id="getMessages" resultType="com.springmarker.blog.bean.Message">
         select *
         from message

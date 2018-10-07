@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="leftbar-navi mdui-ripple" onclick="window.location.href='${request.contextPath}'">
+    <div class="leftbar-navi mdui-ripple" onclick="window.location.href='${request.contextPath}/'">
         <i class="mdui-icon material-icons leftbar-navi-icon">home</i>
         <span style="font-weight:bold">主页</span>
     </div>
@@ -24,8 +24,8 @@
                 </div>
             </div>
             <div class="mdui-collapse-item-body ">
-                <a href="${request.contextPath}/moreWords.do?pageNum=1&type=1" class="leftbar-item mdui-ripple">技术</a>
-                <a href="${request.contextPath}/moreWords.do?pageNum=1&type=2" class="leftbar-item mdui-ripple">随写</a>
+                <a href="${request.contextPath}/list/tech" class="leftbar-item mdui-ripple">技术</a>
+                <a href="${request.contextPath}/list/other" class="leftbar-item mdui-ripple">随写</a>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
     <a class="leftbar-other mdui-ripple">
         <span>关于我</span>
     </a>
-    <a href="${request.contextPath}/moreWords.do?pageNum=1" class="leftbar-other mdui-ripple">
+    <a href="${request.contextPath}/list" class="leftbar-other mdui-ripple">
         <span>所有文章</span>
         <p></p>
     </a>

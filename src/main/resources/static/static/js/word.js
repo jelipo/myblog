@@ -120,6 +120,5 @@ function chaeckDialogForm(form) {
 
 function getContenxtPath() {
     return $("#contextPath").val();
-
 }
 

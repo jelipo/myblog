@@ -4,15 +4,13 @@ import com.springmarker.blog.bean.Word
 import com.springmarker.blog.dao.BlogMainDao
 import com.springmarker.blog.mapper.CommentMapper
 import com.springmarker.blog.mapper.WordMapper
-import org.apache.commons.lang3.StringEscapeUtils
+import com.springmarker.blog.util.PackingResults
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.servlet.ModelAndView
-import util.PackingResult
 import java.text.SimpleDateFormat
-import java.util.*
 import javax.servlet.http.HttpServletRequest
-import kotlin.collections.HashMap
 
 /**
  * @author Springmarker
@@ -35,22 +33,22 @@ class BlogMainService {
         return wordList
     }
 
+    private val sdfMMddyyyy = SimpleDateFormat("MM月dd,yyyy")
 
     fun getBlogByPageNum(request: HttpServletRequest, pageNum: Int, getBlogNum: Int, type: String): Map<*, *> {
         if (pageNum == 0 || getBlogNum == 0) {
-            return PackingResult.toWorngMap("参数错误")
+            return PackingResults.toWorngMap("参数错误")
         }
         val map = HashMap<String, Any>()
-        map.put("getBlogNum", getBlogNum)
-        map.put("startNum", (pageNum - 1) * getBlogNum)
-        map.put("type", type)
-        val list = blogMainDao!!.getWord(map)
-        val simpleDateFormat = SimpleDateFormat("MM月dd,yyyy")
+        map["getBlogNum"] = getBlogNum
+        map["startNum"] = (pageNum - 1) * getBlogNum
+        map["type"] = type
+        val list = blogMainDao.getWord(map)
         for (i in list.indices) {
             val blogMainPojo = list[i]
-            blogMainPojo.formatDate = simpleDateFormat.format(blogMainPojo.date)
+            blogMainPojo.formatDate = sdfMMddyyyy.format(blogMainPojo.date)
         }
-        return PackingResult.toSuccessMap(list)
+        return PackingResults.toSuccessMap(list)
     }
 
     fun getWordByNickTitle(modelAndView: ModelAndView, nickTitle: String): Boolean {
@@ -75,38 +73,9 @@ class BlogMainService {
         return true
     }
 
-
-    fun getMessages(request: HttpServletRequest): Map<*, *> {
-        val list = blogMainDao.getMessages()
-        return PackingResult.toSuccessMap(list)
+    fun getWordsByType(type: String?, page: String?): List<Word> {
+        val limit = 10
+        return wordMapper.getWordsByType(type, limit, (if (page == null) 0 else (page.toInt() - 1)) * limit)
     }
 
-    fun putMessage(request: HttpServletRequest, nickname: String, content: String, contactway: String): Map<*, *> {
-        var nickname = nickname
-
-//        if (commentLimit.isBanIp(request)!!) {
-//            return PackingResult.toWorngMap("您暂时还不能操作！")
-//        }
-        if (content == "") {
-            return PackingResult.toWorngMap("回复失败，请检查您的内容！")
-        }
-        val nowTime = System.currentTimeMillis()
-        if (nickname == "") {
-            nickname = "游客" + nowTime % 10000000
-        }
-        val date = Date(nowTime)
-        val result = blogMainDao.putMessage(StringEscapeUtils.escapeHtml4(nickname), date, StringEscapeUtils.escapeHtml4(content), StringEscapeUtils.escapeHtml4(contactway))
-        return if (result > 0) {
-            //加入暂时黑名单
-//            commentLimit.insertIp(request)
-            //留言计数器+1
-            val servletContext = request.servletContext
-            val messageNUm = servletContext.getAttribute("messageNum") as Int
-            servletContext.setAttribute("messageNum", messageNUm + 1)
-
-            PackingResult.toSuccessMap()
-        } else {
-            PackingResult.toWorngMap("回复失败！")
-        }
-    }
 }

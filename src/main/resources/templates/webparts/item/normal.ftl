@@ -4,7 +4,7 @@
 <div id="word" class="mdui-row mdui-row-margin">
     <div class="mdui-col-xs-12">
         <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor">
-            <a class="MY-mdui-card-media">
+            <a class="MY-mdui-card-media" href="${request.contextPath}/word/${word.nickTitle}.html">
                 <img class="MY-card-img" src="${word.backgroundImage}"/>
                 <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                     <div class="mdui-card-primary ">
@@ -15,7 +15,7 @@
             <a href="${request.contextPath}/word/${word.nickTitle}.html"
                class="mdui-card-content mdui-ripple secondColorAndBackgroundColor href"
                style="display: block;text-decoration:none;">
-                ${word.summary}
+            ${word.summary}
             </a>
             <div class="mdui-divider" style="margin-top:1px"></div>
             <div class="mdui-card-actions">

@@ -1,12 +1,14 @@
 package com.springmarker.blog.ctrl
 
+
+import com.springmarker.blog.util.PackingResults
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.multipart.MultipartFile
-import util.PackingResult
+
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
@@ -61,7 +63,7 @@ class BackgroundCtrl {
     @ResponseBody
     @PostMapping("/uploadFile.do")
     fun uploadFile(request: HttpServletRequest, httpSession: HttpSession, @RequestParam("cdnFile") cdnFile: MultipartFile, @RequestParam(required = false) filename: String): Map<*, *> {
-        val isLoginAny = httpSession.getAttribute("isLogin") ?: return PackingResult.toWorngMap("出现错误！")
+        val isLoginAny = httpSession.getAttribute("isLogin") ?: return PackingResults.toWorngMap("出现错误！")
         return HashMap<String, String>()
     }
 

@@ -22,14 +22,13 @@ class WebPageApiCtrl {
      */
     @GetMapping("/word/{wordId}/comments")
     fun getComments(request: HttpServletRequest, @PathVariable wordId: String): Map<*, *> {
-
         val comments = commentService.getComments(wordId)
         return comments
     }
 
-
     /**
      * 保存评论
+     *
      */
     @PostMapping("/word/{wordId}/comments")
     fun postComment(httpServletRequest: HttpServletRequest, @PathVariable wordId: String,
@@ -37,6 +36,5 @@ class WebPageApiCtrl {
         replyPojo.wordId = wordId.toInt()
         return commentService.putReply(httpServletRequest, replyPojo)
     }
-
 
 }

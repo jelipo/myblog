@@ -1,6 +1,7 @@
 package com.springmarker.blog.ctrl
 
 import com.springmarker.blog.service.BlogMainService
+import com.springmarker.blog.service.MessageService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -20,6 +21,9 @@ class BlogMainCtrl {
 
     @Autowired
     private lateinit var blogMainService: BlogMainService
+
+    @Autowired
+    private lateinit var messageService: MessageService
 
 
     @GetMapping("/", "/index")
@@ -53,7 +57,7 @@ class BlogMainCtrl {
     @GetMapping("/getMessages.do")
     fun getMessages(request: HttpServletRequest): Map<*, *> {
         val a = System.currentTimeMillis()
-        val result = blogMainService.getMessages(request)
+        val result = messageService.getMessages(request)
         println(System.currentTimeMillis() - a)
         return result
     }
@@ -62,7 +66,7 @@ class BlogMainCtrl {
     @PostMapping("/postMessage.do")
     fun postMessage(request: HttpServletRequest, @RequestParam("nickname") nickname: String,
                     @RequestParam("contactway") contactway: String, @RequestParam("message") message: String): Map<*, *> {
-        return blogMainService.putMessage(request, nickname, message, contactway)
+        return messageService.putMessage(request, nickname, message, contactway)
     }
 
     @ResponseBody

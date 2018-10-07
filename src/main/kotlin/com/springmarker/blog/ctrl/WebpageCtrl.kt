@@ -1,14 +1,12 @@
 package com.springmarker.blog.ctrl
 
-import com.springmarker.blog.bean.Word
-import com.springmarker.blog.mapper.WordMapper
 import com.springmarker.blog.service.BlogMainService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.servlet.ModelAndView
-import java.time.LocalDateTime
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -37,6 +35,34 @@ class WebpageCtrl {
             return modelAndView
         }
         modelAndView.viewName = "word"
+        return modelAndView
+    }
+
+    @GetMapping("/list")
+    fun getWords(modelAndView: ModelAndView): ModelAndView {
+        val words = blogMainService.getWordsByType(null, null)
+        modelAndView.model["list"] = words
+        modelAndView.viewName = "wordList"
+        return modelAndView
+    }
+
+    @GetMapping("/list/{type}")
+    fun getWordsByType(@PathVariable type: String?, modelAndView: ModelAndView): ModelAndView {
+        val words = blogMainService.getWordsByType(type, "1")
+        modelAndView.model["list"] = words
+        modelAndView.model["type"] = type
+        modelAndView.model["page"] = "1"
+        modelAndView.viewName = "wordList"
+        return modelAndView
+    }
+
+    @GetMapping("/list-api/{type}/")
+    fun getWordsByTypeApi(@PathVariable type: String, @RequestParam("page") page: String, modelAndView: ModelAndView): ModelAndView {
+        val words = blogMainService.getWordsByType(type, page)
+        modelAndView.model["list"] = words
+        modelAndView.model["type"] = type
+        modelAndView.model["page"] = page
+        modelAndView.viewName = "webparts/list"
         return modelAndView
     }
 

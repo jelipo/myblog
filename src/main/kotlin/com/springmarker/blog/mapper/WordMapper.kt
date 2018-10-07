@@ -21,4 +21,6 @@ interface WordMapper : BaseMapper<Word> {
 
     fun getNearWordsByNickTitle(nickTitle: String): List<Word>
 
+    fun getWordsByType(type: String?, limit: Int, offset: Int): List<Word>
+
 }

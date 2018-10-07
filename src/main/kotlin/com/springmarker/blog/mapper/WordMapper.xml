@@ -23,11 +23,11 @@
         where id = #{id}
     </select>
 
-
     <select id="getWordListByPermission" resultMap="word">
         SELECT *
         from word
         where permission = #{permission}
+
         order by date DESC
         LIMIT #{num}
         OFFSET #{start};
@@ -40,13 +40,35 @@
     </select>
 
     <select id="getNearWordsByNickTitle" resultMap="word">
-        ( SELECT * FROM word WHERE permission = 1 AND "date" &lt;  (SELECT "date" FROM word WHERE nick_title=#{nickTitle}) ORDER BY "date" DESC LIMIT 1 )
+        (SELECT *
+         FROM word
+         WHERE permission = 1
+           AND "date" &lt; (SELECT "date" FROM word WHERE nick_title = #{nickTitle})
+         ORDER BY "date" DESC
+         LIMIT 1)
         UNION ALL
-        ( SELECT * FROM word WHERE permission = 1 AND "date" = (SELECT "date" FROM word WHERE nick_title=#{nickTitle}) )
+                (SELECT *
+                 FROM word
+                 WHERE permission = 1
+                   AND "date" = (SELECT "date" FROM word WHERE nick_title = #{nickTitle}))
         UNION ALL
-        ( SELECT * FROM word WHERE permission = 1 AND "date" &gt; (SELECT "date" FROM word WHERE nick_title=#{nickTitle}) ORDER BY "date" ASC LIMIT 1 );
+                (SELECT *
+                 FROM word
+                 WHERE permission = 1
+                   AND "date" &gt; (SELECT "date" FROM word WHERE nick_title = #{nickTitle})
+                 ORDER BY "date" ASC
+                 LIMIT 1);
     </select>
 
-
+    <select id="getWordsByType" resultMap="word">
+        select *
+        from word
+        <if test="type!=null and type!='' and type !='all'">
+            WHERE type_id = (SELECT id from type WHERE "name" = #{type})
+        </if>
+        ORDER BY "date" DESC
+        limit #{limit}
+        offset #{offset};
+    </select>
 
 </mapper>

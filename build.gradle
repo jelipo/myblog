@@ -55,6 +55,11 @@ idea {
     }
 }
 
+
+bootJar {
+    launchScript()
+}
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-freemarker')
     compile('org.springframework.boot:spring-boot-starter-web')

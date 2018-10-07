@@ -1,4 +1,4 @@
-package com.mayabot.overwatchrobot.util
+package com.springmarker.blog.util
 
 import java.text.SimpleDateFormat
 import java.util.*
