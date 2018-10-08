@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="${request.contextPath}/static/css/my-mdui.min.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/mdui.min.css" rel="stylesheet">
     <link href="${request.contextPath}/static/css/main.css" rel="stylesheet">
 
 </head>

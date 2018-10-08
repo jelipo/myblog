@@ -15,23 +15,4 @@
     </resultMap>
 
 
-    <select id="getCommentsByNickTitle" resultType="com.springmarker.blog.bean.Comment">
-        SELECT *
-        FROM "comment"
-                 JOIN word ON "comment"."word_id" = word."id"
-        WHERE word."nick_title" = #{nickname}
-        ORDER BY "main_comment", "comment"."date";
-    </select>
-
-    <select id="getMessages" resultType="com.springmarker.blog.bean.Message">
-        select *
-        from message
-        ORDER by date DESC
-        limit 0,30;
-    </select>
-
-    <insert id="putMessage" useGeneratedKeys="true">
-        INSERT INTO message (nick_name, date, content, contactway)
-                VALUE (#{0}, #{1}, #{2}, #{3});
-    </insert>
 </mapper>

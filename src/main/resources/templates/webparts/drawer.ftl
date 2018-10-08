@@ -37,7 +37,7 @@
         <span>所有文章</span>
         <p></p>
     </a>
-    <a href="${request.contextPath}/message.do" class="leftbar-other mdui-ripple">
+    <a href="${request.contextPath}/messages" class="leftbar-other mdui-ripple">
         <span>留言</span>
         <p></p>
     </a>

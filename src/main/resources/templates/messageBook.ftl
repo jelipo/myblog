@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link href="${request.contextPath}/static/css/my-mdui.min.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/mdui.min.css" rel="stylesheet">
     <link href="${request.contextPath}/static/css/main.css" rel="stylesheet">
 
     <style>
@@ -67,6 +67,7 @@
 </head>
 
 <body class="mdui-drawer-body-left ">
+<input id="contextPath" value="${request.contextPath}" type="hidden">
 <#include "webparts/drawer.ftl"/>
 <!--主要内容-->
 <div class="mdui-container">
@@ -141,16 +142,20 @@
 <script type="text/javascript" src="${request.contextPath}/static/js/main.js"></script>
 <script>
     $(function () {
-        var list = getAjaxData("/getMessages.do");
+        var contenxtPath = getContenxtPath();
+        var list = getAjaxData(contenxtPath+"/api/messages").data;
         for (var i = 0; i < list.length; i++) {
             var copyHtml = $('#singleMessage').clone();
-            copyHtml.find(".message_name").html(list[i].messageName);
-            copyHtml.find(".message_time").html(list[i].messageTime);
-            copyHtml.find(".message_content").html(list[i].messageContent);
+            copyHtml.find(".message_name").html(list[i].nickName);
+            copyHtml.find(".message_time").html(list[i].date);
+            copyHtml.find(".message_content").html(list[i].content);
             $("#main-message").append(copyHtml);
             //copyHtml.fadeIn(1000);
         }
     });
+    function getContenxtPath() {
+        return $("#contextPath").val();
+    }
 
     function check(form) {
         var nickname = $("#nickname").val();
@@ -159,7 +164,7 @@
         if (message == "") {
             mdui.snackbar({message: '内容不能为空！'});
         }
-        $.post("postMessage.do", {
+        $.post(getContenxtPath()+"/api/messages", {
             nickname: nickname,
             contactway: contactway,
             message: message

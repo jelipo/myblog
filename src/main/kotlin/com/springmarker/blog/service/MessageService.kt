@@ -1,11 +1,12 @@
 package com.springmarker.blog.service
 
-import com.springmarker.blog.dao.BlogMainDao
+import com.springmarker.blog.bean.Message
+import com.springmarker.blog.mapper.MessageMapper
 import com.springmarker.blog.util.PackingResults
 import org.apache.commons.lang3.StringEscapeUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.*
+import java.time.LocalDateTime
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -16,19 +17,15 @@ import javax.servlet.http.HttpServletRequest
 class MessageService {
 
     @Autowired
-    private lateinit var blogMainDao: BlogMainDao
+    private lateinit var messageMapper: MessageMapper
 
     fun getMessages(request: HttpServletRequest): Map<*, *> {
-        val list = blogMainDao.getMessages()
+        val list = messageMapper.getMessages()
         return PackingResults.toSuccessMap(list)
     }
 
     fun putMessage(request: HttpServletRequest, nickname: String, content: String, contactway: String): Map<*, *> {
         var nickname = nickname
-
-//        if (commentLimit.isBanIp(request)!!) {
-//            return PackingResults.toWorngMap("您暂时还不能操作！")
-//        }
         if (content == "") {
             return PackingResults.toWorngMap("回复失败，请检查您的内容！")
         }
@@ -36,16 +33,14 @@ class MessageService {
         if (nickname == "") {
             nickname = "游客" + nowTime % 10000000
         }
-        val date = Date(nowTime)
-        val result = blogMainDao.putMessage(StringEscapeUtils.escapeHtml4(nickname), date, StringEscapeUtils.escapeHtml4(content), StringEscapeUtils.escapeHtml4(contactway))
+        val message = Message(
+                nickName = StringEscapeUtils.escapeHtml4(nickname),
+                content = StringEscapeUtils.escapeHtml4(content),
+                contactway = contactway,
+                date = LocalDateTime.now()
+        )
+        val result = messageMapper.saveMessage(message)
         return if (result > 0) {
-            //加入暂时黑名单
-//            commentLimit.insertIp(request)
-            //留言计数器+1
-            val servletContext = request.servletContext
-            val messageNUm = servletContext.getAttribute("messageNum") as Int
-            servletContext.setAttribute("messageNum", messageNUm + 1)
-
             PackingResults.toSuccessMap()
         } else {
             PackingResults.toWorngMap("回复失败！")

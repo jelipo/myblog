@@ -25,7 +25,6 @@ class BlogMainCtrl {
     @Autowired
     private lateinit var messageService: MessageService
 
-
     @GetMapping("/", "/index")
     fun index(modelMap: ModelMap): String {
         val wordList = blogMainService.getIndexWordList()
@@ -33,41 +32,17 @@ class BlogMainCtrl {
         return "index"
     }
 
-
-    @GetMapping("/moreWords.do")
-    fun moreWords(request: HttpServletRequest, @RequestParam pageNum: Int, @RequestParam(required = false) type: String): String {
-        request.setAttribute("pageNum", pageNum)
-        request.setAttribute("type", type)
-        return "wordList"
-    }
-
-
     @GetMapping("/toNone.do")
     fun toNone(request: HttpServletRequest): String {
         return "none"
     }
 
-
-    @GetMapping("/message.do")
+    @GetMapping("/messages")
     fun toMessageBook(request: HttpServletRequest): String {
         return "messageBook"
     }
 
-    @ResponseBody
-    @GetMapping("/getMessages.do")
-    fun getMessages(request: HttpServletRequest): Map<*, *> {
-        val a = System.currentTimeMillis()
-        val result = messageService.getMessages(request)
-        println(System.currentTimeMillis() - a)
-        return result
-    }
 
-    @ResponseBody
-    @PostMapping("/postMessage.do")
-    fun postMessage(request: HttpServletRequest, @RequestParam("nickname") nickname: String,
-                    @RequestParam("contactway") contactway: String, @RequestParam("message") message: String): Map<*, *> {
-        return messageService.putMessage(request, nickname, message, contactway)
-    }
 
     @ResponseBody
     @PostMapping("webspider.do")

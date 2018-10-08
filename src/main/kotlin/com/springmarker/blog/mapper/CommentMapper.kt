@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository
 @Mapper
 interface CommentMapper : BaseMapper<Comment> {
 
-    fun getCommentsByWordId(nickTitle: String): List<Comment>
+
 
 
 }

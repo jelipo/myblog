@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by cao on 2017/3/7.
@@ -97,7 +98,7 @@ public class SocketTool {
                 }
                 byte[] resultChar = new byte[length];
                 if (br.read(resultChar, 0, length) == -1) throw new IOException();
-                return new String(resultChar, "UTF-8");
+                return new String(resultChar, StandardCharsets.UTF_8);
             }
         }
     }
