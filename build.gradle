@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.3.0'
-        springBootVersion = '2.1.0.RELEASE'
+        kotlinVersion = '1.3.11'
+        springBootVersion = '2.1.1.RELEASE'
     }
     repositories {
         maven { url("https://repo.huaweicloud.com/repository/maven/") }
@@ -44,6 +44,7 @@ repositories {
 
 sourceSets {
     main {
+
         resources {
             //可以将java目录下的所有非.java资源打包到classes下
             srcDirs = ['src/main/java', 'src/main/kotlin', 'src/main/resources']
