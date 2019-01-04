@@ -13,7 +13,9 @@ plugins {
 }
 
 group = "com.springmarker"
-version = "1.0.2"
+version = "1.0.3"
+
+
 
 buildscript {
     val springBootVersion = "2.1.1.RELEASE"
@@ -64,7 +66,7 @@ repositories {
 
 docker {
     registryCredentials {
-        uri("swr.cn-east-2.myhuaweicloud.com")
+        uri(project.findProperty("dockerUri") ?: "")
         val registryUsername: String = (project.findProperty("registryUsername") ?: "") as String
         val registryPassword: String = (project.findProperty("registryPassword") ?: "") as String
         if (registryUsername.isEmpty() || registryPassword.isEmpty()) {
@@ -80,6 +82,9 @@ tasks {
 
     val tasks = this
 
+    val dockerAppConfigPath = "/etc/myblog/"
+    val dockerAppConfigName = "application.properties"
+
     /**
      * 创建Dockerfile
      */
@@ -89,7 +94,8 @@ tasks {
         from(baseDockerImage)
         copyFile("build/libs/${rootProject.name}-$version.jar", "/opt/app/${rootProject.name}-$version.jar")
         exposePort(8080)
-        defaultCommand("/usr/bin/java", "-jar", "/opt/app/${rootProject.name}-$version.jar")
+        defaultCommand("mkdir", "-p", dockerAppConfigPath)
+        defaultCommand("/usr/bin/java", "-jar", "-Dspring.config.location=$dockerAppConfigPath/$dockerAppConfigName", "/opt/app/${rootProject.name}-$version.jar")
     }
 
     /**
@@ -120,6 +126,9 @@ tasks {
         dependsOn(this@tasks.getByName("buildImage"))
         targetImageId(buildImage.imageId)
         force.set(true)
+        onError {
+            println("There is no image's id is ${buildImage.imageId}")
+        }
     }
 
     getByName<BootJar>("bootJar") {
@@ -148,4 +157,5 @@ dependencies {
     compile("com.squareup.okhttp3:okhttp:3.11.0")
     compile("com.baomidou:mybatis-plus-boot-starter:3.0.7")
     compile("org.apache.commons:commons-lang3:3.8.1")
+    runtime("org.postgresql:postgresql")
 }
