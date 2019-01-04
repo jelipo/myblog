@@ -64,7 +64,7 @@ repositories {
 
 docker {
     registryCredentials {
-        System.getenv()
+        uri("swr.cn-east-2.myhuaweicloud.com")
         val registryUsername: String = (project.findProperty("registryUsername") ?: "") as String
         val registryPassword: String = (project.findProperty("registryPassword") ?: "") as String
         if (registryUsername.isEmpty() || registryPassword.isEmpty()) {
