@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "com.springmarker"
-version = "1.0.3"
+version = "1.0.4"
 
 
 
@@ -82,7 +82,7 @@ tasks {
 
     val tasks = this
 
-    val dockerAppConfigPath = "/etc/myblog/"
+    val dockerAppConfigPath = "/var/myblog"
     val dockerAppConfigName = "application.properties"
 
     /**
@@ -95,6 +95,8 @@ tasks {
         copyFile("build/libs/${rootProject.name}-$version.jar", "/opt/app/${rootProject.name}-$version.jar")
         exposePort(8080)
         defaultCommand("mkdir", "-p", dockerAppConfigPath)
+        defaultCommand("touch", dockerAppConfigName)
+        defaultCommand("touch", "${rootProject.name}-$version.conf")
         defaultCommand("java", "-jar", "-Dspring.config.location=$dockerAppConfigPath/$dockerAppConfigName", "/opt/app/${rootProject.name}-$version.jar")
     }
 
