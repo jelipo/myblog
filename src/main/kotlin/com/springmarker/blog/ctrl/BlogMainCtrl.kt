@@ -22,9 +22,6 @@ class BlogMainCtrl {
     @Autowired
     private lateinit var blogMainService: BlogMainService
 
-    @Autowired
-    private lateinit var messageService: MessageService
-
     @GetMapping("/", "/index")
     fun index(modelMap: ModelMap): String {
         val wordList = blogMainService.getIndexWordList()
@@ -41,8 +38,6 @@ class BlogMainCtrl {
     fun toMessageBook(request: HttpServletRequest): String {
         return "messageBook"
     }
-
-
 
     @ResponseBody
     @PostMapping("webspider.do")

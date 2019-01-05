@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper
 import org.springframework.stereotype.Repository
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/10/8 20:18
  */
 @Repository

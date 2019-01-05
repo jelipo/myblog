@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 import javax.servlet.http.HttpServletRequest
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/10/7 20:00
  */
 @Service
@@ -26,11 +26,11 @@ class MessageService {
 
     fun putMessage(request: HttpServletRequest, nickname: String, content: String, contactway: String): Map<*, *> {
         var nickname = nickname
-        if (content == "") {
+        if (content.isEmpty()) {
             return PackingResults.toWorngMap("回复失败，请检查您的内容！")
         }
         val nowTime = System.currentTimeMillis()
-        if (nickname == "") {
+        if (nickname.isEmpty()) {
             nickname = "游客" + nowTime % 10000000
         }
         val message = Message(

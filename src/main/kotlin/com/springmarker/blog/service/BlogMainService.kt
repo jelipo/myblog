@@ -1,16 +1,12 @@
 package com.springmarker.blog.service
 
 import com.springmarker.blog.bean.Word
-import com.springmarker.blog.dao.BlogMainDao
 import com.springmarker.blog.mapper.CommentMapper
 import com.springmarker.blog.mapper.WordMapper
-import com.springmarker.blog.util.PackingResults
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.servlet.ModelAndView
-import java.text.SimpleDateFormat
-import javax.servlet.http.HttpServletRequest
 
 /**
  * @author Springmarker
@@ -20,35 +16,10 @@ import javax.servlet.http.HttpServletRequest
 class BlogMainService {
 
     @Autowired
-    private lateinit var blogMainDao: BlogMainDao
-
-    @Autowired
     private lateinit var wordMapper: WordMapper
 
-    @Autowired
-    private lateinit var commentMapper: CommentMapper
-
     fun getIndexWordList(): MutableList<Word?> {
-        val wordList = wordMapper.getWordListByPermission(1, 0, 10)
-        return wordList
-    }
-
-    private val sdfMMddyyyy = SimpleDateFormat("MM月dd,yyyy")
-
-    fun getBlogByPageNum(request: HttpServletRequest, pageNum: Int, getBlogNum: Int, type: String): Map<*, *> {
-        if (pageNum == 0 || getBlogNum == 0) {
-            return PackingResults.toWorngMap("参数错误")
-        }
-        val map = HashMap<String, Any>()
-        map["getBlogNum"] = getBlogNum
-        map["startNum"] = (pageNum - 1) * getBlogNum
-        map["type"] = type
-        val list = blogMainDao.getWord(map)
-        for (i in list.indices) {
-            val blogMainPojo = list[i]
-            blogMainPojo.formatDate = sdfMMddyyyy.format(blogMainPojo.date)
-        }
-        return PackingResults.toSuccessMap(list)
+        return wordMapper.getWordListByPermission(1, 0, 10)
     }
 
     fun getWordByNickTitle(modelAndView: ModelAndView, nickTitle: String): Boolean {

@@ -26,7 +26,7 @@ public class SocketTool {
         synchronized (socket) {
             try {
                 out = new DataOutputStream(socket.getOutputStream());
-                out.write(str.toString().getBytes("UTF-8"));
+                out.write(str.toString().getBytes(StandardCharsets.UTF_8));
                 return;
             } catch (IOException e) {
                 e.printStackTrace();

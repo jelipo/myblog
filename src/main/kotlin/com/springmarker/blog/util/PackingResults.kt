@@ -3,7 +3,7 @@ package com.springmarker.blog.util
 import java.util.*
 
 /**
- * @author Frank
+ * @author Springmarker
  * @date 2018/10/6 21:05
  */
 object PackingResults {

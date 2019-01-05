@@ -5,7 +5,7 @@
     <select id="getMessages" resultType="com.springmarker.blog.bean.Message">
         SELECT *
         from message
-        order by date DESC ;
+        order by date DESC;
     </select>
 
     <insert id="saveMessage" useGeneratedKeys="true" keyProperty="id" keyColumn="id"

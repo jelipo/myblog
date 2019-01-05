@@ -95,8 +95,8 @@ tasks {
         copyFile("build/libs/${rootProject.name}-$version.jar", "/opt/app/${rootProject.name}-$version.jar")
         exposePort(8080)
         defaultCommand("mkdir", "-p", dockerAppConfigPath)
-        defaultCommand("touch", dockerAppConfigName)
-        defaultCommand("touch", "${rootProject.name}-$version.conf")
+        defaultCommand("touch", "$dockerAppConfigPath/$dockerAppConfigName")
+        defaultCommand("touch", "$dockerAppConfigPath/${rootProject.name}-$version.conf")
         defaultCommand("java", "-jar", "-Dspring.config.location=$dockerAppConfigPath/$dockerAppConfigName", "/opt/app/${rootProject.name}-$version.jar")
     }
 
