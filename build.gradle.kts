@@ -13,8 +13,7 @@ plugins {
 }
 
 group = "com.springmarker"
-version = "1.0.4"
-
+version = "1.0.5"
 
 
 buildscript {
@@ -92,12 +91,13 @@ tasks {
         destFile.set(project.file("Dockerfile"))
         val baseDockerImage: String = (project.findProperty("baseDockerImage") ?: "1.0").toString()
         from(baseDockerImage)
-        copyFile("build/libs/${rootProject.name}-$version.jar", "/opt/app/${rootProject.name}-$version.jar")
+        copyFile("build/libs/${rootProject.name}.jar", "/opt/app/${rootProject.name}.jar")
         exposePort(8080)
         defaultCommand("mkdir", "-p", dockerAppConfigPath)
         defaultCommand("touch", "$dockerAppConfigPath/$dockerAppConfigName")
-        defaultCommand("touch", "$dockerAppConfigPath/${rootProject.name}-$version.conf")
-        defaultCommand("java", "-jar", "-Dspring.config.location=$dockerAppConfigPath/$dockerAppConfigName", "/opt/app/${rootProject.name}-$version.jar")
+        defaultCommand("touch", "$dockerAppConfigPath/${rootProject.name}.conf")
+        defaultCommand("export", "CONF_FOLDER=$dockerAppConfigPath")
+        defaultCommand("java", "-jar", "-Dspring.config.location=$dockerAppConfigPath/$dockerAppConfigName", "/opt/app/${rootProject.name}.jar")
     }
 
     /**
@@ -134,6 +134,7 @@ tasks {
     }
 
     getByName<BootJar>("bootJar") {
+        archiveFileName.set("${rootProject.name}.${archiveExtension.get()}")
         launchScript()
     }
 
