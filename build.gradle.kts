@@ -82,7 +82,6 @@ tasks {
     val tasks = this
 
     val dockerAppConfigPath = "/var/myblog"
-    val dockerAppConfigName = "application.properties"
 
     /**
      * 创建Dockerfile
@@ -91,13 +90,11 @@ tasks {
         destFile.set(project.file("Dockerfile"))
         val baseDockerImage: String = (project.findProperty("baseDockerImage") ?: "1.0").toString()
         from(baseDockerImage)
-        copyFile("build/libs/${rootProject.name}.jar", "/opt/app/${rootProject.name}.jar")
+        copyFile("build/libs/${rootProject.name}.jar", "/opt/app/")
+        copyFile("dockershell.sh", "/opt/app/")
+        environmentVariable(mapOf("CONF_DIR" to dockerAppConfigPath, "APP_NAME" to rootProject.name))
         exposePort(8080)
-        defaultCommand("mkdir", "-p", dockerAppConfigPath)
-        defaultCommand("touch", "$dockerAppConfigPath/$dockerAppConfigName")
-        defaultCommand("touch", "$dockerAppConfigPath/${rootProject.name}.conf")
-        defaultCommand("export", "CONF_FOLDER=$dockerAppConfigPath")
-        defaultCommand("java", "-jar", "-Dspring.config.location=$dockerAppConfigPath/$dockerAppConfigName", "/opt/app/${rootProject.name}.jar")
+        defaultCommand("sh", "/opt/app/dockershell.sh")
     }
 
     /**
