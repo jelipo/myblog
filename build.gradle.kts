@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "com.springmarker"
-version = "1.0.7"
+version = "1.0.8"
 
 
 buildscript {
