@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
@@ -24,7 +23,9 @@
         <#list list as word>
             <#include "webparts/item/normal.ftl"/>
         </#list>
-
+        <div class="mdui-row mdui-row-margin mdui-text-center" style="color: #919191;font-size: 16px;">
+            <a href="${request.contextPath}/list" style="color:#919191">首页只显示最近10条 点击查看更多</a>
+        </div>
     </div>
 </div>
 

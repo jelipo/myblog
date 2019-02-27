@@ -5,6 +5,7 @@
     line-height: 25px;
     opacity: .87;
 }
+
 /* 主标题区域副标题 */
 .MY-mdui-card-primary-subtitle {
     display: block;
@@ -12,19 +13,21 @@
     line-height: 20px;
     opacity: .54;
 }
+
 .MY-mdui-card-primary {
     position: relative;
     padding: 10px 10px 10px 10px;
 }
 
-.mdui-card-actions>img{
+.mdui-card-actions > img {
     margin: 4px 10px 5px 10px;
     float: left;
     height: 30px;
-    width:30px;
+    width: 30px;
     border-radius: 50%;
 }
-.mdui-card-actions>span{
+
+.mdui-card-actions > span {
     padding-top: 3px;
     padding-bottom: 5px;
     float: left;
@@ -32,9 +35,10 @@
     font-size: 14px;
     line-height: 31px;
 }
-.MY-card-more{
+
+.MY-card-more {
     margin-right: 10px;
-    padding:3px 0px 5px 0px;
+    padding: 3px 0px 5px 0px;
     float: right;
     height: 100%;
     width: 40px;
@@ -43,26 +47,30 @@
     text-align: center;
     border-radius: 50%;
 }
-.top-card-left-text{
+
+.top-card-left-text {
     padding: 10px 0 0 0;
 }
-.MY-card-data{
 
-    padding:4px 10px 4px 0px;
+.MY-card-data {
+
+    padding: 4px 10px 4px 0px;
     float: right;
     height: 100%;
     font-size: 12px;
     line-height: 31px;
 }
+
 .mdui-card {
-     position: relative;
-     box-sizing: border-box;
-     overflow: hidden;
-     color: #000;
-     background-color: #fff;
-     border-radius: 5px;
-     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
- }
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #000;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
 .mdui-card-top-right {
     position: relative;
     box-sizing: border-box;
@@ -71,6 +79,7 @@
     border-radius: 5px;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
+
 body {
     font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
     background-color: #e9ebec;
@@ -101,9 +110,22 @@ body {
     margin-left: 10px;
 }
 
+.draw-cdn-img {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 64px 0 45px;
+}
+
+.draw-cdn-img > img {
+    width: 100%;
+}
+
 .mainPage {
     width: 100%;
-    max-width: 1150px;
+    max-width: 1100px;
     margin: auto;
     min-height: 900px;
 }
@@ -134,10 +156,12 @@ body {
     position: relative;
     float: right;
 }
-.top-card-rght-img{
+
+.top-card-rght-img {
     transition: 1s;
 }
-.top-card-rght-img:hover{
+
+.top-card-rght-img:hover {
     transition: 1s;
     opacity: 0;
 }
@@ -174,19 +198,22 @@ body {
     margin-right: 20px;
     font-size: 15px;
 }
+
 .leftbar-item {
     transition: 0.3s;
-    padding : 10px 0 10px 30px;
+    padding: 10px 0 10px 30px;
     font-size: 13px;
     display: block;
-    color:#717171 ;
+    color: #717171;
     text-decoration: none;
 }
+
 .leftbar-item:hover {
     background-color: #eeeeee;
     color: #383838;
     text-decoration: none;
 }
+
 .leftbar-other {
     transition: 0.3s;
     width: 100%;
@@ -194,6 +221,7 @@ body {
     display: block;
     color: #717171;
 }
+
 .leftbar-other > span {
     width: 40px;
     float: left;
@@ -201,6 +229,7 @@ body {
     padding-left: 20px;
     line-height: 35px;
 }
+
 .leftbar-other > p {
     width: 40px;
     float: right;
@@ -214,13 +243,15 @@ body {
     color: #383838;
 }
 
-.secondColorAndBackgroundColor{
+.secondColorAndBackgroundColor {
     color: #696969;
-    background-color:#ffffff;
+    background-color: #ffffff;
 }
-.MY-card-img{
+
+.MY-card-img {
     width: 100%;
 }
+
 .MY-mdui-card-media {
     position: relative;
     padding-left: 0;
@@ -232,65 +263,76 @@ body {
     overflow: hidden;
     display: block;
 }
-.top-card-left-img{
-    position:relative;
-    width:100%;
-    height:280px;
+
+.top-card-left-img {
+    position: relative;
+    width: 100%;
+    height: 280px;
     overflow: hidden;
     padding-right: 20px
 }
-.top-card-right{
+
+.top-card-right {
     height: 335px;
 }
-.card-page{
+
+.card-page {
     min-height: 100px;
     padding: 10px 30px 10px 30px;
 }
-.MY-footer{
+
+.MY-footer {
     height: 220px;
     margin-top: 70px;
     background-color: #2e2e2e;
     color: #e3e3e3;
 }
-.MY-footer a{
-    color:#e3e3e3;
+
+.MY-footer a {
+    color: #e3e3e3;
     text-decoration: none;
 }
-.MY-footer a:hover{
-    color:#e3e3e3;
+
+.MY-footer a:hover {
+    color: #e3e3e3;
     text-decoration: none;
 }
-.footer-main{
-    height:190px;
-    width:100%;
+
+.footer-main {
+    height: 190px;
+    width: 100%;
     max-width: 1330px;
     padding: 40px 20px 20px 40px;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
-.footer-other>div{
+
+.footer-other > div {
     font-weight: bold;
     width: 100%;
     font-size: 15px;
-    height:28px;
+    height: 28px;
 }
-.footer-other>a{
+
+.footer-other > a {
 
     width: 100%;
-    display:block;
-    font-size:13px;
+    display: block;
+    font-size: 13px;
     height: 22px;
     text-decoration: none;
 }
-.footer-bottom{
+
+.footer-bottom {
     font-size: 10px;
     width: 100%;
     max-width: 1330px;
     line-height: 15px;
 }
 
-.noHrefCss{
+.noHrefCss {
     text-decoration: none;
 }
+
 @media only screen and (max-width: 800px) {
     .MY-card-tilte {
         font-size: 20px;
@@ -299,13 +341,15 @@ body {
         overflow: hidden;
         white-space: nowrap;
     }
+
     .mdui-card-content {
         position: relative;
         padding: 8px;
         font-size: 10px;
         line-height: 18px;
     }
-    .mdui-card-actions>span{
+
+    .mdui-card-actions > span {
 
         padding-top: 7px;
 
@@ -315,35 +359,43 @@ body {
 
         font-size: 10px;
     }
-    .MY-card-data{
+
+    .MY-card-data {
         font-size: 10px;
     }
-    .top-card-left-img{
-        position:relative;
-        width:100%;
-        height:200px;
+
+    .top-card-left-img {
+        position: relative;
+        width: 100%;
+        height: 200px;
         overflow: hidden;
     }
-    .top-card-right{
+
+    .top-card-right {
         height: 235px;
         display: none;
     }
+
     .mdui-row-margin {
         margin-top: 10px;
     }
-    .mdui-card-actions>img{
+
+    .mdui-card-actions > img {
         margin: 8px 5px 0px 10px;
-        width:20px;
+        width: 20px;
         height: 20px;
         border-radius: 50%;
     }
-    .card-page{
+
+    .card-page {
         padding: 10px 5px 10px 5px;
     }
-    .mdui-card-actions{
+
+    .mdui-card-actions {
         padding: 0;
     }
-    .smallNone{
+
+    .smallNone {
         display: none;
     }
 

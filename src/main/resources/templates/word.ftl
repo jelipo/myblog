@@ -55,7 +55,7 @@
                         <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}">
                         <span>${word.writer}</span>
                         <div id="wordDate"
-                             class="MY-card-data">${word.date.monthValue}月${word.date.dayOfMonth},${(word.date.year)?c}</div>
+                             class="MY-card-data">${(word.date.year)?c}年${word.date.monthValue}月${word.date.dayOfMonth}日</div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page" style="min-height: 600px;">

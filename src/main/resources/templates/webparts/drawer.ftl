@@ -58,4 +58,8 @@
             </div>
         </div>
     </div>
+
+    <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" class="draw-cdn-img">
+        <img alt="由又拍云提供加速度服务" src="${request.contextPath}/static/img/upyun_logo5.png">
+    </a>
 </div>

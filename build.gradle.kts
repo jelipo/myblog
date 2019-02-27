@@ -1,4 +1,3 @@
-import com.bmuschko.gradle.docker.tasks.container.DockerRemoveContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
@@ -7,18 +6,18 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    kotlin("jvm") version "1.3.20"
-    id("org.springframework.boot") version "2.1.2.RELEASE"
-    id("com.bmuschko.docker-remote-api") version "4.3.0"
+    kotlin("jvm") version "1.3.21"
+    id("org.springframework.boot") version "2.1.3.RELEASE"
+    id("com.bmuschko.docker-remote-api") version "4.5.0"
 }
 
 group = "com.springmarker"
-version = "1.0.8"
+version = "1.1.0"
 
 
 buildscript {
-    val springBootVersion = "2.1.2.RELEASE"
-    val kotlinVersion = "1.3.20"
+    val springBootVersion = "2.1.3.RELEASE"
+    val kotlinVersion = "1.3.21"
     repositories {
         maven("https://repo.huaweicloud.com/repository/maven/")
         gradlePluginPortal()
@@ -31,7 +30,6 @@ buildscript {
     }
 }
 
-
 apply(plugin = "kotlin")
 apply(plugin = "kotlin-spring")
 apply(plugin = "eclipse")
@@ -39,12 +37,10 @@ apply(plugin = "io.spring.dependency-management")
 apply(plugin = "java")
 apply(plugin = "com.bmuschko.docker-remote-api")
 
-
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
-
 
 sourceSets {
     main {
@@ -54,10 +50,9 @@ sourceSets {
         }
     }
 }
-//get("main").resources.setSrcDirs(setOf("src/main/java", "src/main/kotlin", "src/main/resources"))
-
 
 repositories {
+    mavenLocal()
     maven("https://repo.huaweicloud.com/repository/maven/")
     mavenCentral()
 }
@@ -140,7 +135,6 @@ tasks {
             jvmTarget = "1.8"
         }
     }
-
 }
 
 dependencies {
@@ -152,9 +146,8 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-reflect")
     runtime("org.springframework.boot:spring-boot-devtools")
     testCompile("org.springframework.boot:spring-boot-starter-test")
-    //compile('org.springframework.boot:spring-boot-starter-webflux')
-    compile("com.squareup.okhttp3:okhttp:3.11.0")
-    compile("com.baomidou:mybatis-plus-boot-starter:3.0.7")
+    compile("com.squareup.okhttp3:okhttp:3.13.1")
+    compile("com.baomidou:mybatis-plus-boot-starter:3.1.0")
     compile("org.apache.commons:commons-lang3:3.8.1")
     runtime("org.postgresql:postgresql")
 }
