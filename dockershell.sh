@@ -2,6 +2,7 @@
 
 config_dir=${CONF_DIR}
 app_name=${APP_NAME}
+java_opts = ${JAVA_OPTS}
 
 #mkdir -p ${config_dir}
 #export CONF_FOLDER=${config_dir}
@@ -21,4 +22,4 @@ app_name=${APP_NAME}
 #fi
 
 chmod 777 /opt/app/myblog.jar
-bash /opt/app/myblog.jar start
+java -jar  /opt/app/myblog.jar ${java_opts}

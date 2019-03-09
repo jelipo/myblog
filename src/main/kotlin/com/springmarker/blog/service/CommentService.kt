@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.servlet.http.HttpServletRequest
-import java.util.Locale
-import java.util.Calendar
-
 
 /**
  * @author Springmarker
@@ -65,12 +62,11 @@ class CommentService {
                 viceCommentMainCommentId = reply.mainCommentId
             }
         }
-        val cal = Calendar.getInstance(Locale.CHINA)
         comment.apply {
             wordId = reply.wordId
             mainComment = if (reply.isNewMainComment == "1") 1 else 2
             observerName = StringEscapeUtils.escapeHtml4(reply.nickname)
-            date = Date(cal.timeInMillis)
+            date = Date()
             value = StringEscapeUtils.escapeHtml4(reply.value).replace("\n", "<br>")
             email = StringEscapeUtils.escapeHtml4(reply.email)
         }

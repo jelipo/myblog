@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "com.springmarker"
-version = "1.1.1"
+version = "1.1.2"
 
 
 buildscript {
@@ -88,7 +88,7 @@ tasks {
         copyFile("dockershell.sh", "/opt/app/")
         environmentVariable(mapOf("CONF_DIR" to dockerAppConfigPath, "APP_NAME" to rootProject.name))
         exposePort(8080)
-        defaultCommand("sh", "/opt/app/dockershell.sh")
+        defaultCommand("sh", "/opt/app/dockershell.sh", "")
     }
 
     /**
