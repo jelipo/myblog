@@ -2,7 +2,7 @@
 
 config_dir=${CONF_DIR}
 app_name=${APP_NAME}
-java_opts = ${JAVA_OPTS}
+java_opts=${JAVA_OPTS}
 
 #mkdir -p ${config_dir}
 #export CONF_FOLDER=${config_dir}
