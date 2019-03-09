@@ -22,4 +22,4 @@ java_opts=${JAVA_OPTS}
 #fi
 
 chmod 777 /opt/app/myblog.jar
-java -jar  /opt/app/myblog.jar ${java_opts}
+java -jar ${java_opts}  /opt/app/myblog.jar
