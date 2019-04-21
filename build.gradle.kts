@@ -6,8 +6,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    kotlin("jvm") version "1.3.21"
-    id("org.springframework.boot") version "2.1.3.RELEASE"
+    kotlin("jvm") version "1.3.30"
+    id("org.springframework.boot") version "2.1.4.RELEASE"
     id("com.bmuschko.docker-remote-api") version "4.5.0"
 }
 
@@ -16,8 +16,8 @@ version = "1.1.4"
 
 
 buildscript {
-    val springBootVersion = "2.1.3.RELEASE"
-    val kotlinVersion = "1.3.21"
+    val springBootVersion = "2.1.4.RELEASE"
+    val kotlinVersion = "1.3.30"
     repositories {
         maven("https://repo.huaweicloud.com/repository/maven/")
         gradlePluginPortal()
@@ -26,7 +26,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
-        classpath("com.bmuschko:gradle-docker-plugin:4.3.0")
+        classpath("com.bmuschko:gradle-docker-plugin:4.5.0")
     }
 }
 
