@@ -2,6 +2,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
@@ -9,6 +10,7 @@ plugins {
     kotlin("jvm") version "1.3.31"
     id("org.springframework.boot") version "2.1.5.RELEASE"
     id("com.bmuschko.docker-remote-api") version "4.8.1"
+    idea
 }
 
 group = "com.springmarker"
@@ -35,6 +37,7 @@ apply(plugin = "kotlin-spring")
 apply(plugin = "eclipse")
 apply(plugin = "io.spring.dependency-management")
 apply(plugin = "java")
+apply(plugin = "idea")
 apply(plugin = "com.bmuschko.docker-remote-api")
 
 java {
@@ -57,6 +60,18 @@ repositories {
     mavenCentral()
 }
 
+tasks {
+    compileJava { options.encoding = "UTF-8" }
+    javadoc { options.encoding }
+}
+
+idea {
+    project {
+        jdkName = "1.8"
+        languageLevel = IdeaLanguageLevel("1.8")
+        vcs = "Git"
+    }
+}
 
 docker {
     registryCredentials {
@@ -146,8 +161,8 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-reflect")
     runtime("org.springframework.boot:spring-boot-devtools")
     testCompile("org.springframework.boot:spring-boot-starter-test")
-    compile("com.squareup.okhttp3:okhttp:3.13.1")
-    compile("com.baomidou:mybatis-plus-boot-starter:3.1.0")
+    compile("com.squareup.okhttp3:okhttp:3.14.1")
+    compile("com.baomidou:mybatis-plus-boot-starter:3.1.1")
     compile("org.apache.commons:commons-lang3:3.8.1")
     runtime("org.postgresql:postgresql")
 }
