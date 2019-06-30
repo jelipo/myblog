@@ -1,6 +1,6 @@
 package com.springmarker.blog.service
 
-import com.springmarker.blog.bean.Message
+import com.springmarker.blog.pojo.Message
 import com.springmarker.blog.mapper.MessageMapper
 import com.springmarker.blog.util.PackingResults
 import org.apache.commons.lang3.StringEscapeUtils

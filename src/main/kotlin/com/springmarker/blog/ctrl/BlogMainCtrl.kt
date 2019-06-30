@@ -43,9 +43,6 @@ class BlogMainCtrl {
     @PostMapping("webspider.do")
     fun webspider(request: HttpServletRequest, @RequestParam("title") title: String, @RequestParam("screenshotPath") screenshotPath: String,
                   @RequestParam("htmlStr") htmlStr: String): Map<*, *> {
-        println(title)
-        println(screenshotPath)
-        println(htmlStr)
         val map = HashMap<String, String>()
         map.put("data", "hello")
         return map

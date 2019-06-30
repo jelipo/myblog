@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springmarker.blog.mapper.MessageMapper">
 
-    <select id="getMessages" resultType="com.springmarker.blog.bean.Message">
+    <select id="getMessages" resultType="com.springmarker.blog.pojo.Message">
         SELECT *
         from message
         order by date DESC;
     </select>
 
     <insert id="saveMessage" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
-            parameterType="com.springmarker.blog.bean.Message">
+            parameterType="com.springmarker.blog.pojo.Message">
         INSERT INTO message (nick_name, date, content, contactway)
         VALUES (#{nickName}, #{date}, #{content}, #{contactway});
     </insert>

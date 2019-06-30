@@ -81,7 +81,7 @@
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
+    font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, Song, sans-serif;
     background-color: #e9ebec;
     margin: 0;
     padding: 0;
@@ -94,19 +94,31 @@ body {
 
 .leftbar {
     background-color: #ffffff;
-    box-shadow: 0 0px 5px 0px #888888;
+    box-shadow: 0 0 5px 0 #888888;
 }
 
 .leftbar-head {
-    height: 160px;
+    height: 145px;
     width: 100%;
     background-size: 100%;
     position: relative;
 }
 
-.leftbar-head > img {
+.leftbar-head-tag {
+    margin-top: 10px;
+    margin-left: 5px;
+    float: left;
+    font-size: 13px;
+    line-height: 12px;
+    padding: 3px 4px 2px 4px;
+    border-radius: 2px;
+    color: #e06e55;
+    background-color: #FFF;
+}
+
+.leftbar-head-img {
     height: 49px;
-    margin-top: 50px;
+    margin-top: 25px;
     margin-left: 10px;
 }
 
@@ -188,7 +200,7 @@ body {
     width: 40px;
     float: left;
     font-size: 13px;
-    padding-top: 4px;
+    padding-top: 3px;
     padding-left: 25px;
 }
 
@@ -201,8 +213,11 @@ body {
 
 .leftbar-item {
     transition: 0.3s;
-    padding: 10px 0 10px 30px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 30px;
     font-size: 13px;
+    letter-spacing: 2px;
     display: block;
     color: #717171;
     text-decoration: none;

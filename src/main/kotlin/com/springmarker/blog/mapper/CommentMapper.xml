@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springmarker.blog.mapper.CommentMapper">
 
-    <resultMap id="comment" type="com.springmarker.blog.bean.Comment">
+    <resultMap id="comment" type="com.springmarker.blog.pojo.Comment">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="word_id" jdbcType="INTEGER" property="wordId"/>
         <result column="main_comment" jdbcType="INTEGER" property="mainComment"/>

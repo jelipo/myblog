@@ -1,7 +1,7 @@
 package com.springmarker.blog.service
 
-import com.springmarker.blog.bean.Comment
-import com.springmarker.blog.bean.Reply
+import com.springmarker.blog.pojo.Comment
+import com.springmarker.blog.pojo.Reply
 import com.springmarker.blog.mapper.CommentMapper
 import com.springmarker.blog.util.PackingResults
 import org.apache.commons.lang3.StringEscapeUtils

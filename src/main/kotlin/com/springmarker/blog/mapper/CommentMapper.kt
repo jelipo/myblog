@@ -1,7 +1,7 @@
 package com.springmarker.blog.mapper
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
-import com.springmarker.blog.bean.Comment
+import com.springmarker.blog.pojo.Comment
 import org.apache.ibatis.annotations.Mapper
 import org.springframework.stereotype.Repository
 

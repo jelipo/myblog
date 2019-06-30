@@ -1,7 +1,6 @@
 package com.springmarker.blog.service
 
-import com.springmarker.blog.bean.Word
-import com.springmarker.blog.mapper.CommentMapper
+import com.springmarker.blog.pojo.Word
 import com.springmarker.blog.mapper.WordMapper
 
 import org.springframework.beans.factory.annotation.Autowired

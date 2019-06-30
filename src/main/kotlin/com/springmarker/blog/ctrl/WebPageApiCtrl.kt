@@ -1,13 +1,14 @@
 package com.springmarker.blog.ctrl
 
 import com.fasterxml.jackson.annotation.JsonView
-import com.springmarker.blog.bean.Comment
-import com.springmarker.blog.bean.Message
-import com.springmarker.blog.bean.Reply
+import com.springmarker.blog.pojo.Comment
+import com.springmarker.blog.pojo.Message
+import com.springmarker.blog.pojo.Reply
 import com.springmarker.blog.service.CommentService
 import com.springmarker.blog.service.MessageService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -30,9 +31,8 @@ class WebPageApiCtrl {
     @JsonView(Comment.Public::class)
     @GetMapping("/word/{wordId}/comments")
     fun getComments(request: HttpServletRequest, @PathVariable wordId: String): Map<*, *> {
-        val a = System.currentTimeMillis()
         val comments = commentService.getComments(wordId)
-        println(System.currentTimeMillis() - a)
+        println("" + Date() + "   " + request.getHeader("HTTP_X_FORWARDED_FOR"))
         return comments
     }
 

@@ -1,4 +1,4 @@
-package com.springmarker.blog.bean
+package com.springmarker.blog.pojo
 
 /**
  * @author Springmarker

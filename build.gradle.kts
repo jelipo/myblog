@@ -7,8 +7,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    kotlin("jvm") version "1.3.31"
-    id("org.springframework.boot") version "2.1.5.RELEASE"
+    kotlin("jvm") version "1.3.40"
+    id("org.springframework.boot") version "2.1.6.RELEASE"
     id("com.bmuschko.docker-remote-api") version "4.8.1"
     idea
 }
@@ -18,8 +18,8 @@ version = "1.1.4-2"
 
 
 buildscript {
-    val springBootVersion = "2.1.5.RELEASE"
-    val kotlinVersion = "1.3.31"
+    val springBootVersion = "2.1.6.RELEASE"
+    val kotlinVersion = "1.3.40"
     repositories {
         maven("https://repo.huaweicloud.com/repository/maven/")
         gradlePluginPortal()
@@ -28,7 +28,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
-        classpath("com.bmuschko:gradle-docker-plugin:4.8.1")
+        classpath("com.bmuschko:gradle-docker-plugin:4.10.0")
     }
 }
 
@@ -75,7 +75,7 @@ idea {
 
 docker {
     registryCredentials {
-        uri(project.findProperty("dockerUri") ?: "")
+        url.set((project.findProperty("dockerUri") ?: "") as String)
         val registryUsername: String = (project.findProperty("registryUsername") ?: "") as String
         val registryPassword: String = (project.findProperty("registryPassword") ?: "") as String
         if (registryUsername.isEmpty() || registryPassword.isEmpty()) {
@@ -152,6 +152,15 @@ tasks {
     }
 }
 
+idea {
+    project {
+        jdkName = "1.8"
+        languageLevel = IdeaLanguageLevel("8")
+        vcs = "Git"
+    }
+}
+
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-freemarker")
@@ -161,8 +170,8 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-reflect")
     runtime("org.springframework.boot:spring-boot-devtools")
     testCompile("org.springframework.boot:spring-boot-starter-test")
-    compile("com.squareup.okhttp3:okhttp:3.14.1")
-    compile("com.baomidou:mybatis-plus-boot-starter:3.1.1")
+    compile("com.squareup.okhttp3:okhttp:4.0.0")
+    compile("com.baomidou:mybatis-plus-boot-starter:3.1.2")
     compile("org.apache.commons:commons-lang3:3.8.1")
     runtime("org.postgresql:postgresql")
 }

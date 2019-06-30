@@ -1,14 +1,26 @@
 <!--侧边栏-->
+<link rel="stylesheet" href="${request.contextPath}/static/css/iconfont.css">
 <i onclick="toggle()" class="mdui-icon material-icons"
    style="position:fixed;left: 5px;top: 10px;z-index: 1024;">menu</i>
 <div id="drawer" class="mdui-drawer leftbar secondColorAndBackgroundColor">
-    <div class="leftbar-head" style="background-image: url('${request.contextPath}/static/img/first.jpg')">
-        <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}" class="mdui-img-circle">
-        <div class="mdui-grid-tile-actions">
-            <div class="mdui-grid-tile-text">
-                <div class="mdui-grid-tile-title">Springmarker</div>
+    <div class="leftbar-head" style="background-image: url('${request.contextPath}/static/img/first.jpg');
+            background-position:0 -48px;">
+        <div style="height:85px;">
+            <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}"
+                 class="mdui-img-circle leftbar-head-img" style="float: left;">
+            <div style="float: right;padding-top: 25px;padding-right: 20px;color: #FFF;">
+                <span style="font-size: 30px;" class="iconfont icon-github"></span>
+                <span style="font-size: 28px;" class="iconfont icon-email"></span>
             </div>
         </div>
+        <div style="padding-left: 10px;color: #fff;clear: both;font-size: 17px;">
+            Springmarker
+
+            <div></div>
+        </div>
+        <div class="leftbar-head-tag" style="margin-left: 10px;">站长</div>
+        <div class="leftbar-head-tag">全干</div>
+        <div class="leftbar-head-tag">Java</div>
     </div>
     <div class="leftbar-navi mdui-ripple" onclick="window.location.href='${request.contextPath}/'">
         <i class="mdui-icon material-icons leftbar-navi-icon">home</i>

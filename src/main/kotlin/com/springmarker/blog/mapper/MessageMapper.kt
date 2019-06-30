@@ -1,6 +1,6 @@
 package com.springmarker.blog.mapper
 
-import com.springmarker.blog.bean.Message
+import com.springmarker.blog.pojo.Message
 import org.apache.ibatis.annotations.Mapper
 import org.springframework.stereotype.Repository
 

@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="word" type="com.springmarker.blog.bean.Word" -->
+<#-- @ftlvariable name="word" type="com.springmarker.blog.pojo.Word" -->
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
