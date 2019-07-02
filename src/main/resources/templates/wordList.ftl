@@ -10,6 +10,8 @@
     <meta name="format-detection" content="telephone=no"/>
     <link href="${request.contextPath}/static/css/mdui.min.css?v=${randomStr}" rel="stylesheet">
     <link href="${request.contextPath}/static/css/main.css?v=${randomStr}" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/iconfont.css" rel="stylesheet">
+
 </head>
 
 <body class="mdui-drawer-body-left ">

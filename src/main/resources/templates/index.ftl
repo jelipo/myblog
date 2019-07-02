@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>主页 - Springmarker</title>
+    <title>Springmarker</title>
     <link rel="bookmark" type="image/x-icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}"/>
     <link rel="shortcut icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -10,6 +10,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <link href="${request.contextPath}/static/css/mdui.min.css?v=${randomStr}" rel="stylesheet">
     <link href="${request.contextPath}/static/css/main.css?v=${randomStr}" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/iconfont.css" rel="stylesheet">
 </head>
 
 <body class="mdui-drawer-body-left ">

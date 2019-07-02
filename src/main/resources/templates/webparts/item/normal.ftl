@@ -19,7 +19,7 @@
             </a>
             <div class="mdui-divider" style="margin-top:1px"></div>
             <div class="mdui-card-actions">
-                <img src="${request.contextPath}/static/img/head.jpg">
+                <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}">
                 <span class="writer-name">${word.writer}</span>
                 <i mdui-menu="{target: '#example-attr'}"
                    class="mdui-ripple mdui-icon material-icons MY-card-more">more_vert</i>

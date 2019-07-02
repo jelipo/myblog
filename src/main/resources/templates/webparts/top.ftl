@@ -2,7 +2,7 @@
     <div id="top_card_left" class="mdui-col-xs-7">
         <div class="mdui-card mdui-hoverable secondColorAndBackgroundColor">
             <div class="mdui-card-media top-card-left-img">
-                <img src="${request.contextPath}/static/img/top.jpg"/>
+                <img src="${request.contextPath}/static/img/top.jpg?v=${randomStr}"/>
                 <div class="mdui-card-media-covered mdui-card-media-covered-transparent">
                     <div class="mdui-card-primary ">
                         <div class="MY-card-tilte">宁静致远</div>
@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="mdui-card-actions smallNone">
-                <img src="${request.contextPath}/static/img/head.jpg" class="mdui-img-circle">
+                <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}" class="mdui-img-circle">
                 <div class="top-card-left-text">Springmarker</div>
             </div>
         </div>

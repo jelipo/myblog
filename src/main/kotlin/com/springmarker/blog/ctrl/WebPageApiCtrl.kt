@@ -6,6 +6,7 @@ import com.springmarker.blog.pojo.Message
 import com.springmarker.blog.pojo.Reply
 import com.springmarker.blog.service.CommentService
 import com.springmarker.blog.service.MessageService
+import com.springmarker.blog.util.IpUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -32,7 +33,7 @@ class WebPageApiCtrl {
     @GetMapping("/word/{wordId}/comments")
     fun getComments(request: HttpServletRequest, @PathVariable wordId: String): Map<*, *> {
         val comments = commentService.getComments(wordId)
-        println("" + Date() + "   " + request.getHeader("HTTP_X_FORWARDED_FOR"))
+        println("" + Date() + "   " + IpUtil.getRealIp(request))
         return comments
     }
 

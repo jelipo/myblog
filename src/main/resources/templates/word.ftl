@@ -12,6 +12,8 @@
     <link href="${request.contextPath}/static/css/main.css?v=${randomStr}" rel="stylesheet">
     <link href="${request.contextPath}/static/css/word.css?v=${randomStr}" rel="stylesheet">
     <link href="${request.contextPath}/static/css/marxico.css?v=${randomStr}" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/iconfont.css" rel="stylesheet">
+
 </head>
 
 <body class="mdui-drawer-body-left ">
@@ -116,7 +118,7 @@
     <!--评论-->
     <div class="comment-mian" id="comment">
         <div class="comment-mian-msg">
-            <img src="${request.contextPath}/static/img/head.jpg" class="mdui-img-circle">
+            <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}" class="mdui-img-circle">
             <div>
                 <div class="comment-mian-msg-lz">Springmarker</div>
                 <div class="comment-mian-msg-time">1楼 11月12,2017 18:32:54</div>

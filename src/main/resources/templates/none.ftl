@@ -9,6 +9,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <link href="${request.contextPath}/static/css/mdui.min.css" rel="stylesheet">
     <link href="${request.contextPath}/static/css/main.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/iconfont.css" rel="stylesheet">
 
 </head>
 
