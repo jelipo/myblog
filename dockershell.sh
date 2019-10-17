@@ -21,5 +21,5 @@ java_opts=${JAVA_OPTS}
 #    echo "" > ${config_dir}/application.properties
 #fi
 
-chmod 777 /opt/app/myblog.jar
-java -jar ${java_opts}  /opt/app/myblog.jar
+chmod 777 /opt/app/"${app_name}".jar
+java -jar ${java_opts}  /opt/app/"${app_name}".jar

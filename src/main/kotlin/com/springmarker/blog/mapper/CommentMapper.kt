@@ -15,5 +15,4 @@ interface CommentMapper : BaseMapper<Comment> {
 
 
 
-
 }

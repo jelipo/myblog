@@ -2,9 +2,6 @@ package com.springmarker.blog
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import java.time.LocalDateTime
-import java.util.*
-import javax.xml.crypto.Data
 
 /**
  * @author Springmarker
