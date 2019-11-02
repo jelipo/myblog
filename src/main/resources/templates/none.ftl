@@ -1,7 +1,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>空白 - Springmarker</title>
+    <title>空白 - Jelipo</title>
     <link rel="bookmark" type="image/x-icon" href="${request.contextPath}/static/img/favicon.ico"/>
     <link rel="shortcut icon" href="${request.contextPath}/static/img/favicon.ico">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">

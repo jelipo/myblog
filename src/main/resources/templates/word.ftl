@@ -1,8 +1,8 @@
-<#-- @ftlvariable name="word" type="com.springmarker.blog.pojo.Word" -->
+<#-- @ftlvariable name="word" type="com.jelipo.blog.pojo.Word" -->
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>${word.title} - Springmarker</title>
+    <title>${word.title} - Jelipo</title>
     <link rel="bookmark" type="image/x-icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}"/>
     <link rel="shortcut icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -120,7 +120,7 @@
         <div class="comment-mian-msg">
             <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}" class="mdui-img-circle">
             <div>
-                <div class="comment-mian-msg-lz">Springmarker</div>
+                <div class="comment-mian-msg-lz">Jelipo</div>
                 <div class="comment-mian-msg-time">1楼 11月12,2017 18:32:54</div>
             </div>
             <span>

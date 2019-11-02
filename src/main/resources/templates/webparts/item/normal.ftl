@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="word" type="com.springmarker.blog.pojo.Word" -->
+<#-- @ftlvariable name="word" type="com.jelipo.blog.pojo.Word" -->
 
 <!-- 单个item-->
 <div id="word" class="mdui-row mdui-row-margin">

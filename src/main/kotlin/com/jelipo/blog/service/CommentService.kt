@@ -1,36 +1,31 @@
-package com.springmarker.blog.service
+package com.jelipo.blog.service
 
-import com.springmarker.blog.pojo.Comment
-import com.springmarker.blog.pojo.Reply
-import com.springmarker.blog.mapper.CommentMapper
-import com.springmarker.blog.util.PackingResults
-import org.apache.commons.lang3.StringEscapeUtils
+import com.jelipo.blog.pojo.Comment
+import com.jelipo.blog.pojo.Reply
+import com.jelipo.blog.repository.CommentRepository
+import com.jelipo.blog.util.PackingResults
+import org.apache.commons.lang3.time.DateFormatUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/10/6 18:41
  */
 @Service
 class CommentService {
 
     @Autowired
-    private lateinit var commentMapper: CommentMapper
-
-    private val simpleDateFormat = SimpleDateFormat("MM月dd,yyyy HH:mm:ss")
+    private lateinit var commentRepository: CommentRepository
 
     fun getComments(wordId: String): Map<*, *> {
-        val list = commentMapper.selectByMap(mapOf("word_id" to wordId.toInt()))
-        //val list = commentMapper.getCommentsByWordId(wordId)
+        val list = commentRepository.findAllByWordId(wordId.toInt())
 
         val json = HashMap<String, Comment>()
         for (comment in list) {
-            comment.formatDate = simpleDateFormat.format(comment.date)
+            comment.formatDate = DateFormatUtils.format(Date(), "MM月dd,yyyy HH:mm:ss");
             if (comment.mainComment == 1) {
                 comment.viceComment = ArrayList()
                 json[comment.id.toString()] = comment
@@ -65,15 +60,14 @@ class CommentService {
         comment.apply {
             wordId = reply.wordId
             mainComment = if (reply.isNewMainComment == "1") 1 else 2
-            observerName = StringEscapeUtils.escapeHtml4(reply.nickname)
+            observerName = reply.nickname
             date = Date()
-            value = StringEscapeUtils.escapeHtml4(reply.value).replace("\n", "<br>")
-            email = StringEscapeUtils.escapeHtml4(reply.email)
+            value = reply.value
+            email = reply.email
         }
 
-        val result = commentMapper.insert(comment)
-        return if (result > 0) {
-//            commentLimit.insertIp(request)
+        val savedComment = commentRepository.save(comment)
+        return if (savedComment.id != null) {
             PackingResults.toSuccessMap(HashMap<String, String>(0))
         } else {
             PackingResults.toWorngMap("服务器出现错误！")

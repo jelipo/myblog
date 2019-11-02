@@ -1,9 +1,9 @@
-package com.springmarker.blog.pojo
+package com.jelipo.blog.pojo
 
 import java.time.LocalDate
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/7/7 15:22
  */
 data class BlogMain(

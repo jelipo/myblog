@@ -1,28 +1,30 @@
-package com.springmarker.blog.service
+package com.jelipo.blog.service
 
-import com.springmarker.blog.pojo.Word
-import com.springmarker.blog.mapper.WordMapper
-
+import com.jelipo.blog.pojo.Word
+import com.jelipo.blog.repository.WordRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
+import org.springframework.util.StringUtils
 import org.springframework.web.servlet.ModelAndView
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/7/11 22:35
  */
 @Service
 class BlogMainService {
 
     @Autowired
-    private lateinit var wordMapper: WordMapper
+    private lateinit var wordRepository: WordRepository
 
-    fun getIndexWordList(): MutableList<Word?> {
-        return wordMapper.getWordListByPermission(1, 0, 10)
+    fun getIndexWordList(): List<Word?> {
+        val page = wordRepository.findAllByPermissionOrderByCreatDate(1, PageRequest.of(1, 10))
+        return page.toList()
     }
 
     fun getWordByNickTitle(modelAndView: ModelAndView, nickTitle: String): Boolean {
-        val list = wordMapper.getNearWordsByNickTitle(nickTitle)
+        val list = wordRepository.getNearWordsByNickTitle(nickTitle)
         if (list.size == 3) {
             modelAndView.model["word"] = list[1]
             modelAndView.model["lastWord"] = list[0]
@@ -45,7 +47,14 @@ class BlogMainService {
 
     fun getWordsByType(type: String?, page: String?): List<Word> {
         val limit = 10
-        return wordMapper.getWordsByType(type, limit, (if (page == null) 0 else (page.toInt() - 1)) * limit)
+        val pageInt = page?.toInt() ?: 0
+        return if (StringUtils.isEmpty(type)) {
+            val pageList = wordRepository.findAllByOrderByCreatDateDesc(
+                    PageRequest.of(pageInt, limit))
+            pageList.toList()
+        } else {
+            wordRepository.getWordsByType(type, limit, (pageInt + 1) * limit)
+        }
     }
 
 }

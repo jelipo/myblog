@@ -11,7 +11,7 @@
             </div>
             <div class="mdui-card-actions smallNone">
                 <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}" class="mdui-img-circle">
-                <div class="top-card-left-text">Springmarker</div>
+                <div class="top-card-left-text">Jelipo</div>
             </div>
         </div>
     </div>

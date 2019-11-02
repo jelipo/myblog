@@ -1,6 +1,6 @@
-package com.springmarker.blog.ctrl
+package com.jelipo.blog.ctrl
 
-import com.springmarker.blog.service.BlogMainService
+import com.jelipo.blog.service.BlogMainService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 import javax.servlet.http.HttpServletRequest
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/7/7 14:18
  */
 @Controller
@@ -39,6 +39,7 @@ class BlogMainCtrl {
                   @RequestParam("screenshotPath") screenshotPath: String,
                   @RequestParam("htmlStr") htmlStr: String): Map<*, *> {
         return mapOf("data" to "hello")
+
     }
 
 }

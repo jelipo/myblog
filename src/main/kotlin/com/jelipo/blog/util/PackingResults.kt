@@ -1,9 +1,9 @@
-package com.springmarker.blog.util
+package com.jelipo.blog.util
 
 import java.util.*
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/10/6 21:05
  */
 object PackingResults {

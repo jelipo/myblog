@@ -1,7 +1,7 @@
-package com.springmarker.blog.pojo
+package com.jelipo.blog.pojo
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/7/11 22:32
  */
 class Reply(

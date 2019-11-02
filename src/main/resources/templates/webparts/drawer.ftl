@@ -10,16 +10,16 @@
             <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}"
                  class="mdui-img-circle leftbar-head-img" style="float: left;">
             <div class="leftbar-head-icon">
-                <a href="https://github.com/springmarker" target="_blank" mdui-tooltip="{content: 'GitHub'}">
+                <a href="https://github.com/jelipo" target="_blank" mdui-tooltip="{content: 'GitHub'}">
                     <span class="iconfont" style="font-size: 27px">&#xe718;</span>
                 </a>
-                <a href="mailto:admin@springmarker.com" mdui-tooltip="{content: '邮件'}">
+                <a href="mailto:admin@jelipo.com" mdui-tooltip="{content: '邮件'}">
                     <span class="iconfont" style="font-size: 26px">&#xe61b;</span>
                 </a>
             </div>
         </div>
         <div style="padding-left: 10px;color: #fff;clear: both;font-size: 17px;">
-            我的小站 - Springmarker
+            我的小站 - Jelipo
             <div></div>
         </div>
         <div class="leftbar-head-tag" style="margin-left: 10px;">站长</div>

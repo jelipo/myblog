@@ -1,4 +1,4 @@
-package com.springmarker.blog.conf
+package com.jelipo.blog.conf
 
 import org.apache.commons.lang3.RandomStringUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 import javax.annotation.PostConstruct
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/10/4 20:50
  */
 @Configuration

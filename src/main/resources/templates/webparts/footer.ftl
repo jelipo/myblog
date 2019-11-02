@@ -4,21 +4,21 @@
         <div class="mdui-col-xs-4 footer-other">
             <div>导 航 ：</div>
             <a class="foot-href" href="/">网站主页</a>
-            <a href="https://github.com/springmarker/MyBlog" target="_blank">此站GitHub</a>
+            <a href="https://github.com/jelipo/MyBlog" target="_blank">此站GitHub</a>
         </div>
         <div class="mdui-col-xs-4 footer-other">
             <div>联 系 ：</div>
-            <a href="mailto:admin@springmarker.com">发送邮件</a>
+            <a href="mailto:admin@jelipo.com">发送邮件</a>
             <a>向我留言</a>
         </div>
         <div class="mdui-col-xs-4 footer-other">
-            <a href="https://github.com/springmarker" target="_blank">
+            <a href="https://github.com/jelipo" target="_blank">
                 <img width="80px" src="${request.contextPath}/static/img/github.png?v=${randomStr}">
             </a>
         </div>
     </div>
     <div class="mdui-center mdui-text-center footer-bottom">
-        <a>©2019 Springmarker. All rights reserved.</a>
+        <a>©2019 Jelipo. All rights reserved.</a>
         <a href="http://www.miitbeian.gov.cn" target="_blank">备案号：鲁ICP备16035555号-2</a>
     </div>
 </footer>

@@ -1,11 +1,11 @@
-package com.springmarker.blog.util
+package com.jelipo.blog.util
 
 import javax.servlet.http.HttpServletRequest
 
 /**
  * IP工具类
  *
- * @author  Springmarker
+ * @author  Jelipo
  * @date  2019/7/2 13:30
  */
 object IpUtil {
@@ -17,7 +17,7 @@ object IpUtil {
      * HTTP_CLIENT_IP：有些代理服务器
      * X-Real-IP：nginx服务代理
      */
-    private val ipHeaders = listOf<String>("X-Forwarded-For", "Proxy-Client-IP",
+    private val ipHeaders = listOf("X-Forwarded-For", "Proxy-Client-IP",
             "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "X-Real-IP")
 
     /**

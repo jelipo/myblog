@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>Springmarker</title>
+    <title>Jelipo</title>
     <link rel="bookmark" type="image/x-icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}"/>
     <link rel="shortcut icon" href="${request.contextPath}/static/img/favicon.ico?v=${randomStr}">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">

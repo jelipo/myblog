@@ -1,19 +1,19 @@
-package com.springmarker.blog.ctrl
+package com.jelipo.blog.ctrl
 
 import com.fasterxml.jackson.annotation.JsonView
-import com.springmarker.blog.pojo.Comment
-import com.springmarker.blog.pojo.Message
-import com.springmarker.blog.pojo.Reply
-import com.springmarker.blog.service.CommentService
-import com.springmarker.blog.service.MessageService
-import com.springmarker.blog.util.IpUtil
+import com.jelipo.blog.pojo.Comment
+import com.jelipo.blog.pojo.Message
+import com.jelipo.blog.pojo.Reply
+import com.jelipo.blog.service.CommentService
+import com.jelipo.blog.service.MessageService
+import com.jelipo.blog.util.IpUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/10/5 20:14
  */
 @RestController

@@ -1,26 +1,26 @@
-package com.springmarker.blog.service
+package com.jelipo.blog.service
 
-import com.springmarker.blog.pojo.Message
-import com.springmarker.blog.mapper.MessageMapper
-import com.springmarker.blog.util.PackingResults
-import org.apache.commons.lang3.StringEscapeUtils
+import com.jelipo.blog.pojo.Message
+import com.jelipo.blog.repository.MessageRepository
+import com.jelipo.blog.util.PackingResults
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
+import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/10/7 20:00
  */
 @Service
 class MessageService {
 
+
     @Autowired
-    private lateinit var messageMapper: MessageMapper
+    private lateinit var messageRepository: MessageRepository
 
     fun getMessages(request: HttpServletRequest): Map<*, *> {
-        val list = messageMapper.getMessages()
+        val list = messageRepository.findAllByOrderByCreatDateDesc()
         return PackingResults.toSuccessMap(list)
     }
 
@@ -34,13 +34,13 @@ class MessageService {
             nickname = "游客" + nowTime % 10000000
         }
         val message = Message(
-                nickName = StringEscapeUtils.escapeHtml4(nickname),
-                content = StringEscapeUtils.escapeHtml4(content),
+                nickName = nickname,
+                content = content,
                 contactway = contactway,
-                date = LocalDateTime.now()
+                creatDate = Date()
         )
-        val result = messageMapper.saveMessage(message)
-        return if (result > 0) {
+        val savedMessage = messageRepository.save(message)
+        return if (savedMessage.id != null) {
             PackingResults.toSuccessMap()
         } else {
             PackingResults.toWorngMap("回复失败！")

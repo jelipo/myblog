@@ -1,7 +1,7 @@
-package com.springmarker.blog.ctrl
+package com.jelipo.blog.ctrl
 
 
-import com.springmarker.blog.util.PackingResults
+import com.jelipo.blog.util.PackingResults
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
 
 /**
- * @author Springmarker
+ * @author Jelipo
  * @date 2018/7/7 14:52
  */
 @Controller

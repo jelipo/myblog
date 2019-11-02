@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>留言 - Springmarker</title>
+    <title>留言 - Jelipo</title>
     <link rel="bookmark" type="image/x-icon" href="${request.contextPath}/static/img/favicon.ico"/>
     <link rel="shortcut icon" href="${request.contextPath}/static/img/favicon.ico">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -122,7 +122,7 @@
     <!--单个留言-->
     <div id="singleMessage" class="message">
         <div style="float: left;width: 100%">
-            <div class="message_name">Springmarker</div>
+            <div class="message_name">Jelipo</div>
             <div class="message_time">10月26,2016 20:15</div>
             <div style="float: left;padding-left: 7px;">留言道：</div>
         </div>
