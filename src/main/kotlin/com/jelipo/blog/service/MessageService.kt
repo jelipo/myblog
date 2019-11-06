@@ -5,6 +5,7 @@ import com.jelipo.blog.repository.MessageRepository
 import com.jelipo.blog.util.PackingResults
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 
@@ -37,7 +38,7 @@ class MessageService {
                 nickName = nickname,
                 content = content,
                 contactway = contactway,
-                creatDate = Date()
+                creatDate = LocalDateTime.now()
         )
         val savedMessage = messageRepository.save(message)
         return if (savedMessage.id != null) {

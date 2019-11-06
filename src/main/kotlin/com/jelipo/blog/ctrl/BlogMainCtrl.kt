@@ -20,7 +20,7 @@ class BlogMainCtrl {
     @Autowired
     private lateinit var blogMainService: BlogMainService
 
-    @GetMapping("/", "/index")
+    @GetMapping("/")
     fun index(modelMap: ModelMap): String {
         val wordList = blogMainService.getIndexWordList()
         modelMap["list"] = wordList

@@ -19,7 +19,7 @@ class BlogMainService {
     private lateinit var wordRepository: WordRepository
 
     fun getIndexWordList(): List<Word?> {
-        val page = wordRepository.findAllByPermissionOrderByCreatDate(1, PageRequest.of(1, 10))
+        val page = wordRepository.findAllByPermissionOrderByCreatDateDesc(1, null)
         return page.toList()
     }
 
@@ -53,7 +53,14 @@ class BlogMainService {
                     PageRequest.of(pageInt, limit))
             pageList.toList()
         } else {
-            wordRepository.getWordsByType(type, limit, (pageInt + 1) * limit)
+            if (type == "all") {
+                val words = wordRepository.getWords(limit, (pageInt - 1) * limit)
+                words
+            } else {
+                val wordsByType = wordRepository.getWordsByType(type, limit, (pageInt - 1) * limit)
+                wordsByType
+            }
+
         }
     }
 

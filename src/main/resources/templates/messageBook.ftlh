@@ -69,7 +69,7 @@
 
 <body class="mdui-drawer-body-left ">
 <input id="contextPath" value="${request.contextPath}" type="hidden">
-<#include "webparts/drawer.ftl"/>
+<#include "webparts/drawer.ftlh"/>
 <!--主要内容-->
 <div class="mdui-container">
     <div style="height: 150px"></div>
@@ -135,7 +135,7 @@
 </div>
 <!--部件-->
 
-<#include "webparts/footer.ftl" />
+<#include "webparts/footer.ftlh" />
 
 </body>
 <script type="text/javascript" src="${request.contextPath}/static/js/jquery-3.3.1.min.js"></script>

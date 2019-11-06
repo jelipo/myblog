@@ -34,7 +34,7 @@
     <!--参数-->
 
 
-<#include "webparts/drawer.ftl" />
+<#include "webparts/drawer.ftlh" />
     <!--主要内容-->
 <div class="mdui-container" style="min-height: 1200px">
     <div style="height: 150px">
@@ -57,7 +57,7 @@
                         <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}">
                         <span>${word.writer}</span>
                         <div id="wordDate"
-                             class="MY-card-data">${(word.date.year)?c}年${word.date.monthValue}月${word.date.dayOfMonth}日</div>
+                             class="MY-card-data">${(word.creatDate.year)?c}年${word.creatDate.monthValue}月${word.creatDate.dayOfMonth}日</div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page" style="min-height: 600px;">
@@ -112,7 +112,7 @@
     </div>
 </div>
 
-<#include "webparts/footer.ftl" />
+<#include "webparts/footer.ftlh" />
 <div id="toReplace" style="display:none">
 
     <!--评论-->

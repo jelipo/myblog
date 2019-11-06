@@ -1,7 +1,9 @@
 package com.jelipo.blog.pojo
 
-import java.util.*
+import java.time.LocalDateTime
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 
 /**
@@ -12,6 +14,7 @@ import javax.persistence.Id
 data class Word(
 
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Int? = null,
 
         var title: String = "",
@@ -24,7 +27,7 @@ data class Word(
 
         var backgroundImage: String = "",
 
-        var creatDate: Date = Date(),
+        var creatDate: LocalDateTime = LocalDateTime.now(),
 
         var typeId: Int = 0,
 

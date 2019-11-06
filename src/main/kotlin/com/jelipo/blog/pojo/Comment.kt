@@ -1,8 +1,11 @@
 package com.jelipo.blog.pojo
 
 import com.fasterxml.jackson.annotation.JsonView
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 import kotlin.collections.ArrayList
 
@@ -15,7 +18,8 @@ data class Comment(
 
         @JsonView(Public::class)
         @Id
-        var id: Int? = null,
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
+        var id: Long? = null,
 
         var wordId: Int? = -1,
 
@@ -28,7 +32,7 @@ data class Comment(
         @JsonView(Public::class)
         var toObserverName: String? = null,
 
-        var date: Date = Date(),
+        var creatDate: LocalDateTime = LocalDateTime.now(),
 
         @JsonView(Public::class)
         var viceCommentMainCommentId: String? = "",

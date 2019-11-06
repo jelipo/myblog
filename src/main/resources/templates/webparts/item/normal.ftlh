@@ -23,7 +23,7 @@
                 <span class="writer-name">${word.writer}</span>
                 <i mdui-menu="{target: '#example-attr'}"
                    class="mdui-ripple mdui-icon material-icons MY-card-more">more_vert</i>
-                <div class="MY-card-data">${word.date.monthValue}月${word.date.dayOfMonth},${(word.date.year)?c}</div>
+                <div class="MY-card-data">${word.creatDate.monthValue}月${word.creatDate.dayOfMonth},${(word.creatDate.year)?c}</div>
             </div>
         </div>
     </div>

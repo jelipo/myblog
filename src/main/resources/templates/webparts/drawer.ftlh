@@ -18,7 +18,7 @@
                 </a>
             </div>
         </div>
-        <div style="padding-left: 10px;color: #fff;clear: both;font-size: 17px;">
+        <div style="padding-left: 10px;color: #fff;clear: both;font-size: 16px;">
             我的小站 - Jelipo
             <div></div>
         </div>
