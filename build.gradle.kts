@@ -4,10 +4,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     idea
-    kotlin("jvm") version "1.3.50"
-    kotlin("plugin.spring") version "1.3.50"
-    id("org.springframework.boot") version "2.2.0.RELEASE"
-    id("io.spring.dependency-management") version "1.0.8.RELEASE"
+    kotlin("jvm") version "1.3.61"
+    kotlin("plugin.spring") version "1.3.61"
+    id("org.springframework.boot") version "2.2.5.RELEASE"
+    id("io.spring.dependency-management") version "1.0.9.RELEASE"
 }
 
 group = "com.jelipo"
@@ -24,8 +24,8 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 java.targetCompatibility = JavaVersion.VERSION_1_8
 
 idea.project {
-    jdkName = "1.8"
-    languageLevel = IdeaLanguageLevel("1.8")
+    jdkName = "11"
+    languageLevel = IdeaLanguageLevel("11")
     vcs = "Git"
 }
 
@@ -40,15 +40,15 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "1.8"
+            jvmTarget = "11"
         }
     }
 }
 
 idea {
     project {
-        jdkName = "1.8"
-        languageLevel = IdeaLanguageLevel("8")
+        jdkName = "11"
+        languageLevel = IdeaLanguageLevel("11")
         vcs = "Git"
     }
 }
@@ -78,7 +78,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.apache.commons:commons-lang3:3.9")
-    runtime("org.postgresql:postgresql")
+    runtimeOnly("org.postgresql:postgresql")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

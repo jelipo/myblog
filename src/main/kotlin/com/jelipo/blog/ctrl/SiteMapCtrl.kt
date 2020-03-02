@@ -19,7 +19,7 @@ class SiteMapCtrl {
         val tempContextUrl = url.delete(url.length - request.requestURI.length, url.length).append("/").toString()
         response.setHeader("Content-Type", "application/xml")
         println(request.serverName)
-        var listOf = listOf<String>("")
+        val listOf = listOf("")
         listOf.groupBy {
             it.length
         }
