@@ -6,11 +6,18 @@ package com.jelipo.blog.pojo
  */
 class Reply(
         var wordId: Int? = null,
+
         var toObservername: String? = null,
+
         var mainCommentId: String? = null,
+
         var viceCommentId: String? = null,
+
         var nickname: String? = null,
+
         var email: String? = null,
+
         var value: String? = null,
+
         var isNewMainComment: String? = null
 )

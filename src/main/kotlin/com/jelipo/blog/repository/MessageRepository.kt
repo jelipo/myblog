@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface MessageRepository : CrudRepository<Message, Int> {
 
-    fun findAllByOrderByCreatDateDesc(): List<Message>;
+    fun findAllByOrderByCreatDateDesc(): List<Message>
 
 }

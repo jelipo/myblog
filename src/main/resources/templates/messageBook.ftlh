@@ -14,7 +14,7 @@
 
     <style>
         .seconfTitle {
-            font-family: Microsoft Yahei;
+            font-family: Microsoft Yahei, serif;
             font-weight: 500;
             color: #3f51b5;
         }
@@ -170,7 +170,7 @@
             contactway: contactway,
             message: message
         }, function (result) {
-            if (result.resultCode != 200) {
+            if (result.resultCode !== 200) {
                 alert(result.wrong);
                 return false;
             } else {

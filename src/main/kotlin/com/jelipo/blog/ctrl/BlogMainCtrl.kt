@@ -33,13 +33,4 @@ class BlogMainCtrl {
     @GetMapping("/messages")
     fun toMessageBook(request: HttpServletRequest): String = "messageBook"
 
-    @ResponseBody
-    @PostMapping("webspider.do")
-    fun webspider(request: HttpServletRequest, @RequestParam("title") title: String,
-                  @RequestParam("screenshotPath") screenshotPath: String,
-                  @RequestParam("htmlStr") htmlStr: String): Map<*, *> {
-        return mapOf("data" to "hello")
-
-    }
-
 }

@@ -31,11 +31,11 @@
 <#--<input id="nextwordId" value="${nextWordId}" type="hidden">-->
 <#--<input id="nextwordTitle" value="${nextWordTitle}" type="hidden">-->
 <#--<input id="backgroundImage" value="${backgroundImage}" type="hidden">-->
-    <!--参数-->
+<!--参数-->
 
 
 <#include "webparts/drawer.ftlh" />
-    <!--主要内容-->
+<!--主要内容-->
 <div class="mdui-container" style="min-height: 1200px">
     <div style="height: 150px">
 
@@ -57,7 +57,9 @@
                         <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}">
                         <span>${word.writer}</span>
                         <div id="wordDate"
-                             class="MY-card-data">${(word.creatDate.year)?c}年${word.creatDate.monthValue}月${word.creatDate.dayOfMonth}日</div>
+                             class="MY-card-data">${(word.creatDate.year)?c}年${word.creatDate.monthValue}
+                            月${word.creatDate.dayOfMonth}日
+                        </div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page" style="min-height: 600px;">
@@ -75,16 +77,16 @@
         <div class="card-pageOther" style="height: 40px">
             <#if (lastWord??)>
                 <a id="lastPage" href="${request.contextPath}/word/${lastWord.nickTitle}.html"
-            mdui-tooltip="{content: '${lastWord.title}'}" class="mdui-btn mdui-btn-icon mdui-ripple">
-                <i class="mdui-icon material-icons">arrow_back</i>
+                   mdui-tooltip="{content: '${lastWord.title}'}" class="mdui-btn mdui-btn-icon mdui-ripple">
+                    <i class="mdui-icon material-icons">arrow_back</i>
                 </a>
             </#if>
             <#if (nextWord??)>
                 <a id="nextPage" href="${request.contextPath}/word/${nextWord.nickTitle}.html"
-            mdui-tooltip="{content: '${nextWord.title}'}"
-                style="float:right;"
-                class="mdui-btn mdui-btn-icon mdui-ripple">
-                <i class="mdui-icon material-icons">arrow_forward</i>
+                   mdui-tooltip="{content: '${nextWord.title}'}"
+                   style="float:right;"
+                   class="mdui-btn mdui-btn-icon mdui-ripple">
+                    <i class="mdui-icon material-icons">arrow_forward</i>
                 </a>
             </#if>
         </div>

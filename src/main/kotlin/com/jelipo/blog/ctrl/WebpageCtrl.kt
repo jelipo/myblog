@@ -1,7 +1,6 @@
 package com.jelipo.blog.ctrl
 
 import com.jelipo.blog.service.BlogMainService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,18 +13,9 @@ import javax.servlet.http.HttpServletRequest
  * @date 2018/7/7 14:41
  */
 @Controller
-class WebpageCtrl {
-
-    @Autowired
-    private lateinit var blogMainService: BlogMainService
-
-
-//    @ResponseBody
-//    @GetMapping("/getWord.do")
-//    fun getWord(request: HttpServletRequest, @RequestParam pageNum: Int, @RequestParam getBlogNum: Int,
-//                @RequestParam(required = false) type: String): Map<*, *> {
-//        return blogMainService.getBlogByPageNum(request, pageNum, getBlogNum, type)
-//    }
+class WebpageCtrl(
+        private val blogMainService: BlogMainService
+) {
 
     @GetMapping("/word/{nickTitle}.html")
     fun toWord(request: HttpServletRequest, @PathVariable nickTitle: String, modelAndView: ModelAndView): ModelAndView {
