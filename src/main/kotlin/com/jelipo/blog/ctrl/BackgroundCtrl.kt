@@ -49,7 +49,7 @@ class BackgroundCtrl {
                    @RequestParam writer: String,
                    @RequestParam summary: String,
                    @RequestParam(required = false) allowComment: Boolean?): String {
-        val isLogin = httpSession.getAttribute("isLogin") as Boolean ?: return "redirect:/needLogin.do"
+        val isLogin = httpSession.getAttribute("isLogin") as Boolean
         val isSuccess = true
         //TODO 判断
         if (isSuccess) {
