@@ -74,10 +74,10 @@ configurations {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    implementation("io.r2dbc:r2dbc-postgresql")
+    //implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+    //implementation("org.springframework.boot:spring-boot-starter-webflux")
+    //implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    //implementation("io.r2dbc:r2dbc-postgresql")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-freemarker")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -90,5 +90,5 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
-    testImplementation("io.projectreactor:reactor-test")
+    //testImplementation("io.projectreactor:reactor-test")
 }

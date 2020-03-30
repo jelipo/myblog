@@ -25,10 +25,9 @@ interface WordRepository : PagingAndSortingRepository<Word, Int> {
         select * from word
         WHERE type_id = (SELECT id from wordtype WHERE "name" = :type )
         ORDER BY "creat_date" DESC
-        limit :limit
-        offset :offset
     """, nativeQuery = true)
-    fun getWordsByType(@Param("type") type: String?, @Param("limit") limit: Int, @Param("offset") offset: Int): List<Word>
+    fun getWordsByType(@Param("type") type: String?, pageable: Pageable): Page<Word>
+
 
     fun findAllByOrderByCreatDateDesc(pageable: Pageable): Page<Word>
 

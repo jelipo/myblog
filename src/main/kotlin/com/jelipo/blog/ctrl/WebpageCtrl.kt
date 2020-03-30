@@ -30,7 +30,7 @@ class WebpageCtrl(
 
     @GetMapping("/list")
     fun getWords(modelAndView: ModelAndView): ModelAndView {
-        val words = blogMainService.getWordsByType(null, null)
+        val words = blogMainService.getWordsByType(null, 1)
         modelAndView.model["list"] = words
         modelAndView.viewName = "wordList"
         return modelAndView
@@ -38,7 +38,7 @@ class WebpageCtrl(
 
     @GetMapping("/list/{type}")
     fun getWordsByType(@PathVariable type: String?, modelAndView: ModelAndView): ModelAndView {
-        val words = blogMainService.getWordsByType(type, "1")
+        val words = blogMainService.getWordsByType(type, 1)
         modelAndView.model["list"] = words
         modelAndView.model["type"] = type
         modelAndView.model["page"] = "1"
@@ -46,9 +46,11 @@ class WebpageCtrl(
         return modelAndView
     }
 
-    @GetMapping("/list-api/{type}/")
-    fun getWordsByTypeApi(@PathVariable type: String, @RequestParam("page") page: String, modelAndView: ModelAndView): ModelAndView {
-        val words = blogMainService.getWordsByType(type, page)
+    @GetMapping("/list-api/{type}")
+    fun getWordsByTypeApi(
+            @PathVariable type: String, @RequestParam("page", required = false) page: Int?, modelAndView: ModelAndView
+    ): ModelAndView {
+        val words = blogMainService.getWordsByType(type, page?:1)
         modelAndView.model["list"] = words
         modelAndView.model["type"] = type
         modelAndView.model["page"] = page

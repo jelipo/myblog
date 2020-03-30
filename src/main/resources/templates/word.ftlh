@@ -56,14 +56,13 @@
                     <div class="mdui-card-actions word-msg-height">
                         <img src="${request.contextPath}/static/img/head.jpg?v=${randomStr}">
                         <span>${word.writer}</span>
-                        <div id="wordDate"
-                             class="MY-card-data">${(word.creatDate.year)?c}年${word.creatDate.monthValue}
-                            月${word.creatDate.dayOfMonth}日
+                        <div id="wordDate" class="MY-card-data">
+                            ${(word.creatDate.year)?c}年${word.creatDate.monthValue}月${word.creatDate.dayOfMonth}日
                         </div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-page" style="min-height: 600px;">
-                        <div class="maxaingBody">${word.html}</div>
+                        <div class="maxaingBody">${word.html?no_esc}</div>
                     </div>
                     <div class="mdui-divider"></div>
                     <div class="card-pageOther" style="height: 40px">

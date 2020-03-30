@@ -4,6 +4,7 @@ import com.jelipo.blog.pojo.Word
 import com.jelipo.blog.repository.WordRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import org.springframework.web.servlet.ModelAndView
@@ -45,20 +46,21 @@ class BlogMainService {
         return true
     }
 
-    fun getWordsByType(type: String?, page: String?): List<Word> {
+    fun getWordsByType(type: String?, page: Int): List<Word> {
         val limit = 10
-        val pageInt = page?.toInt() ?: 0
         return if (StringUtils.isEmpty(type)) {
             val pageList = wordRepository.findAllByOrderByCreatDateDesc(
-                    PageRequest.of(pageInt, limit))
+                    PageRequest.of(page, limit))
             pageList.toList()
         } else {
             if (type == "all") {
-                val words = wordRepository.getWords(limit, (pageInt - 1) * limit)
-                words
+                Sort.by(Sort.Order.desc("creat_time"))
+                val words = wordRepository.findAll(PageRequest.of(page, limit, Sort.by(Word::creatDate.name).descending()))
+                words.content
             } else {
-                val wordsByType = wordRepository.getWordsByType(type, limit, (pageInt - 1) * limit)
-                wordsByType
+                val wordsByType = wordRepository.getWordsByType(type, PageRequest.of(
+                        page, limit, Sort.by("creat_date").descending()))
+                wordsByType.content
             }
 
         }
