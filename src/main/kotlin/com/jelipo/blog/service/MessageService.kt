@@ -6,7 +6,6 @@ import com.jelipo.blog.util.PackingResults
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
-import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest
  */
 @Service
 class MessageService {
-
 
     @Autowired
     private lateinit var messageRepository: MessageRepository
