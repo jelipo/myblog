@@ -15,7 +15,7 @@
             <a href="${request.contextPath}/word/${word.nickTitle}.html"
                class="mdui-card-content mdui-ripple secondColorAndBackgroundColor href"
                style="display: block;text-decoration:none;">
-            ${word.summary}
+                ${word.summary}
             </a>
             <div class="mdui-divider" style="margin-top:1px"></div>
             <div class="mdui-card-actions">
@@ -23,7 +23,8 @@
                 <span class="writer-name">${word.writer}</span>
                 <i mdui-menu="{target: '#example-attr'}"
                    class="mdui-ripple mdui-icon material-icons MY-card-more">more_vert</i>
-                <div class="MY-card-data">${word.creatDate.monthValue}月${word.creatDate.dayOfMonth},${(word.creatDate.year)?c}</div>
+                <div class="MY-card-data">${word.creatDate.monthValue}月${word.creatDate.dayOfMonth}
+                    ,${(word.creatDate.year)?c}</div>
             </div>
         </div>
     </div>

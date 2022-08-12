@@ -17,8 +17,10 @@ object IpUtil {
      * HTTP_CLIENT_IP：有些代理服务器
      * X-Real-IP：nginx服务代理
      */
-    private val ipHeaders = listOf("X-Forwarded-For", "Proxy-Client-IP",
-            "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "X-Real-IP")
+    private val ipHeaders = listOf(
+        "X-Forwarded-For", "Proxy-Client-IP",
+        "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "X-Real-IP"
+    )
 
     /**
      * 获取真实IP的方法

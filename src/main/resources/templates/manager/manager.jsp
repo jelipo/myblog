@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>管理</title>
-    <link rel="bookmark"  type="image/x-icon"  href="/res/img/favicon.ico"/>
+    <link rel="bookmark" type="image/x-icon" href="/res/img/favicon.ico"/>
     <link rel="shortcut icon" href="/res/img/favicon.ico">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -50,16 +50,19 @@
         <div class="mdui-row mdui-row-margin">
             <div class="mdui-col-xs-12 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor card-padding">
-                    <form action="/uploadBlog.do" method="post" onsubmit="return check()"  enctype="multipart/form-data">
+                    <form action="/uploadBlog.do" method="post" onsubmit="return check()" enctype="multipart/form-data">
                         <h3 style="width: 100%">上传文章：</h3>
                         <div class="mdui-textfield form-input-half">
-                            <input id="title" name="title" class="mdui-textfield-input" type="text" placeholder="文章标题"/>
+                            <input id="title" name="title" class="mdui-textfield-input" type="text"
+                                   placeholder="文章标题"/>
                         </div>
                         <div class="mdui-textfield form-input-half">
-                            <input id="writer" name="writer" class="mdui-textfield-input" type="text" placeholder="作者"/>
+                            <input id="writer" name="writer" class="mdui-textfield-input" type="text"
+                                   placeholder="作者"/>
                         </div>
                         <div class="mdui-textfield" style="float: left;width:100%;height: 70px;">
-                            <input id="summary" name="summary" class="mdui-textfield-input" type="text" placeholder="简介"/>
+                            <input id="summary" name="summary" class="mdui-textfield-input" type="text"
+                                   placeholder="简介"/>
                         </div>
                         <div style="width: 100%;height: 60px;float: left">
                             <div class="form-selectFile-text">选择Blog文件：</div>
@@ -71,7 +74,7 @@
                         </div>
                         <div style="width:100%;height: 60px;float: left">
                             <label class="mdui-checkbox">
-                                <input  id="comment_switch" name="allowComment" type="checkbox"/>
+                                <input id="comment_switch" name="allowComment" type="checkbox"/>
                                 <i class="mdui-checkbox-icon"></i>允许评论
                             </label>
                         </div>
@@ -84,7 +87,8 @@
         <div class="mdui-row mdui-row-margin">
             <div class="mdui-col-xs-12 ">
                 <div class="mdui-card mdui-shadow-20 secondColorAndBackgroundColor card-padding">
-                    <form action="/uploadFile.do" method="post" onsubmit="return uploadToCDN()" enctype="multipart/form-data">
+                    <form action="/uploadFile.do" method="post" onsubmit="return uploadToCDN()"
+                          enctype="multipart/form-data">
                         <h2>上传文件到七牛：</h2>
                         <div class="mdui-textfield" style="float: left;width:100%;height: 70px;">
                             <input id="filename" name="filename" class="mdui-textfield-input"
@@ -92,7 +96,7 @@
                         </div>
                         <div style="width: 100%;height: 50px;float: left">
                             <div class="form-selectFile-text">选择文件：</div>
-                            <input id="cdnFile" type="file" name="cdnFile" >
+                            <input id="cdnFile" type="file" name="cdnFile">
                         </div>
                         <input type="submit" value="提交" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red">
                     </form>
@@ -121,10 +125,10 @@
     function check() {
         var title = $("#title").val();
         var writer = $("#writer").val();
-        var summary=$("#summary").val();
+        var summary = $("#summary").val();
         var blogFile = $("#blogFile").val();
-        var imageFile=$("#backgroundImage").val();
-        var isNull = (title == "") || (writer == "") ||(summary=="")|| (file =="")||(imageFile=="");
+        var imageFile = $("#backgroundImage").val();
+        var isNull = (title == "") || (writer == "") || (summary == "") || (file == "") || (imageFile == "");
         if (isNull) {
             mdui.snackbar({message: '值为空！'});
             return false;
@@ -135,20 +139,21 @@
 
     //初始化对话框
     var linkDialog = new mdui.Dialog('#linkDialog');
+
     //文件上传
     function uploadToCDN() {
         var file = $("#cdnFile").val();
-        if (file==''){
+        if (file == '') {
             mdui.snackbar({message: '未选择文件'});
             return false;
         }
         var formData = new FormData();
-        var filename=$("#filename").val();
+        var filename = $("#filename").val();
         formData.append("cdnFile", $("#cdnFile")[0].files[0]);
         formData.append("filename", filename);
         mdui.snackbar({message: '正在上传。'});
-        var data=ajaxUploadFile("/uploadFile.do", formData);
-        var link=data.link;
+        var data = ajaxUploadFile("/uploadFile.do", formData);
+        var link = data.link;
         $("#link").html(link)
         linkDialog.open();
         return false;

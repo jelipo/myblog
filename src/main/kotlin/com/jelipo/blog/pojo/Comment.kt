@@ -16,43 +16,43 @@ import kotlin.collections.ArrayList
 @Entity
 data class Comment(
 
-        @JsonView(Public::class)
-        @Id
-        @GeneratedValue(strategy= GenerationType.IDENTITY)
-        var id: Long? = null,
+    @JsonView(Public::class)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
 
-        var wordId: Int? = -1,
-
-
-        var mainComment: Int = 0,
-
-        @JsonView(Public::class)
-        var observerName: String? = null,
-
-        @JsonView(Public::class)
-        var toObserverName: String? = null,
-
-        var creatDate: LocalDateTime = LocalDateTime.now(),
-
-        @JsonView(Public::class)
-        var viceCommentMainCommentId: String? = "",
-
-        @JsonView(Public::class)
-        var value: String? = null,
-
-        var email: String? = null,
-        /** table base field */
+    var wordId: Int? = -1,
 
 
-        /** added fireld */
-        @JsonView(Public::class)
-        @Transient
-        var viceComment: MutableList<Comment> = ArrayList(0),
+    var mainComment: Int = 0,
 
-        @JsonView(Public::class)
-        @Transient
-        var formatDate: String = ""
-        /** added fireld */
+    @JsonView(Public::class)
+    var observerName: String? = null,
+
+    @JsonView(Public::class)
+    var toObserverName: String? = null,
+
+    var creatDate: LocalDateTime = LocalDateTime.now(),
+
+    @JsonView(Public::class)
+    var viceCommentMainCommentId: String? = "",
+
+    @JsonView(Public::class)
+    var value: String? = null,
+
+    var email: String? = null,
+    /** table base field */
+
+
+    /** added fireld */
+    @JsonView(Public::class)
+    @Transient
+    var viceComment: MutableList<Comment> = ArrayList(0),
+
+    @JsonView(Public::class)
+    @Transient
+    var formatDate: String = ""
+    /** added fireld */
 ) {
     interface Public
 }

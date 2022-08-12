@@ -42,9 +42,11 @@ class WebPageApiCtrl {
      *
      */
     @PostMapping("/word/{wordId}/comments")
-    fun postComment(httpServletRequest: HttpServletRequest,
-                    @PathVariable wordId: String,
-                    @ModelAttribute("replyPojo") replyPojo: Reply): Map<*, *> {
+    fun postComment(
+        httpServletRequest: HttpServletRequest,
+        @PathVariable wordId: String,
+        @ModelAttribute("replyPojo") replyPojo: Reply
+    ): Map<*, *> {
         replyPojo.wordId = wordId.toInt()
         return commentService.putReply(httpServletRequest, replyPojo)
     }
@@ -55,15 +57,16 @@ class WebPageApiCtrl {
     @JsonView(Message.Public::class)
     @GetMapping("/messages")
     fun getMessages(request: HttpServletRequest): Map<*, *> {
-        val result = messageService.getMessages(request)
-        return result
+        return messageService.getMessages(request)
     }
 
     @PostMapping("/messages")
-    fun postMessage(@RequestParam("nickname") nickname: String,
-                    @RequestParam("contactway") contactway: String,
-                    @RequestParam("message") message: String,
-                    httpServletRequest: HttpServletRequest): Map<*, *> {
+    fun postMessage(
+        @RequestParam("nickname") nickname: String,
+        @RequestParam("contactway") contactway: String,
+        @RequestParam("message") message: String,
+        httpServletRequest: HttpServletRequest
+    ): Map<*, *> {
         return messageService.putMessage(httpServletRequest, nickname, message, contactway)
     }
 

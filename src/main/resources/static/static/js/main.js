@@ -31,18 +31,17 @@ $(function () {
         change(false);
     });
     change(true);
-    var lastWidth = 0;
+    const lastWidth = 0;
 
     function change(isFirst) {
-        var minWidth = 800;
-        var width = $(this).width();
+        const minWidth = 800;
+        const width = $(this).width();
         if (isFirst || !(lastWidth < minWidth & width < minWidth) || !(lastWidth > minWidth & width > minWidth)) {
             if (width < minWidth) {
                 $('#top_card_left').removeClass('mdui-col-xs-7');
                 $('#top_card_left').addClass('mdui-col-xs-12');
                 $('#top_card_right').css("display", "none");
-            }
-            else {
+            } else {
                 $('#top_card_left').removeClass('mdui-col-xs-12');
                 $('#top_card_left').addClass('mdui-col-xs-7');
                 $('#top_card_right').removeClass('mdui-col-xs-12');

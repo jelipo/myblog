@@ -144,7 +144,7 @@
 <script>
     $(function () {
         var contenxtPath = getContenxtPath();
-        var list = getAjaxData(contenxtPath+"/api/messages").data;
+        var list = getAjaxData(contenxtPath + "/api/messages").data;
         for (var i = 0; i < list.length; i++) {
             var copyHtml = $('#singleMessage').clone();
             copyHtml.find(".message_name").html(list[i].nickName);
@@ -154,6 +154,7 @@
             //copyHtml.fadeIn(1000);
         }
     });
+
     function getContenxtPath() {
         return $("#contextPath").val();
     }
@@ -165,7 +166,7 @@
         if (message == "") {
             mdui.snackbar({message: '内容不能为空！'});
         }
-        $.post(getContenxtPath()+"/api/messages", {
+        $.post(getContenxtPath() + "/api/messages", {
             nickname: nickname,
             contactway: contactway,
             message: message

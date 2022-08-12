@@ -6,7 +6,7 @@
     float: left;
     height: 100%;
     display: block;
-    text-decoration:none;
+    text-decoration: none;
     out-line: none;
     color: #424242;
     font-weight: 900;
@@ -15,12 +15,13 @@
 }
 
 
-.card-turnPage>div{
+.card-turnPage > div {
     float: left;
     line-height: 23px;
     font-size: 16px;
 }
-.card-turnPage>i{
+
+.card-turnPage > i {
     float: left;
     font-size: 23px;
 
@@ -147,20 +148,25 @@
     margin-top: 5px;
     color: #ff9713
 }
-.newComment:hover{
+
+.newComment:hover {
 
 }
-.newComment:hover{
-    cursor:text;
+
+.newComment:hover {
+    cursor: text;
 }
-.observername{
+
+.observername {
     color: #F44336;
 }
-.card-pagedownmsg{
+
+.card-pagedownmsg {
     font-size: 15px;
     height: 100%;
     width: 100px;
 }
+
 @media only screen and (max-width: 800px) {
     .card-comment {
         padding: 20px 10px 20px 10px;
@@ -173,8 +179,9 @@
     .comment-mian-scomment-main {
         display: block;
     }
+
     .card-turnPage {
-       font-size: 12px;
+        font-size: 12px;
         font-weight: 300;
     }
 

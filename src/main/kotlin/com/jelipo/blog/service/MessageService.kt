@@ -33,10 +33,10 @@ class MessageService {
             nickname = "游客" + nowTime % 10000000
         }
         val message = Message(
-                nickName = nickname,
-                content = content,
-                contactway = contactway,
-                creatDate = LocalDateTime.now()
+            nickName = nickname,
+            content = content,
+            contactway = contactway,
+            creatDate = LocalDateTime.now()
         )
         val savedMessage = messageRepository.save(message)
         return if (savedMessage.id != null) {

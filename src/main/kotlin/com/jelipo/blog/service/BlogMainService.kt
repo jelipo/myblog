@@ -50,16 +50,21 @@ class BlogMainService {
         val limit = 10
         return if (StringUtils.isEmpty(type)) {
             val pageList = wordRepository.findAllByOrderByCreatDateDesc(
-                    PageRequest.of(page, limit))
+                PageRequest.of(page, limit)
+            )
             pageList.toList()
         } else {
             if (type == "all") {
                 Sort.by(Sort.Order.desc("creat_time"))
-                val words = wordRepository.findAll(PageRequest.of(page, limit, Sort.by(Word::creatDate.name).descending()))
+                val words =
+                    wordRepository.findAll(PageRequest.of(page, limit, Sort.by(Word::creatDate.name).descending()))
                 words.content
             } else {
-                val wordsByType = wordRepository.getWordsByType(type, PageRequest.of(
-                        page, limit, Sort.by("creat_date").descending()))
+                val wordsByType = wordRepository.getWordsByType(
+                    type, PageRequest.of(
+                        page, limit, Sort.by("creat_date").descending()
+                    )
+                )
                 wordsByType.content
             }
 

@@ -107,7 +107,7 @@ function chaeckDialogForm(form) {
         isNewMainComment: isNewMainComment //是否是新主评论
     }, function (result) {
         dialog.close();
-        if (result.resultCode != 200) {
+        if (result.resultCode !== 200) {
             alert(result.wrong);
             return;
         } else {

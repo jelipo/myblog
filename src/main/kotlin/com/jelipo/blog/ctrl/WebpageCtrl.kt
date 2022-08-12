@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
  */
 @Controller
 class WebpageCtrl(
-        private val blogMainService: BlogMainService
+    private val blogMainService: BlogMainService
 ) {
 
     @GetMapping("/word/{nickTitle}.html")
@@ -48,9 +48,9 @@ class WebpageCtrl(
 
     @GetMapping("/list-api/{type}")
     fun getWordsByTypeApi(
-            @PathVariable type: String, @RequestParam("page", required = false) page: Int?, modelAndView: ModelAndView
+        @PathVariable type: String, @RequestParam("page", required = false) page: Int?, modelAndView: ModelAndView
     ): ModelAndView {
-        val words = blogMainService.getWordsByType(type, page?:1)
+        val words = blogMainService.getWordsByType(type, page ?: 1)
         modelAndView.model["list"] = words
         modelAndView.model["type"] = type
         modelAndView.model["page"] = page

@@ -15,20 +15,20 @@ import javax.persistence.Id
 @Entity
 data class Message(
 
-        @Id
-        @GeneratedValue(strategy= GenerationType.IDENTITY)
-        var id: Int? = null,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Int? = null,
 
-        @JsonView(Public::class)
-        var nickName: String = "",
+    @JsonView(Public::class)
+    var nickName: String = "",
 
-        @JsonView(Public::class)
-        var creatDate: LocalDateTime = LocalDateTime.now(),
+    @JsonView(Public::class)
+    var creatDate: LocalDateTime = LocalDateTime.now(),
 
-        @JsonView(Public::class)
-        var content: String? = null,
+    @JsonView(Public::class)
+    var content: String? = null,
 
-        var contactway: String? = null
+    var contactway: String? = null
 
 ) {
     interface Public

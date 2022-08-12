@@ -14,28 +14,28 @@ import javax.persistence.Id
 @Entity
 data class Word(
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Int? = null,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Int? = null,
 
-        var title: String = "",
+    var title: String = "",
 
-        var permission: Int = 0,
+    var permission: Int = 0,
 
-        var summary: String = "",
+    var summary: String = "",
 
-        var writer: String = "",
+    var writer: String = "",
 
-        var backgroundImage: String = "",
+    var backgroundImage: String = "",
 
-        var creatDate: LocalDateTime = LocalDateTime.now(),
+    var creatDate: LocalDateTime = LocalDateTime.now(),
 
-        var typeId: Int = 0,
+    var typeId: Int = 0,
 
-        var allowComment: Int = 0,
+    var allowComment: Int = 0,
 
-        var html: String = "",
+    var html: String = "",
 
-        var nickTitle: String = "404"
+    var nickTitle: String = "404"
 
 )

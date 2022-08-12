@@ -25,7 +25,12 @@ class BackgroundCtrl {
     }
 
     @PostMapping("bossLogin.do")
-    fun bossLogin(@RequestParam username: String, @RequestParam password: String, httpSession: HttpSession, request: HttpServletRequest): String {
+    fun bossLogin(
+        @RequestParam username: String,
+        @RequestParam password: String,
+        httpSession: HttpSession,
+        request: HttpServletRequest
+    ): String {
         //TODO 判断
         if (true) {
             httpSession.setAttribute("isLogin", true)
@@ -36,19 +41,21 @@ class BackgroundCtrl {
 
     @GetMapping("/gotoManager.do")
     fun gotoManager(httpSession: HttpSession): String {
-        val isLogin = httpSession.getAttribute("isLogin") as Boolean ?: return "redirect:/needLogin.do"
+        val isLogin = httpSession.getAttribute("isLogin") as Boolean
         return "manager/manager"
     }
 
     @PostMapping("/uploadBlog.do")
-    fun uploadBlog(request: HttpServletRequest,
-                   httpSession: HttpSession,
-                   @RequestParam("blogFile") blogFiles: MultipartFile,
-                   @RequestParam("backgroundImage") backgroundImage: MultipartFile,
-                   @RequestParam title: String,
-                   @RequestParam writer: String,
-                   @RequestParam summary: String,
-                   @RequestParam(required = false) allowComment: Boolean?): String {
+    fun uploadBlog(
+        request: HttpServletRequest,
+        httpSession: HttpSession,
+        @RequestParam("blogFile") blogFiles: MultipartFile,
+        @RequestParam("backgroundImage") backgroundImage: MultipartFile,
+        @RequestParam title: String,
+        @RequestParam writer: String,
+        @RequestParam summary: String,
+        @RequestParam(required = false) allowComment: Boolean?
+    ): String {
         val isLogin = httpSession.getAttribute("isLogin") as Boolean
         val isSuccess = true
         //TODO 判断
@@ -62,7 +69,12 @@ class BackgroundCtrl {
 
     @ResponseBody
     @PostMapping("/uploadFile.do")
-    fun uploadFile(request: HttpServletRequest, httpSession: HttpSession, @RequestParam("cdnFile") cdnFile: MultipartFile, @RequestParam(required = false) filename: String): Map<*, *> {
+    fun uploadFile(
+        request: HttpServletRequest,
+        httpSession: HttpSession,
+        @RequestParam("cdnFile") cdnFile: MultipartFile,
+        @RequestParam(required = false) filename: String
+    ): Map<*, *> {
         val isLoginAny = httpSession.getAttribute("isLogin") ?: return PackingResults.toWorngMap("出现错误！")
         return HashMap<String, String>()
     }

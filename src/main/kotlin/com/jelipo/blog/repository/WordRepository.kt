@@ -13,25 +13,30 @@ interface WordRepository : PagingAndSortingRepository<Word, Int> {
 
     fun findAllByPermissionOrderByCreatDateDesc(permission: Int, pageable: Pageable?): Page<Word>
 
-    @Query("""
+    @Query(
+        """
         select * from word
         ORDER BY "creat_date" DESC
         limit :limit
         offset :offset
-    """, nativeQuery = true)
+    """, nativeQuery = true
+    )
     fun getWords(@Param("limit") limit: Int, @Param("offset") offset: Int): List<Word>
 
-    @Query("""
+    @Query(
+        """
         select * from word
         WHERE type_id = (SELECT id from wordtype WHERE "name" = :type )
         ORDER BY "creat_date" DESC
-    """, nativeQuery = true)
+    """, nativeQuery = true
+    )
     fun getWordsByType(@Param("type") type: String?, pageable: Pageable): Page<Word>
 
 
     fun findAllByOrderByCreatDateDesc(pageable: Pageable): Page<Word>
 
-    @Query("""
+    @Query(
+        """
         (SELECT *
          FROM word
          WHERE permission = 1
@@ -50,6 +55,7 @@ interface WordRepository : PagingAndSortingRepository<Word, Int> {
                    AND "creat_date" > (SELECT "creat_date" FROM word WHERE nick_title = :nickTitle)
                  ORDER BY "creat_date" ASC
                  LIMIT 1);
-    """, nativeQuery = true)
+    """, nativeQuery = true
+    )
     fun getNearWordsByNickTitle(@Param("nickTitle") nickTitle: String): List<Word>
 }
